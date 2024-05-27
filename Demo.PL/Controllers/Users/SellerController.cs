@@ -64,6 +64,7 @@ namespace Demo.PL.Controllers.Users
 
         #endregion
 
+
         #region Login 
 
         [HttpGet]
@@ -98,6 +99,7 @@ namespace Demo.PL.Controllers.Users
 
         #endregion
 
+
         #region Home
 
         [HttpGet]
@@ -108,6 +110,7 @@ namespace Demo.PL.Controllers.Users
 
         #endregion
 
+
         #region Store 
         public IActionResult Store()
         {
@@ -116,5 +119,43 @@ namespace Demo.PL.Controllers.Users
 
 
         #endregion
+
+
+        #region AddProduct
+        public IActionResult Create()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+
+        #region EditProduct
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region DeleteProduct
+        public IActionResult Delete()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region ProductList
+        public IActionResult ProductList()
+        {
+            return View();
+        }
+        #endregion
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Demo.BLL.Interfaces;
 using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,29 +12,16 @@ namespace Demo.BLL.Resitories
 {
     public class CategoryRepo : ICategoryRepo
     {
-        private readonly MvcProjectDbContext _mVCPhotoCampDbContext;
+        private readonly MvcProjectDbContext _dbConText;
         public CategoryRepo(MvcProjectDbContext mVCPhotoCampDbContext)
         {
-            _mVCPhotoCampDbContext = mVCPhotoCampDbContext;
+            _dbConText = mVCPhotoCampDbContext;
         }
 
-        public IEnumerable<Category> categories => _mVCPhotoCampDbContext.Categories;
-
-        //public IEnumerable<Category> categories
-        //{
-        //    get
-        //    {
-        //        return new List<Category>
-        //        {
-        //            new Category { CategoryName="Camera",Description=" All Camera Products"},
-        //            new Category { CategoryName="Tripod",Description=" All Tripod Products"},
-        //            new Category { CategoryName="Accessories",Description=" All Accessories Products"},
-        //            new Category { CategoryName="Light",Description=" All Light Products"}
-
-        //        };
-        //    }
-
-        //}
+        public IEnumerable<Category> GetAll()
+        {
+            return _dbConText.Categories.ToList();
+        }
 
     }
 }

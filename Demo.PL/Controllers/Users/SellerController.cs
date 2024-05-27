@@ -1,8 +1,11 @@
-﻿using Demo.DAL.Entities;
+﻿using Demo.BLL.Interfaces;
+using Demo.DAL.Entities;
+using Demo.PL.Helpers;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers.Users
@@ -11,13 +14,16 @@ namespace Demo.PL.Controllers.Users
     {
         private readonly UserManager<Client> _userManagerClient;
         private readonly SignInManager<Client> _signInManagerClient;
+        private readonly IProductRepo _productRepo;
 
         public SellerController(UserManager<Client> userManager
             , SignInManager<Client> signInManager
+            ,IProductRepo productRepo
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
+            this._productRepo = productRepo;
         }
         #region Register
         public IActionResult SellerRegister()
@@ -122,15 +128,28 @@ namespace Demo.PL.Controllers.Users
 
 
         #region AddProduct
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
+
         }
-        //[HttpPost]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+
+        [HttpPost]
+        public IActionResult Create(Product model)
+        {
+            model.Status = "Pending";
+
+            if (ModelState.IsValid)
+            {
+                model.ImageName = DocumentSettings.UploadFille(model.Image, "Images");
+                _productRepo.Add(model);
+                return RedirectToAction(nameof(ProductList));
+            }
+
+            ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => new { x.Key, x.Value.Errors });
+            return View(model);
+        }
         #endregion
 
 
@@ -153,7 +172,8 @@ namespace Demo.PL.Controllers.Users
         #region ProductList
         public IActionResult ProductList()
         {
-            return View();
+            var products = _productRepo.Getproducts();
+            return View(products);
         }
         #endregion
 

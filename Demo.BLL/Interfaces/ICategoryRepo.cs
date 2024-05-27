@@ -9,7 +9,6 @@ namespace Demo.BLL.Interfaces
 {
     public interface ICategoryRepo
     {
-        // CRUD operation
-        IEnumerable<Category> categories { get; } // get all ccategories 
+        IEnumerable<Category> GetAll();
     }
 }

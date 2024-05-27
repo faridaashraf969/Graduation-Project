@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Demo.DAL.Entities
+{
+    public class Order
+    {
+        [Key]
+        public int OrderNumber { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal TotalAmount { get; set; }
+        [RegularExpression("^[0-9]{1,3}-[a-zA-Z]{5,10}-[a-zA-Z]{4,10}-[a-zA-Z]{5,10}$",
+            ErrorMessage = "Address must be Like 123-Street-City-Country")]
+        [Required]
+        public string Address { get; set; }
+        public DateTime DeliveryDate { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string Status { get; set; }
+
+    }
+}

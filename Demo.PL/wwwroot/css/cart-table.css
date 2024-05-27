@@ -1,0 +1,57 @@
+*{
+font-family: 'Montserrat';
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+}
+.logo {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 45px;
+  color: #000000;
+  margin-top: 10px;
+}
+.table th{
+   /* color:  #7b9bd3; */
+   color:  #004f9862;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+.container h2{
+    margin-top: 36px;
+    margin-bottom: 26px;
+    color:  #004F98;
+    
+}
+.button-container {
+    position: relative;
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .btn1, .btn2{
+    padding: 8px 20px;
+    margin-left: 10px;
+    border: 2px solid  #F0A400;
+    transition: all 0.3s ease;
+  }
+  
+  .btn1 {
+    background-color: #F0A400;
+    color:white  ;
+    
+  }
+  
+  .btn2 {
+    background-color: white;
+    color: #F0A400;
+  }
+  .btn1:hover {
+    transform: scale(1.1);
+  }
+  .btn2:hover{
+    transform: scale(1.1);
+  }

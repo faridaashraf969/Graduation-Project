@@ -1,0 +1,74 @@
+* {
+    margin-top: 0;
+    margin-left: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: font-family: "Montserrat", sans-serif ;
+}
+.logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+    margin-top: 10px;
+}
+/* //////////////////////////////start cameras section///////////////////////////// */
+.camera-sections {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.camera-p1 {
+    width: 375px;
+    height: 415px;
+}
+.camera-p1 h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: #0B3362;
+    margin-top: 20px;
+}
+.camera-p1 p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: rgba(23, 26, 31, 0.6);
+}
+.cam-ac {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.cam-ac span {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    color: #0B3362;
+}
+.cam-ac button {
+    width: 102px;
+    height: 36px;
+    background: #F0A400;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+}
+
+
+
+
+
+
+
+
+

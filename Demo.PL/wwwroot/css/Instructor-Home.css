@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    
+  }
+
+  
+  .parent {
+    position: relative;
+    width: 100%; 
+    height: 500px;
+    padding: 20px 20px;
+    margin-top:100px
+  }
+  
+  .photo {
+    width: 450px; 
+    height: 300px; 
+    position: absolute;
+    right: 0;
+    
+    
+  }
+  
+  .content {
+    width: 50%;
+    margin-top: 80px;
+  }
+  .content h2  {
+    color:  #0B3362;
+    font-weight: bold;
+
+    
+  }
+
+  
+  
+/* ////////////////////start nav section////////////////////////// */
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.logo {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 45px;
+  color: #000000;
+  margin-top: 10px;
+}
+nav ul li {
+  display: inline-block;
+  margin-left: 45px;
+  margin-top: 20px;
+}
+nav ul li a {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: black;
+}
+nav ul li a:hover {
+  color: #98C4F6;
+}
+.u-icon {
+  margin-top: 20px;
+}
+/* ////////////////////end nav section////////////////////////// */
+  /* Styling the clickable divs */
+
+.box1 {
+    width: 85%;
+    height: 200px;
+    background-color: #f0f0f0;
+    margin: 20px 10px;
+    border-radius: 26px;
+    
+    background-image: url('../files/instructorpageimages/box4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 5px 5px 10px rgba(48, 43, 43, 0.6);
+    position: relative;
+    padding: 13px 35px;
+    text-overflow: ellipsis;
+}
+  .box1 a{
+    text-decoration: none;
+    color:white;
+  }
+  .box1 img{
+position: absolute;
+bottom: 15px;
+right: 15px;
+  }
+  .box1 p{
+    width: 650px;
+  }
+  .box1:hover {
+    transform: scale(1.1);
+  }
+.box2 {
+    width: 85%;
+    height: 200px;
+    background-color: #f0f0f0;
+    margin: 20px 10px;
+    border-radius: 26px;
+    
+    background-image: url('../files/instructorpageimages/box3.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 5px 5px 10px rgba(48, 43, 43, 0.6);
+    position: relative;
+    padding: 13px 35px;
+}
+  .box2 a{
+    text-decoration: none;
+    color:white;
+  }
+  .box2 img{
+position: absolute;
+bottom: 15px;
+right: 15px;
+  }
+  .box2 p{
+    width: 650px;
+  }
+  .box2:hover {
+    transform: scale(1.1);
+  }
+.box3 {
+    width: 85%;
+    height: 200px;
+    background-color: #f0f0f0;
+    margin: 20px 10px;
+    border-radius: 26px;
+    
+    background-image: url('../files/instructorpageimages/box5.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    box-shadow: 5px 5px 10px rgba(48, 43, 43, 0.6);
+    position: relative;
+    padding: 13px 35px;
+}
+  .box3 a{
+    text-decoration: none;
+    color:white;
+  }
+  .box3 img{
+position: absolute;
+bottom: 15px;
+right: 15px;
+  }
+  .box3 p{
+    width: 650px;
+  }
+  .box3:hover {
+    transform: scale(1.1);
+  }
+.box4 {
+    width: 85%;
+    height: 200px;
+    background-color: #f0f0f0;
+    margin: 20px 10px;
+    border-radius: 26px;
+    
+    background-image: url('../files/instructorpageimages/box2.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 5px 5px 10px rgba(48, 43, 43, 0.6);
+    position: relative;
+    padding: 13px 35px;
+}
+  .box4 a{
+    text-decoration: none;
+    color:white;
+  }
+  .box4 img{
+position: absolute;
+bottom: 15px;
+right: 15px;
+  }
+  .box4 p{
+    width: 650px;
+  }
+  .box4:hover {
+    transform: scale(1.1);
+  }
+  .div55 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: -50px;
+  }
+
+  /* Styling the footer */
+
+  footer {
+    background-color: #0B3362;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    bottom: 0;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center items horizontally */
+  }
+  
+  footer h2 {
+    margin-bottom: 20px; /* Add space below the heading */
+  }
+  
+  footer ul {
+    margin-right: auto; /* Push the ul to the left by margin-right */
+    text-align: left;
+  }
+  
+  footer ul li {
+    margin-bottom: 10px;
+  }
+  
+  footer ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .social-icons {
+    margin-left: auto; /* Push the .social-icons to the right by margin-left */
+  }
+  
+  .social-icons a {
+    color: #fff;
+    margin-left: 10px;
+    text-decoration: none;
+  }

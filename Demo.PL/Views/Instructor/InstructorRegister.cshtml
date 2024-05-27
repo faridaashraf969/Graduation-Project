@@ -1,0 +1,107 @@
+﻿@using Demo.PL.Models.UserLogins
+@using Demo.PL.Models.UserRegister
+@model InstructorViewModel
+@{
+    Layout = "_AuthLayout";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Berkshire+Swash&family=Fira+Sans:ital,wght@1,100&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mrs+Saint+Delafield&family=Oswald:wght@500&family=Raleway:ital,wght@1,500&family=Roboto:ital@1&family=Rubik+Iso&display=swap" rel="stylesheet">
+    <link href="~/css/register.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- the big Sign up box div -->
+
+    <div class="signup-box">
+        <h2 id="h2">Sign Up AS An Instructor!</h2>
+        <div asp-validation-summary="All" class="validation"></div>
+        <form asp-controller="Instructor" asp-action="InstructorRegister">
+            <!--  First Name-->
+            <div class="textbox">
+                <label for="fname">First Name</label><br>
+                <input asp-for="FName" type="text" id="fname" required><br>
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <!-- Last Name -->
+            <div class="textbox">
+
+                <label for="lname">Last Name</label><br>
+                <input asp-for="LName" type="text" id="lname" required>
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="textbox">
+                <label for="email">Email</label><br>
+                <input asp-for="Email" type="email" id="email" required>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Phone number -->
+            <div class="textbox">
+                <label for="phone">Phone Number</label><br>
+                <input asp-for="Phone" type="tel" id="phone" required>
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <!-- Years Of Experience -->
+            <div class="textbox">
+                <label for="YearsOfExperience">Years Of Experience</label><br>
+                <input asp-for="YearsOfExperience" id="YearsOfExperience" required>
+                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+            </div>
+
+            <!-- SSN -->
+            <div class="textbox">
+                <label for="SSN">SSN</label><br>
+                <input asp-for="SSN" id="SSN" required>
+                <span asp-validation-for="SSN" class="text-danger"></span>
+            </div>
+            
+
+            <!-- password -->
+            <div class="textbox">
+                <label for="pass">Password</label><br>
+                <input asp-for="Password" type="password" id="pass" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!--Comfirm password -->
+            <div class="textbox">
+                <label for="pass">Comfirm Password</label><br>
+                <input asp-for="ComfirmPassword" type="password" id="pass" required>
+                <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- button sign up-->
+            <div>
+                <input class="btn" type="submit" value="Sign Up">
+            </div>
+
+            <!--last paragraph-->
+            <p class="paragraph">Already have an Account?<a href="InstructorLogin" class="link"><span>Log In</span></a></p>
+
+
+
+        </form>
+    </div>
+
+    @section ValidationScriptSection
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+</body>
+
+</html>
+
+
+
+
+

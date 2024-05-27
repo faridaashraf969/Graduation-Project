@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/css/usertype.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Photocamp</title>
+
+</head>
+<body>
+    <!--logo-->
+    <nav>
+        <p class="logo">Photocamp</p>
+    </nav>
+
+    <!-- text -->
+    <h3>Join as a client, Photographer, seller or instructor</h3>
+
+    <section class="user-type">
+        <!-- Button client -->
+        <button onclick="location.href='@Url.Action("ClientRegister","Client")'">
+            <img src="~/Files/Images/client.jpg" alt="client"><br>
+            <span>I am a Client</span>
+
+        </button>
+
+        <!-- Button photographer-->
+        <button onclick="location.href='@Url.Action("PhotographerRegister","Photographer")'">
+            <img src="~/Files/Images/photographer.jpg" alt="photographer"><br>
+            <span>I am a Photographer</span>
+        </button>
+
+        <!-- Button seller -->
+        <button onclick="location.href='@Url.Action("SellerRegister","Seller")'">
+            <img src="~/Files/Images/seller.jpg" alt="seller"><br>
+            <span>I am a Seller</span>
+        </button>
+
+        <!-- Button instructor -->
+        <button onclick="location.href='@Url.Action("InstructorRegister","Instructor")'">
+            <img src="~/Files/Images/instructor.jpg" alt="instructor"><br>
+            <span>I am an Instructor</span>
+        </button>
+    </section>
+
+</body>
+</html>

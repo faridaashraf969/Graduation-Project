@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+}
+/* ////////////////////start nav section////////////////////////// */
+nav {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+    margin-top: 25px;
+}
+nav ul li {
+    display: inline-block;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+nav ul li a {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: black;
+}
+nav ul li a:hover {
+    color: #98C4F6;
+}
+.u-icon {
+    margin-top: 20px;
+}
+/* ////////////////////end nav section////////////////////////// */
+
+/* ////////////////////start welcome section////////////////////////// */
+.welcome-sec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.welc-sec1 {
+    margin-top: 50px;
+
+}
+.welcome-sec h2 {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #0B3362;
+}
+.welcome-sec p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    color: rgba(23, 26, 31, 0.6);
+    margin-top: 20px;
+    margin-left: 10px;
+}
+hr {
+    width: 1252px;
+    margin: auto;
+    border: 1px solid #D6D6D6;
+}
+/* ////////////////////end welcome section////////////////////////// */
+/* see bid box */
+.fet-sec {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.see-bid {
+   
+    background-image: url('../files/photographer imges/see-bid-background.jpg');
+    background-color: rgba(11, 51, 98, 0.6);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 26px;
+    box-shadow: 8px 7px 8.4px 0px rgba(0, 0, 0, 0.25);
+    width: 1100px;
+    height: 240px;
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.see-bid:hover{
+    transform: scale(1.1);
+}
+h1{
+    color: white;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 43.88px;
+    padding-top: 30px;
+    padding-left: 35px;
+}
+p{
+    color: rgba(255, 255, 255, 1);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    margin-top: 20px;
+    margin-left: 45px;
+    width: 60%;
+}
+.arrow{
+    
+    margin-left: 90%;
+    margin-top: 70%;
+}
+/* visit store box  */
+.visit-store {
+    
+    background-image: url('../files/photographer imges/visit-store-background.jpg');
+    background-color: rgba(11, 51, 98, 0.6);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 26px;
+    box-shadow: 8px 7px 8.4px 0px rgba(0, 0, 0, 0.25);
+    width: 1100px;
+    height: 240px;
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.visit-store:hover{
+    transform: scale(1.1);
+}
+/* photographer courses box */
+.photo-courses {
+   
+    background-image: url('../files/photographer imges/photographer-courses-background.jpg');
+    background-color: rgba(11, 51, 98, 0.6);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 26px;
+    box-shadow: 8px 7px 8.4px 0px rgba(0, 0, 0, 0.25);
+    width: 1100px;
+    height: 240px;
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.photo-courses:hover{
+    transform: scale(1.1);
+}
+/* view  list      */
+.view-work {
+    
+    background-image: url('../files/photographer imges/view-list-background.jpg');
+    background-color: rgba(11, 51, 98, 0.6);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 26px;
+    box-shadow: 8px 7px 8.4px 0px rgba(0, 0, 0, 0.25);
+    width: 1100px;
+    height: 240px;
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 30px
+}
+.view-work:hover{
+    transform: scale(1.1);
+}
+div h1 {
+    color: #FFFFFF;
+}
+
+/* ////////////////////start footer section////////////////////////// */
+
+.footer-main {
+    background: #0B3362;
+    width: 100%;
+    height:310px; ;
+}
+.footer-logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: white;
+    text-align: center;
+    margin-left: 170px;
+}
+.footer-section  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 30px;
+    flex-wrap: nowrap;
+}
+.footer-section ul li {
+    color: #FFFFFF;
+}
+.footer-section ul li a {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    color: #FFFFFF;
+}
+
+
+.social-icons {
+    margin-top: 180px;
+    margin-left: 180px; 
+    display: flex;
+}  
+.social-icons a {
+    color: #fff;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.footer-p {
+    text-align: center;
+    margin-top: 180px;
+    margin-left: 120px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}
+/* ///////////////////end footer section////////////////////////// */
+
+
+

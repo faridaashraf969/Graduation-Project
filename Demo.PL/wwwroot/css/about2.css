@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+}
+/* ////////////////////start nav section////////////////////////// */
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+.logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+    margin-top: 10px;
+}
+nav ul li {
+    display: inline-block;
+    margin-left: 45px;
+    margin-top: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: black;
+}
+nav ul li a:hover {
+    color: #98C4F6;
+}
+.nav-button {
+    width: 107px;
+    height: 33px;
+    background: #F0A400;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+    color: #FFFFFF;
+    font-size: 19px;
+}
+.nav-button:hover{
+    background-color: white;
+    border: 2px solid #F0A400;
+    color: #F0A400;
+}
+/* ////////////////////end nav section////////////////////////// */
+/* ////////////////////start content section////////////////////////// */
+.about-content p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: rgba(23, 26, 31, 0.6);
+    width: 900px;
+   margin: auto;
+}
+/* ////////////////////end content section////////////////////////// */
+/* ////////////////////start image section////////////////////////// */
+.about-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+}
+/* ////////////////////end image section////////////////////////// */
+/* ////////////////////start mission section////////////////////////// */
+.mission-sec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin : 80px 0;
+}
+.m1p1 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+.m1p1 img {
+    margin-right: 20px;
+}
+.m1p1 h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    color: #171A1F;
+}
+.m1 p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    color: rgba(23, 26, 31, 0.6);
+    width: 480px;
+}
+
+
+
+
+

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart-table</title>
+    <link rel="stylesheet" href="~/css/cart-table.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Berkshire+Swash&family=Fira+Sans:ital,wght@1,100&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mrs+Saint+Delafield&family=Oswald:wght@500&family=Raleway:ital,wght@1,500&family=Roboto:ital@1&family=Rubik+Iso&display=swap" rel="stylesheet">
+
+    <style>
+        /* Optional: Additional custom styling for table borders */
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- //////////////////////////////////////start nav bar/////////////////////////////////////////////// -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <p class="logo">Photocamp</p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Find a Photographer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+
+
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- //////////////////////////////////////start nav bar/////////////////////////////////////////////// -->
+    <div class="container">
+        <h2>Your Shopping cart</h2>
+        <table class="table">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th>Amount</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> 1</td>
+                    <td>Nikon Zfc Mirrorless</td>
+                    <td>53,499 L.E</td>
+                    <td>53,499 L.E</td>
+                    <td><img src="~/Files/Images/Vector.svg"> </td>
+                </tr>
+                <tr style="background-color: #f8f9fa;">
+                    <td>1</td>
+                    <td>Canon EOS R100</td>
+                    <td>32,999 L.E</td>
+                    <td>32,999 L.E</td>
+                    <td><img src="~/Files/Images/Vector.svg"></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sony ZV-1</td>
+                    <td>37,000 L.E</td>
+                    <td>32,999 L.E</td>
+                    <td><img src="~/Files/Images/Vector.svg"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="button-container">
+            <button class="btn1">Checkout</button>
+            <button class="btn2" onclick="location.href='@Url.Action("Store","Home")'">Add more Products</button>
+        </div>
+    </div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+

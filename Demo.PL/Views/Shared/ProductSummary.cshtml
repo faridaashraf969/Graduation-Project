@@ -1,0 +1,31 @@
+﻿@model Product
+<link href="~/css/store.css" rel="stylesheet" />
+
+
+<div class="camera-p1">
+
+    <img src="~/Files/Store-Images/cam1.png" alt="cam1">
+    <h3>@Model.Name</h3>
+    <p>@Model.Description</p>
+    <div class="cam-ac  col-sm-4 col-lg-4 col-md-4">
+        <span>@Model.Price.ToString("c")</span>
+        <button>Add to cart</button>
+    </div>
+</div>
+
+@* <table>
+    <tr>
+        <td>
+            <div class="camera-p1">
+                <img src="~/Files/Store-Images/cam1.png" alt="cam5">
+                <h3>@Model.Name</h3>
+                <p>@Model.Description</p>
+                <div class="cam-ac">
+                    <span>@Model.Price</span>
+                    <button>Add to cart</button>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+ *@

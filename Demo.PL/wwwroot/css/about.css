@@ -1,0 +1,66 @@
+*{
+    font-size: 15px;
+    font-family: 'Montserrat';
+    line-height: 22px;
+    font-weight: 500;
+}
+/* ////////////////////start nav section////////////////////////// */
+
+.logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+    margin-top: 10px;
+}
+
+
+/* ////////////////////end nav section////////////////////////// */
+.intro{
+    text-align: center;
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom: 40px;
+}
+.container {
+display: flex;
+margin-top: 50px;
+}
+.cover {
+    height: 600px;
+    width: 100%x;
+    background-image: url('../files/images/about.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 60px;
+}
+.t1 img {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 33px;
+    height: 33px;
+}
+h3{
+display: inline;
+margin-top: 10px;
+font-size: 25px;
+}
+.title2{
+    margin-left: 60px;
+   
+}
+.vission{
+    height: 20px;
+    width: 30px;
+}
+.mission{
+    width: 30px;
+    height: 20px;
+}
+p{
+    color: rgb(120, 123, 126);
+}
+.title1,.title2 {
+    margin: 30px 0;
+}

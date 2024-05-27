@@ -9,9 +9,9 @@ namespace Demo.BLL.Interfaces
 {
     public interface IProductRepo
     {
-        // CRUD Operation
-        IEnumerable<Product> products { get; }  //getb all product
-        IEnumerable<Product> preferredProgucts { get; } // get preferredproduct only at home page 
+        IEnumerable<Product> Getproducts();  //getb all product
         Product GetProductById(int ProductId);
+        int Add(Product Product);
+        void Update(Product product);
     }
 }

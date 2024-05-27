@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,19 +13,24 @@ namespace Demo.DAL.Entities
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Product Name Is Required")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Product Description Is Required")]
         public string Description { get; set; }
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
-        public string ImageThumbnailUrl { get; set; }
-        public bool IsPreferredProduct { get; set; }
-        public bool InStock { get; set; }
+        [Required]
+        public int Quantity { get; set; }
+
+        public string ImageName { get; set; }
         [ForeignKey("Category")]
         public int? CategoryId { get; set; } //FK
-        [InverseProperty("Products")]
-        public /*virtual*/ Category Category { get; set; }
+        [InverseProperty("Product")]
+        public Category Category { get; set; }
+        public string Status { get; set; }
+        [NotMapped]
+        public IFormFile Image { get; set; }
 
 
     }

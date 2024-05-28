@@ -14,13 +14,14 @@ namespace Demo.DAL.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Category Name Is Required")]
+        [Required]
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "Category Description Is Required")]
         public string Description { get; set; }
-
+        //[ForeignKey("Product")]
+        //public int ProductId { get; set; }
         [InverseProperty("Category")]
-        public List<Product> Product { get; set; }
+        // navigational property [many]
+        public ICollection<Product> Products { get; set; } = new HashSet<Product>();
+        // public List<Product> Products { get; set; } 
     }
 }

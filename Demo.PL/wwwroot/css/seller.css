@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+}
+/* ////////////////////start nav section////////////////////////// */
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+    margin-top: 10px;
+}
+nav ul li {
+    display: inline-block;
+    margin-left: 45px;
+    margin-top: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: black;
+}
+nav ul li a:hover {
+    color: #98C4F6;
+}
+.u-icon {
+    margin-top: 20px;
+}
+/* ////////////////////end nav section////////////////////////// */
+/* ////////////////////start welcome section////////////////////////// */
+.welcome-sec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.welc-sec1 {
+    margin-top: 50px;
+    width: 620px;
+}
+.welcome-sec h3 {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #0B3362;
+}
+.welcome-sec p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    color: rgba(23, 26, 31, 0.6);
+    margin-top: 20px;
+}
+/* ////////////////////end welcome section////////////////////////// */
+/* ////////////////////start add product section////////////////////////// */
+hr {
+    width: 1252px;
+    margin: auto;
+    border: 1px solid #D6D6D6;
+}
+.add-p {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+.add-p h3 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+    color: #0B3362;
+}
+.new-p {
+    width: 420px;
+    height: 100.6px;
+    border: 3px solid #D6D6D6;
+    border-radius: 11px;
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ////////////////////end add product section////////////////////////// */
+/* ////////////////////start product list section////////////////////////// */
+.product-list {
+    margin-top: 50px;
+}
+.product-list h3 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+    color: #0B3362;
+}
+.table {
+    margin-top: 50px;
+    margin-bottom: 300px;
+}
+/* ////////////////////end product list section////////////////////////// */
+/* ////////////////////start footer section////////////////////////// */
+.footer-main {
+    background: #0B3362;
+    width: 100%;
+    height:310px; ;
+}
+.footer-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 30px;
+    flex-wrap: nowrap;
+}
+.footer-section ul li {
+    color: #FFFFFF;
+}
+.footer-section ul li a {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    color: #FFFFFF;
+}
+.footer-logo {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 45px;
+    color: white;
+}
+.footer-section a img {
+    width: 120px;
+    height: 30px;
+    margin-top: 150px;
+}
+.footer-p {
+    text-align: center;
+    margin-top: 60px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}
+/* ///////////////////end footer section////////////////////////// */
+
+

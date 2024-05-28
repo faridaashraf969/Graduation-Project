@@ -34,6 +34,33 @@ namespace Demo.PL.Controllers
             return View(category);
         }
         [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+            var category = _categoryRepo.GetById(id.Value);
+            if(category is null)
+                return NotFound();
+            return View(category);
+        }
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _categoryRepo.Update(category);
+                    return RedirectToAction(nameof(AllCategory))
+                }
+                catch(System.Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message); 
+                }
+            }
+            return View(category);
+        }
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id == null)

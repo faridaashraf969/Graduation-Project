@@ -1,12 +1,11 @@
 ﻿using System.Net.Mail;
 using System.Net;
-using Demo.DAL.Entities;
 
 namespace Demo.PL.Helpers
 {
     public static class EmailSettings
     {
-        public static void SendEmail(Email email)
+        public static void SendEmail(DAL.Entities.Email email)
         {
             var clinte = new SmtpClient("smtp.gmail.com", 587); // host , port
             clinte.EnableSsl = true;

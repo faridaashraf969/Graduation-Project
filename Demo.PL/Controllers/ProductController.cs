@@ -14,14 +14,14 @@ namespace Demo.PL.Controllers
             _productRepository = productRepository;
 
         }
-        public IActionResult List()
-        {
-            var products = _productRepository.products; //get all Products
-            ProductListViewModel viewModel = new ProductListViewModel();
-            viewModel.Products = _productRepository.products;
-            viewModel.CurrentCategory = "productcategory";
-            return View(viewModel);
-        }
+        //public IActionResult List()
+        //{
+        //    var products = _productRepository.products; //get all Products
+        //    ProductListViewModel viewModel = new ProductListViewModel();
+        //    viewModel.Products = _productRepository.products;
+        //    viewModel.CurrentCategory = "productcategory";
+        //    return View(viewModel);
+        //}
         public IActionResult Cart()
         {
             return View();

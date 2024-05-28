@@ -1,5 +1,6 @@
 ﻿using System.Net.Mail;
 using System.Net;
+using Demo.DAL.Entities;
 
 namespace Demo.PL.Helpers
 {

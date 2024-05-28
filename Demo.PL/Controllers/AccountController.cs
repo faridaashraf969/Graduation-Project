@@ -1,4 +1,5 @@
 ﻿using Demo.DAL.Entities;
+using Demo.PL.Helpers;
 using Demo.PL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,15 +11,15 @@ namespace Demo.PL.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<Client> _userManagerClient;
-        private readonly SignInManager<Client> _signInManagerClient;
+        private readonly UserManager<Client> _userManager;
+        private readonly SignInManager<Client> _signInManager;
 
         public AccountController(UserManager<Client> userManager
             ,SignInManager<Client> signInManager
             ) 
         {
-            this._userManagerClient = userManager;
-            this._signInManagerClient = signInManager;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
         }
 
         [HttpGet]
@@ -83,7 +84,7 @@ namespace Demo.PL.Controllers
                     
                 };
 
-                var Result = await _userManagerClient.CreateAsync(user, model.Password);
+                var Result = await _userManager.CreateAsync(user, model.Password);
                 if (Result.Succeeded)
                 {
                     return RedirectToAction(nameof(Login));
@@ -110,13 +111,13 @@ namespace Demo.PL.Controllers
         {
             if (ModelState.IsValid)
             {
-                var User = await _userManagerClient.FindByEmailAsync(model.Email);
+                var User = await _userManager.FindByEmailAsync(model.Email);
                 if (User is not null)
                 {
-                    var Result = await _userManagerClient.CheckPasswordAsync(User, model.Password);
+                    var Result = await _userManager.CheckPasswordAsync(User, model.Password);
                     if (Result)
                     {
-                        var Login = await _signInManagerClient.PasswordSignInAsync(User, model.Password, model.RememberMe, false);
+                        var Login = await _signInManager.PasswordSignInAsync(User, model.Password, model.RememberMe, false);
 
                         if (Login.Succeeded)
                         {

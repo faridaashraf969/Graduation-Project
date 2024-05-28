@@ -108,10 +108,40 @@ namespace Demo.PL.Controllers.Users
 
         #region Edit Product
 
-        #endregion 
+        #endregion
 
-        #region Delete Product
+        #region DeleteProduct
+        [HttpGet]
+        public IActionResult DeleteProduct(int? id)
+        {
+            if (id == null)
+                return BadRequest("Product ID is required.");
 
+            var product = _productRepo.GetProductById(id.Value);
+            if (product == null)
+                return NotFound("Product not found.");
+
+            return View(product);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _productRepo.GetProductById(id);
+            if (product == null)
+                return NotFound("Product not found.");
+
+            try
+            {
+                _productRepo.Delete(product);
+                return RedirectToAction("AllCategory", "Category");
+            }
+            catch (System.Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Error deleting product: {ex.Message}");
+                return View(product);
+            }
+        }
         #endregion
         /////////////////////////////////////////////////////////////////
     }

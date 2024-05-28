@@ -1,0 +1,47 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<link href="~/css/new-category.css" rel="stylesheet" />
+<div asp-validation-summary="All"></div>
+<div class="login-box">
+    <h2 id="h2"> Delete @Model.Name Product</h2>
+    <form asp-action="DeleteProduct">
+        <div class="textbox">
+
+            <label>Name</label><br>
+            <input asp-for="Name" required>
+        </div>
+        <div class="textbox">
+
+            <label>Description</label><br>
+            <input asp-for="Description" required>
+        </div>
+        <div class="textbox">
+
+            <label>Price</label><br>
+            <input asp-for="Price" required>
+        </div>
+        <div class="textbox">
+
+            <label>Quantity</label><br>
+            <input asp-for="Quantity" required>
+        </div>
+        <div class="textbox">
+
+            <label>Image</label><br>
+            <input asp-for="Image" required>
+        </div>
+        <div class="textbox">
+
+            <label>Category</label><br>
+            <input asp-for="Category" required>
+        </div>
+        <!-- button  -->
+        <div class="btns">
+            <input type="submit" class="btn" value="Delete"><br>
+            <a asp-action="ProductsPage" class="btn btn1">Cancel</a>
+        </div>
+    </form>
+</div>

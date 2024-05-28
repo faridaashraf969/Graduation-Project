@@ -9,12 +9,12 @@ namespace Demo.PL.Controllers.Users
 {
     public class AdminController : Controller
     {
-        private readonly UserManager<Client> _userManager;
-        private readonly SignInManager<Client> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProductRepo _productRepo;
 
-        public AdminController(UserManager<Client> userManager,
-            SignInManager<Client> signInManager
+        public AdminController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager
             ,IProductRepo productRepo) 
         {
             this._userManager = userManager;

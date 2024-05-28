@@ -16,15 +16,21 @@ namespace Demo.DAL.Contexts
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(" server=DESKTOP-23QDN41\\MSSQLSERVER01 ; Database = MVCPhotoCamp ; Trusted_Connection = true; ");
-        //}
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.Orders)
+                .WithOne(o => o.ApplicationUser)
+                .HasForeignKey(o => o.ApplicationUserID);
+        }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<ApplicationUser> User { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
     }
 }

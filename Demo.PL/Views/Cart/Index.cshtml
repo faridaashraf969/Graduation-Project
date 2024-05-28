@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CartItem>
+
+<h2>Your Cart</h2>
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>@(item.Quantity * item.Price).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Total: @Model.Sum(item => item.Quantity * item.Price).ToString("C")</p>
+    <a href="@Url.Action("Checkout", "Cart")">Proceed to Checkout</a>
+}
+

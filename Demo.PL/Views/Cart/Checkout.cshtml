@@ -1,0 +1,31 @@
+﻿@using System.Security.Claims
+@model IEnumerable<CartItem>
+
+<h2>Checkout</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@(item.Quantity * item.Price).ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>Total: @Model.Sum(item => item.Quantity * item.Price).ToString("C")</p>
+<form asp-action="CheckoutConfirm" method="post">
+    <input type="hidden" name="customerId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+    <button type="submit">Confirm and Pay</button>
+</form>
+

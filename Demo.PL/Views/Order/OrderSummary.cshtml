@@ -1,0 +1,28 @@
+﻿@model Order
+
+<h2>Order Summary</h2>
+<p>Order ID: @Model.OrderNumber</p>
+<p>Order Date: @Model.OrderDate</p>
+<p>Client: @Model.ApplicationUser.UserName</p>
+<p>Total Amount: @Model.TotalAmount</p>
+
+<h3>Order Items</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.ProductID</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>

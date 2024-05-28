@@ -1,36 +1,42 @@
-﻿using Demo.BLL.Interfaces;
-using Demo.PL.Models;
+﻿using Demo.PL.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Demo.PL.Controllers
+public class ProductController : Controller
 {
-    public class ProductController : Controller
+    private readonly ProductService _productService;
+    private readonly CartService _cartService;
+
+    public ProductController(ProductService productService, CartService cartService)
     {
-        private readonly ICategoryRepo _categoryRepository;
-        private readonly IProductRepo _productRepository;
-        public ProductController(ICategoryRepo categoryRepository, IProductRepo productRepository) //constructor from product controler with two parameter
+        _productService = productService;
+        _cartService = cartService;
+    }
+
+    public IActionResult Index()
+    {
+        var products = _productService.GetAllProducts();
+        return View(products);
+    }
+
+    public IActionResult Details(int id)
+    {
+        var product = _productService.GetProductById(id);
+        if (product == null)
         {
-            _categoryRepository = categoryRepository;
-            _productRepository = productRepository;
-
+            return NotFound();
         }
-        //public IActionResult List()
-        //{
-        //    var products = _productRepository.products; //get all Products
-        //    ProductListViewModel viewModel = new ProductListViewModel();
-        //    viewModel.Products = _productRepository.products;
-        //    viewModel.CurrentCategory = "productcategory";
-        //    return View(viewModel);
-        //}
-        public IActionResult Cart()
+        return View(product);
+    }
+
+    [HttpPost]
+    public IActionResult AddToCart(int productId, int quantity)
+    {
+        var product = _productService.GetProductById(productId);
+        if (product == null)
         {
-            return View();
+            return NotFound();
         }
-
-        //public IActionResult DeleteProduct()
-        //{
-        //    return View();
-        //}
-
+        _cartService.AddToCart(product, quantity);
+        return RedirectToAction("Index", "Cart");
     }
 }

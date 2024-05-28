@@ -13,12 +13,12 @@ namespace Demo.PL.Controllers.Users
 {
     public class SellerController : Controller
     {
-        private readonly UserManager<Client> _userManagerClient;
-        private readonly SignInManager<Client> _signInManagerClient;
+        private readonly UserManager<ApplicationUser> _userManagerClient;
+        private readonly SignInManager<ApplicationUser> _signInManagerClient;
         private readonly IProductRepo _productRepo;
 
-        public SellerController(UserManager<Client> userManager
-            , SignInManager<Client> signInManager
+        public SellerController(UserManager<ApplicationUser> userManager
+            , SignInManager<ApplicationUser> signInManager
             ,IProductRepo productRepo
             )
         {
@@ -26,7 +26,7 @@ namespace Demo.PL.Controllers.Users
             this._signInManagerClient = signInManager;
             this._productRepo = productRepo;
         }
-        #region Register
+            #region Register
         public IActionResult SellerRegister()
         {
             return View();
@@ -38,7 +38,7 @@ namespace Demo.PL.Controllers.Users
 
             if (ModelState.IsValid)//
             {
-                var user = new Client()
+                var user = new ApplicationUser()
                 {
                     UserName = model.Email.Split('@')[0],
                     Email = model.Email,

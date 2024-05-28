@@ -9,17 +9,17 @@ namespace Demo.PL.Controllers.Users
 {
     public class PhotographerController : Controller
     {
-        private readonly UserManager<Client> _userManagerClient;
-        private readonly SignInManager<Client> _signInManagerClient;
+        private readonly UserManager<ApplicationUser> _userManagerClient;
+        private readonly SignInManager<ApplicationUser> _signInManagerClient;
 
-        public PhotographerController(UserManager<Client> userManager
-            , SignInManager<Client> signInManager
+        public PhotographerController(UserManager<ApplicationUser> userManager
+            , SignInManager<ApplicationUser> signInManager
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
         }
-        #region Register
+            #region Register
         public IActionResult PhotographerRegister()
         {
             return View();
@@ -31,7 +31,7 @@ namespace Demo.PL.Controllers.Users
 
             if (ModelState.IsValid)//
             {
-                var user = new Client()
+                var user = new ApplicationUser()
                 {
                     UserName = model.Email.Split('@')[0],
                     Email = model.Email,

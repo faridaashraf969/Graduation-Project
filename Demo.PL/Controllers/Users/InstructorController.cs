@@ -9,11 +9,11 @@ namespace Demo.PL.Controllers.Users
 {
     public class InstructorController : Controller
     {
-        private readonly UserManager<Client> _userManagerClient;
-        private readonly SignInManager<Client> _signInManagerClient;
+        private readonly UserManager<ApplicationUser> _userManagerClient;
+        private readonly SignInManager<ApplicationUser> _signInManagerClient;
 
-        public InstructorController(UserManager<Client> userManager
-            , SignInManager<Client> signInManager
+        public InstructorController(UserManager<ApplicationUser> userManager
+            , SignInManager<ApplicationUser> signInManager
             )
         {
             this._userManagerClient = userManager;
@@ -31,7 +31,7 @@ namespace Demo.PL.Controllers.Users
 
             if (ModelState.IsValid)//
             {
-                var user = new Client()
+                var user = new ApplicationUser()
                 {
                     UserName = model.Email.Split('@')[0],
                     Email = model.Email,

@@ -26,7 +26,7 @@ namespace Demo.DAL.Entities
         public string ImageName { get; set; }
         [ForeignKey("Category")]
         public int? CategoryId { get; set; } //FK
-        [InverseProperty("Product")]
+        [InverseProperty("Products")]
         public Category Category { get; set; }
         public string Status { get; set; }
         [NotMapped]

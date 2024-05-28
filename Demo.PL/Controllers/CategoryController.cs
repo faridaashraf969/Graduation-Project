@@ -51,7 +51,7 @@ namespace Demo.PL.Controllers
                 try
                 {
                     _categoryRepo.Update(category);
-                    return RedirectToAction(nameof(AllCategory))
+                    return RedirectToAction(nameof(AllCategory));
                 }
                 catch(System.Exception ex)
                 {

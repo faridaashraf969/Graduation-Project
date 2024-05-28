@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Product>
+
+<h2>Products</h2>
+@foreach (var product in Model)
+{
+    <div>
+        <h3>@product.Name</h3>
+        <p>@product.Description</p>
+        <p>Price: @product.Price.ToString("C")</p>
+        <img src="@product.Image" alt="@product.Name" />
+        <a href="@Url.Action("Details", new { id = product.Id })">View Details</a>
+    </div>
+}
+

@@ -11,11 +11,11 @@ namespace Demo.PL.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<Client> _userManager;
-        private readonly SignInManager<Client> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<Client> userManager
-            ,SignInManager<Client> signInManager
+        public AccountController(UserManager<ApplicationUser> userManager
+            ,SignInManager<ApplicationUser> signInManager
             ) 
         {
             this._userManager = userManager;
@@ -73,7 +73,7 @@ namespace Demo.PL.Controllers
 
             if (ModelState.IsValid)//
             {
-                var user = new Client()
+                var user = new ApplicationUser()
                 {
                     UserName = model.Email.Split('@')[0],
                     Email = model.Email,

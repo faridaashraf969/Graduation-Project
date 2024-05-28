@@ -2,6 +2,8 @@ using Demo.BLL.Interfaces;
 using Demo.BLL.Resitories;
 using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
+using Demo.PL.Helpers;
+using Demo.PL.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,9 +36,23 @@ namespace Demo.PL
             services.AddDbContext<MvcProjectDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             },ServiceLifetime.Scoped);
+            services.AddScoped<ProductService>();
+            services.AddScoped<CartService>();
+            services.AddScoped<OrderService>();
+            services.AddScoped<PaymentService>();
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.AddHttpContextAccessor();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             //////
             //services.AddAuthentication();
-            services.AddIdentity<Client, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<MvcProjectDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -69,6 +85,8 @@ namespace Demo.PL
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthentication();
 

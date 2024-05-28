@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #E6EDF5;
+    font-family: 'Montserrat';
+    }
+    
+    .login-box {
+      width: 300px;
+      padding: 40px;
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    p {
+      font-size: 20px;
+      color: #0B3362;
+    }
+    a {
+      font-size: 20px;
+      text-decoration: none;
+      color: #F0A400;
+    }

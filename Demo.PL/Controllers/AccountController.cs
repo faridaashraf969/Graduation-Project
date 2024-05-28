@@ -136,7 +136,7 @@ namespace Demo.PL.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
-        //////// Forget Password////
+        //////// Forget Password ////
         public IActionResult ForgetPassword()
         {
             return View();

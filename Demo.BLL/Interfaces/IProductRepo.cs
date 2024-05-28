@@ -9,9 +9,11 @@ namespace Demo.BLL.Interfaces
 {
     public interface IProductRepo
     {
-        IEnumerable<Product> Getproducts();  //getb all product
+        IEnumerable<Product> Getproducts();  //get all product
         Product GetProductById(int ProductId);
         int Add(Product Product);
         void Update(Product product);
+        int Delete(Product product);
+
     }
 }

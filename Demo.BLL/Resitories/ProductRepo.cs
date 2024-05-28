@@ -24,7 +24,13 @@ namespace Demo.BLL.Resitories
             _dbContext.Add(Product);
             return _dbContext.SaveChanges();
         }
-        
+
+        public int Delete(Product product)
+        {
+            _dbContext.Remove(product);
+            return _dbContext.SaveChanges();
+            
+        }
 
         public Product GetProductById(int ProductId)
         {

@@ -43,7 +43,7 @@ namespace Demo.BLL.Resitories
 
         public int Delete(Category category)
         {
-            _projectDbContext.Add(category);
+            _projectDbContext.Remove(category);
             return _projectDbContext.SaveChanges();
         }
 

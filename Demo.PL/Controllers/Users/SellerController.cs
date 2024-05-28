@@ -1,4 +1,5 @@
 ﻿using Demo.BLL.Interfaces;
+using Demo.BLL.Resitories;
 using Demo.DAL.Entities;
 using Demo.PL.Helpers;
 using Demo.PL.Models.UserLogins;
@@ -162,9 +163,36 @@ namespace Demo.PL.Controllers.Users
 
 
         #region DeleteProduct
-        public IActionResult Delete()
+        [HttpGet]
+        public IActionResult DeleteProduct(int? id)
         {
-            return View();
+            if (id == null)
+                return BadRequest("Product ID is required.");
+
+            var product = _productRepo.GetProductById(id.Value);
+            if (product == null)
+                return NotFound("Product not found.");
+
+            return View(product);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _productRepo.GetProductById(id);
+            if (product == null)
+                return NotFound("Product not found.");
+
+            try
+            {
+                _productRepo.Delete(product);
+                return RedirectToAction("AllCategory", "Category");
+            }
+            catch (System.Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Error deleting product: {ex.Message}");
+                return View(product);
+            }
         }
         #endregion
 

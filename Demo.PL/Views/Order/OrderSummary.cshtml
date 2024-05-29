@@ -3,10 +3,10 @@
 <h2>Order Summary</h2>
 <p>Order ID: @Model.OrderNumber</p>
 <p>Order Date: @Model.OrderDate</p>
-<p>Client: @Model.ApplicationUser.UserName</p>
+<p>Customer UserName : @Model.ApplicationUser.UserName</p>
 <p>Total Amount: @Model.TotalAmount</p>
 
-<h3>Order Items</h3>
+@* <h3>Order Items</h3>
 <table>
     <thead>
         <tr>
@@ -19,10 +19,32 @@
         @foreach (var item in Model.OrderItems)
         {
             <tr>
-                <td>@item.ProductID</td>
+                <td>@item.ProductName</td>
                 <td>@item.Quantity</td>
                 <td>@item.Price</td>
             </tr>
         }
     </tbody>
-</table>
+</table> *@
+ 
+        <h3>Payment Information</h3>
+
+        <form asp-action="ProcessPayment" method="post">
+
+            <input type="hidden" name="orderId" value="@Model.OrderNumber" />
+            <div>
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" required />
+            </div>
+            <div>
+                <label for="expiryDate">Expiry Date</label>
+                <input type="text" id="expiryDate" name="expiryDate" required />
+            </div>
+            <div>
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required />
+            </div>
+            <button type="submit">Pay Now</button>
+        </form>
+  
+

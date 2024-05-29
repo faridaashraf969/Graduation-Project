@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Demo.BLL.Interfaces
 {
-    public class ICourseRepo
+    public interface ICourseRepo
     {
-        //IEnumerable<Course> GetAll();
-        //Course GetById(int id);
-        //int Add(Course course);
-        //int Update(Course course);
-        //int Delete(Course course);
-
+        IEnumerable<Course> GetAll();
+        Course GetById(int id);
+        int Add(Course course);
+        void Update(Course course);
+        int Delete(Course course);
     }
 }

@@ -1,8 +1,11 @@
-﻿using Demo.DAL.Entities;
+﻿using Demo.BLL.Interfaces;
+using Demo.DAL.Entities;
+using Demo.PL.Helpers;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers.Users
@@ -11,13 +14,16 @@ namespace Demo.PL.Controllers.Users
     {
         private readonly UserManager<ApplicationUser> _userManagerClient;
         private readonly SignInManager<ApplicationUser> _signInManagerClient;
+        private readonly ICourseRepo _courseRepo;
 
         public InstructorController(UserManager<ApplicationUser> userManager
             , SignInManager<ApplicationUser> signInManager
+            , ICourseRepo courseRepo
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
+            this._courseRepo = courseRepo;  
         }
         #region Register
         public IActionResult InstructorRegister()
@@ -104,6 +110,34 @@ namespace Demo.PL.Controllers.Users
             return View();
         }
 
+        #endregion
+        #region AddCourse
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Course model)
+        {
+            model.Status = "Pending";
+            if (ModelState.IsValid)
+            {
+                _courseRepo.Add(model);
+                return RedirectToAction(nameof(CourseList));
+            }
+            return View(model);
+        }
+
+        #endregion
+        #region CoursetList
+        public IActionResult CourseList()
+        {
+            //_productRepo.Getproducts();
+            var courses = _courseRepo.GetAll();
+            return View(courses);
+        }
         #endregion
 
     }

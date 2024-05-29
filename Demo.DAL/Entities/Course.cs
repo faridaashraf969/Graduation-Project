@@ -23,9 +23,10 @@ namespace Demo.DAL.Entities
         [Required(ErrorMessage = "Product Description Is Required")]
         public string Description { get; set; }
         public string Feedback { get; set; }
-        [ForeignKey("Instructor")]
-        public int? CategoryId { get; set; } //FK
-        [InverseProperty("Cources")]
+        //[ForeignKey("Instructor")]
+        public int? InstructorId { get; set; } //FK
+        //[InverseProperty("Cources")]
         public Instructor Instructor { get; set; }
+        public string Status { get; set; }
     }
 }

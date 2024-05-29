@@ -17,7 +17,7 @@ namespace Demo.DAL.Entities
         public int YearsOfExperience { get; set; }
 
         public string BankAccountNumber { get; set; }
-        [InverseProperty("Inctructor")]
+        //[InverseProperty("Inctructor")]
         public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
 
     }

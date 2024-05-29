@@ -59,7 +59,9 @@ namespace Demo.PL
             //Dendancy Injection
             services.AddTransient<IProductRepo, ProductRepo>(); //configure services
             services.AddTransient<ICategoryRepo, CategoryRepo>();
-            
+            services.AddTransient<ICourseRepo, CourseRepo>();
+
+
 
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

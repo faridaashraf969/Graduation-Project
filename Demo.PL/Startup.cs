@@ -59,6 +59,8 @@ namespace Demo.PL
             //Dendancy Injection
             services.AddTransient<IProductRepo, ProductRepo>(); //configure services
             services.AddTransient<ICategoryRepo, CategoryRepo>();
+            
+
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(Options =>

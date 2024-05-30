@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Course>
+@{
+    @foreach (var course in Model)
+    {
+        <div>
+            <h3>@course.Topic</h3>
+
+            <p>@course.Description</p>
+
+            <p>@course.Duration</p>
+
+            <p>@course.Requirements</p>
+
+            <p>@(course.Instructor.FirstName + " " + course.Instructor.LastName)</p>
+            
+
+            <p>Price: @course.Price.ToString("C")</p>
+
+            <img src="@course.Image" alt="@course.ImageName" />
+            
+            @*Add to cart button*@
+        </div>
+    }
+}

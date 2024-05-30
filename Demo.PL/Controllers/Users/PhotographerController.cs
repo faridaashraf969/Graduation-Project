@@ -39,10 +39,10 @@ namespace Demo.PL.Controllers.Users
                     LastName = model.LName,
                     Role = "Photographer",
                     PhoneNumber = model.Phone,
-                    SSN= model.SSN,
+                    SSN = model.SSN,
                     BankAccountNumber = model.BankAccountNumber,
                     PortofiloUrl = model.PortofiloUrl,
-                    Specialty=model.Specialty,
+                    Specialty = model.Specialty,
                     IsActive = model.IsActive,
                 };
 

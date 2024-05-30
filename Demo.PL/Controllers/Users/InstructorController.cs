@@ -1,29 +1,37 @@
 ﻿using Demo.BLL.Interfaces;
+using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
+using Demo.DAL.Migrations;
 using Demo.PL.Helpers;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Demo.PL.Controllers.Users
 {
     public class InstructorController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManagerClient;
-        private readonly SignInManager<ApplicationUser> _signInManagerClient;
+        private readonly UserManager<DAL.Entities.ApplicationUser> _userManagerClient;
+        private readonly SignInManager<DAL.Entities.ApplicationUser> _signInManagerClient;
         private readonly ICourseRepo _courseRepo;
+        private readonly MvcProjectDbContext _dbContext;
 
-        public InstructorController(UserManager<ApplicationUser> userManager
-            , SignInManager<ApplicationUser> signInManager
+        public InstructorController(UserManager<DAL.Entities.ApplicationUser> userManager
+            , SignInManager<DAL.Entities.ApplicationUser> signInManager
             , ICourseRepo courseRepo
+            ,MvcProjectDbContext dbContext
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
-            this._courseRepo = courseRepo;  
+            this._courseRepo = courseRepo;
+            this._dbContext = dbContext;
         }
         #region Register
         public IActionResult InstructorRegister()
@@ -37,7 +45,7 @@ namespace Demo.PL.Controllers.Users
 
             if (ModelState.IsValid)//
             {
-                var user = new ApplicationUser()
+                var user = new DAL.Entities.ApplicationUser()
                 {
                     UserName = model.Email.Split('@')[0],
                     Email = model.Email,
@@ -46,7 +54,7 @@ namespace Demo.PL.Controllers.Users
                     Role = "Instructor",
                     PhoneNumber = model.Phone,
                     SSN = model.SSN,
-                    YearsOfExperience=model.YearsOfExperience
+                    YearsOfExperience = model.YearsOfExperience
                 };
 
                 var Result = await _userManagerClient.CreateAsync(user, model.Password);
@@ -111,6 +119,7 @@ namespace Demo.PL.Controllers.Users
         }
 
         #endregion
+
         #region AddCourse
         [HttpGet]
         public IActionResult Create()
@@ -119,26 +128,35 @@ namespace Demo.PL.Controllers.Users
         }
 
         [HttpPost]
-        public IActionResult Create(Course model)
+        public async Task<IActionResult> Create(DAL.Entities.Course model)
         {
             model.Status = "Pending";
             if (ModelState.IsValid)
             {
+                model.ImageName = DocumentSettings.UploadFille(model.Image, "Images");
+
+                var user =await _userManagerClient.GetUserAsync(User);
+                model.InstructorId = user.Id;
+                model.Instructor = user;
+
                 _courseRepo.Add(model);
                 return RedirectToAction(nameof(CourseList));
+              
             }
             return View(model);
         }
 
         #endregion
-        #region CoursetList
-        public IActionResult CourseList()
+
+        #region CourseList
+        public async Task<IActionResult> CourseList() //Instructor's Course List 
         {
-            //_productRepo.Getproducts();
-            var courses = _courseRepo.GetAll();
-            return View(courses);
+            var user = await _userManagerClient.GetUserAsync(User);
+            var courses = _dbContext.Courses.Where(c => c.InstructorId == user.Id);
+            return View(await courses.ToListAsync());
         }
         #endregion
+
 
     }
 }

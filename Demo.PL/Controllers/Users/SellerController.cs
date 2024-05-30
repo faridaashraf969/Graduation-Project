@@ -42,7 +42,7 @@ namespace Demo.PL.Controllers.Users
                 {
                     UserName = model.Email.Split('@')[0],
                     Email = model.Email,
-                    FirstName = model.FName,//Fname for Application User And First name for Modelllll 
+                    FirstName = model.FName, 
                     LastName = model.LName,
                     Role = "Seller",
                     PhoneNumber = model.Phone,

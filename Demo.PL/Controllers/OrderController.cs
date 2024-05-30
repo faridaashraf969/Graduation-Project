@@ -18,6 +18,7 @@ public class OrderController : Controller
         var order = _context.Orders
             .Include(o => o.OrderItems)
             .Include(o => o.ApplicationUser)
+            
             .FirstOrDefault(o => o.OrderNumber == orderId);
 
         if (order == null)

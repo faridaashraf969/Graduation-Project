@@ -4,14 +4,16 @@ using Demo.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Demo.DAL.Migrations
 {
     [DbContext(typeof(MvcProjectDbContext))]
-    partial class MvcProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530014257_AddCourseInstructorRelation")]
+    partial class AddCourseInstructorRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,9 +58,6 @@ namespace Demo.DAL.Migrations
                     b.Property<string>("Feedback")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("InstructorId")
                         .HasColumnType("nvarchar(450)");
 
@@ -67,9 +66,6 @@ namespace Demo.DAL.Migrations
 
                     b.Property<int>("Rate")
                         .HasColumnType("int");
-
-                    b.Property<string>("Requirements")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");

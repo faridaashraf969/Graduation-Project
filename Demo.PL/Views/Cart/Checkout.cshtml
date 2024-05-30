@@ -17,13 +17,13 @@
             <tr>
                 <td>@item.ProductName</td>
                 <td>@item.Quantity</td>
-                <td>@item.Price.ToString("C")</td>
-                <td>@(item.Quantity * item.Price).ToString("C")</td>
+                <td>@item.Price</td>
+                <td>@(item.Quantity * item.Price)</td>
             </tr>
         }
     </tbody>
 </table>
-<p>Total: @Model.Sum(item => item.Quantity * item.Price).ToString("C")</p>
+<p>Total: @Model.Sum(item => item.Quantity * item.Price)</p>
 <form asp-action="CheckoutConfirm" method="post">
     <input type="hidden" name="customerId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
     <button type="submit">Confirm and Pay</button>

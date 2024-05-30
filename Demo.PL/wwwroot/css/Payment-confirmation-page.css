@@ -1,0 +1,21 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+}
+h2 {
+    padding-top: 250px;
+    color: #0B3362;
+    text-align: center;
+}
+p {
+    text-align: center;
+}
+.p1 {
+    color: #004F98;
+    padding-bottom: 20px;
+}
+.p2 {
+    color: #F0A400;
+    padding-top: 20px;
+    font-weight: bold;
+}

@@ -20,20 +20,29 @@ namespace Demo.DAL.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
+            // Configure the one-to-many relationship User Make Orders
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Orders)
                 .WithOne(o => o.ApplicationUser)
                 .HasForeignKey(o => o.ApplicationUserID);
+
+            // Configure the one-to-many relationship Instructor Add Courses
+            modelBuilder.Entity<Course>()
+                .HasOne(c => c.Instructor)
+                .WithMany(u => u.Courses)
+                .HasForeignKey(c => c.InstructorId);
+
         }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ApplicationUser> User { get; set; }
+        
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        //public object Courses { get; set; }
+        
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Instructor> Instructors { get; set; }
+        //public DbSet<Instructor> Instructors { get; set; }
+        //public DbSet<Seller> Sellers { get; set; }
 
     }
 }

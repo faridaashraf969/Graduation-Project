@@ -20,7 +20,7 @@ namespace Demo.DAL.Entities
 
         public string Role { get; set; }
 
-        ////////
+        //////
 
         public string SSN { get; set; }
         public string Specialty { get; set; }
@@ -34,6 +34,8 @@ namespace Demo.DAL.Entities
         public int YearsOfExperience { get; set; }
 
         public ICollection<Order> Orders { get; set; }
+
+        public ICollection<Course> Courses { get; set; }
 
     }
 }

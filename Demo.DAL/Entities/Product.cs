@@ -22,8 +22,6 @@ namespace Demo.DAL.Entities
         public decimal Price { get; set; }
         [Required]
         public int Quantity { get; set; }
-
-        public string ImageName { get; set; }
         [ForeignKey("Category")]
         public int? CategoryId { get; set; } //FK
         [InverseProperty("Products")]
@@ -31,7 +29,7 @@ namespace Demo.DAL.Entities
         public string Status { get; set; }
         [NotMapped]
         public IFormFile Image { get; set; }
-
+        public string ImageName { get; set; }
 
     }
 }

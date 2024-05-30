@@ -1,11 +1,26 @@
-﻿@model Order
+﻿ @model Order
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <link rel="stylesheet" href="~/css/Payment-confirmation-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
 
-<h2>Payment Confirmation</h2>
-<p>Thank you for your order!</p>
-<p>Order ID: @Model.OrderNumber</p>
-<p>Order Date: @Model.OrderDate</p>
-<p>Total Amount: @Model.TotalAmount</p>
-
-<p>Your payment has been successfully processed. You will receive a confirmation email shortly.</p>
+    <h2>Payment Confirmation</h2>
+    <p class="p1">Thank you for your order!</p>
+    <p>Order ID: @Model.OrderNumber</p>
+    <p>Order Date: @Model.OrderDate</p>
+    <p>Total Amount: @Model.TotalAmount</p>
+    
+    <p class="p2">Your payment has been successfully processed.</p>
+</body>
+</html>
 
 

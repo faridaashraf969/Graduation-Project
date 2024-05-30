@@ -1,8 +1,11 @@
 ﻿using Demo.BLL.Interfaces;
+using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
 using Demo.PL.Models.UserLogins;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers.Users
@@ -12,14 +15,20 @@ namespace Demo.PL.Controllers.Users
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProductRepo _productRepo;
+        private readonly ICourseRepo _courseRepo;
+        private readonly MvcProjectDbContext _dbContext;
 
         public AdminController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager
-            ,IProductRepo productRepo) 
+            ,IProductRepo productRepo
+            ,ICourseRepo courseRepo
+            ,MvcProjectDbContext dbContext) 
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
             this._productRepo = productRepo;
+            this._courseRepo = courseRepo;
+            this._dbContext = dbContext;
         }
         #region Admin Home
         public IActionResult AdminHome() //Admin Page (Mai Salah 3la Telegram)
@@ -63,7 +72,8 @@ namespace Demo.PL.Controllers.Users
 
         //////////////////////////////////////////////////////////////////
         
-        //EL ACTIONS MA3A MAIIIIIII
+        //EL ACTIONS MA3A MAIIIIIII//
+
         #region Add Category 
 
         #endregion
@@ -90,7 +100,7 @@ namespace Demo.PL.Controllers.Users
         #endregion
 
         #region Approve Product
-        public IActionResult Approve([FromRoute] int id)
+        public IActionResult ApproveProduct([FromRoute] int id)
         {
             var product = _productRepo.GetProductById(id);
             if (product == null)
@@ -144,5 +154,29 @@ namespace Demo.PL.Controllers.Users
         }
         #endregion
         /////////////////////////////////////////////////////////////////
+        #region Approve Product
+        public IActionResult ApproveCourse([FromRoute] int id)
+        {
+            var course = _courseRepo.GetById(id);
+            if (course == null)
+            {
+
+                return NotFound();
+            }
+
+            course.Status = "Approved";
+            _courseRepo.Update(course);
+
+            return RedirectToAction(nameof(CoursesPage));
+        }
+
+        #endregion
+        public IActionResult CoursesPage()
+        {
+            var courses = _dbContext.Courses.Include(c => c.Instructor).ToList();
+                
+            return View(courses);
+        }
+
     }
 }

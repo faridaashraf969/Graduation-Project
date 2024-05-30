@@ -1,5 +1,5 @@
 ﻿<link href="~/css/store.css" rel="stylesheet" />
-@model ProductListViewModel
+@model IEnumerable<Product>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,20 +86,15 @@
 
     <div class="camera-sections">
         @{
-            foreach (Product product in Model.Products)
+            @foreach (var product in Model)
             {
-           
-                <div class="camera-p1 col-sm-4 col-lg-4 col-md-4">
-
-                    <img src="~/Files/Store-Images/cam1.png" alt="cam1">
+                <div>
                     <h3>@product.Name</h3>
                     <p>@product.Description</p>
-                    <div class="cam-ac">
-                        <span>@product.Price.ToString("c")</span>
-                        <button>Add to cart</button>
-                    </div>
+                    <p>@product.Price.ToString("C")</p>
+                    <p>@product.Image</p>
+                    <a href="@Url.Action("Details", new { id = product.Id })">View Details</a>
                 </div>
-         
             }
         }
 

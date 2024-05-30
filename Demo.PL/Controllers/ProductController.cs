@@ -12,7 +12,7 @@ public class ProductController : Controller
         _cartService = cartService;
     }
 
-    public IActionResult Index()
+    public IActionResult List()
     {
         var products = _productService.GetAllProducts();
         return View(products);

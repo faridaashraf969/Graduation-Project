@@ -92,7 +92,7 @@
                     <h3>@product.Name</h3>
                     <p>@product.Description</p>
                     <p>@product.Price.ToString("C")</p>
-                    <p>@product.Image</p>
+                    <p><img src="~/Files/Images/@product.ImageName" alt="Photography Basics @product.ImageName" class="course-image"></p>
                     <a href="@Url.Action("Details", new { id = product.Id })">View Details</a>
                 </div>
             }
@@ -101,6 +101,9 @@
     </div>
 </body>
 </html>
+@* <div class="c-img">
+    <img src="~/Files/Images/@product.ImageName" alt="Photography Basics @product.ImageName" class="course-image">
+</div> *@
 
 
 

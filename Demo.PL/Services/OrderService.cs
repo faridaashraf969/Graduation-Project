@@ -17,7 +17,7 @@ public class OrderService
     {
         var order = new Order
         {
-            ApplicationUserID = applicationUserId,
+            UserID = applicationUserId,
             OrderDate = DateTime.UtcNow,
             TotalAmount = cartItems.Sum(item => item.Quantity * item.Price),
             ShippingAddress = shippingAddress,

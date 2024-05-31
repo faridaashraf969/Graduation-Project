@@ -31,6 +31,7 @@
                     <td>@Html.DisplayNameFor(e => e.Category)</td>
                     <td>@Html.DisplayNameFor(e => e.Quantity)</td>
                     <td>@Html.DisplayNameFor(e => e.Status)</td>
+                    <td>Seller Name</td>
                    
                     <td>Update</td>
                     <td>Delete</td>
@@ -49,6 +50,7 @@
                             <td>@Html.DisplayFor(e => Product.Category.Name)</td>
                             <td>@Product.Quantity</td>
                             <td>@Product.Status</td>
+                            <td>@(Product.Seller.FirstName + " " + Product.Seller.LastName)</td>
 
                             <partial name="_buttonPartialView" model="@Product.Id"></partial>
 

@@ -1,0 +1,76 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.course-details-container {
+    width: 60%;
+    margin: 70px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.course-details-container .course-image {
+    width: 95%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.course-details-container h2 {
+    color:#0B3362 ;
+    margin-bottom: 10px;
+}
+
+.course-details-container p {
+    margin: 5px 0;
+    color: rgba(23, 26, 31, 0.6);
+
+}
+strong{
+    color: #0b3362;
+}
+
+.instructor-name {
+    color: #F0A400;
+}
+.learn{
+    margin-top: 15px;
+    justify-content: center; 
+    align-items: center; 
+}
+.learn h4{
+    color: #0B3362;
+}
+ul{
+    display: flex;
+}
+li{
+    display: flex;
+    flex-direction: row;
+}
+img{
+    padding: 10px;
+}
+.btn-enroll {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color:  #F0A400;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 80%;
+}
+
+.btn-enroll:hover {
+    background-color: #54575a;
+}

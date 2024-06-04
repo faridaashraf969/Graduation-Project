@@ -48,9 +48,13 @@ namespace Demo.DAL.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         
         public DbSet<Course> Courses { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
         //public DbSet<Instructor> Instructors { get; set; }
         //public DbSet<Seller> Sellers { get; set; }
+
+        public DbSet<OrderHeader> OrderHeader { get; set; }
+
+        public DbSet<ShoppingCart> ShoppingCart { get; set;}
 
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Bulky.DataAcess.Repository;
-using Bulky.DataAcess.Repository.IRepsitory;
+
 using Bulky.Models;
 using Bulky.Models.ViewModel;
-using BulkyAcess.Utility;
 using Demo.DAL.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -133,7 +132,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             {
                 _dbContext.OrderHeader.UpdateStatus(orderHeader.Id, SD.StatusCancelled, SD.StatusCancelled);
             }
-            _dbContext.Save();
+            _dbContext.SaveChanges();
             TempData["Success"] = "Order Cancelled Successfully.";
             return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
 
@@ -167,7 +166,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = item.Product.Title
+                            Name = item.Product.Name
                         }
                     },
                     Quantity = item.Count

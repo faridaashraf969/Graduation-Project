@@ -20,6 +20,10 @@ namespace Demo.DAL.Entities
 
         public string Role { get; set; }
 
+        public string City { get; set; }
+        public string State { get; set; }
+
+        public string StreetAddress { get; set; }
         //////
 
         public string SSN { get; set; }
@@ -38,6 +42,8 @@ namespace Demo.DAL.Entities
         public ICollection<Course> Courses { get; set; }
 
         public ICollection<Product> Products { get; set; }
+
+        public int CompanyId { get; set; }
 
     }
 }

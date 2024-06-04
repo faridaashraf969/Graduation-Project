@@ -17,7 +17,7 @@ namespace Demo.BLL.Resitories
     {
         private readonly MvcProjectDbContext _dbContext;
 
-        public OrderHeaderRepository (MvcProjectDbContext dbContext) 
+        public OrderHeaderRepository(MvcProjectDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -52,21 +52,6 @@ namespace Demo.BLL.Resitories
                 orderFromDb.PaymentIntentId = paymentIntentId;
                 orderFromDb.PaymentDate = DateTime.Now;
             }
-        }
-
-        void IOrderHeaderRepository.Update(OrderHeader orderHeader)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IOrderHeaderRepository.UpdateStatus(int id, string orderStatus, string paymentStatus)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IOrderHeaderRepository.UpdateStripePaymentID(int id, string sessionId, string paymentIntentId)
-        {
-            throw new NotImplementedException();
         }
     }
 

@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Demo.BLL.Resitories
 {
-    public class ShoppingCartRepository
-    {
+   
+    
         public class ShoppingCartRepository :  IShoppingCartRepository
         {
             private readonly MvcProjectDbContext _dbContext;
@@ -27,4 +27,4 @@ namespace Demo.BLL.Resitories
         }
     
 }
-}
+

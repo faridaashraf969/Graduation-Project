@@ -1,11 +1,13 @@
 ﻿using Demo.BLL.Interfaces;
 using Demo.BLL.Resitories;
+using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
 using Demo.PL.Helpers;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,17 +18,21 @@ namespace Demo.PL.Controllers.Users
         private readonly UserManager<ApplicationUser> _userManagerClient;
         private readonly SignInManager<ApplicationUser> _signInManagerClient;
         private readonly IProductRepo _productRepo;
+        private readonly MvcProjectDbContext _dbContext;
 
         public SellerController(UserManager<ApplicationUser> userManager
             , SignInManager<ApplicationUser> signInManager
             ,IProductRepo productRepo
+            ,MvcProjectDbContext dbContext
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
             this._productRepo = productRepo;
+            this._dbContext = dbContext;
         }
-            #region Register
+
+        #region Register
         public IActionResult SellerRegister()
         {
             return View();
@@ -137,13 +143,19 @@ namespace Demo.PL.Controllers.Users
         }
 
         [HttpPost]
-        public IActionResult Create(Product model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Product model)
         {
             model.Status = "Pending";
 
             if (ModelState.IsValid)
             {
                 model.ImageName = DocumentSettings.UploadFille(model.Image, "Images");
+
+                var user = await _userManagerClient.GetUserAsync(User);
+                model.SellerID= user.Id;
+                model.Seller = user;
+
                 _productRepo.Add(model);
                 return RedirectToAction(nameof(ProductList));
             }
@@ -155,9 +167,67 @@ namespace Demo.PL.Controllers.Users
 
 
         #region EditProduct
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if(id==null)
+            {
+                return NotFound();
+            }
+            var product = _productRepo.GetProductById(id.Value);
+            if (product == null || product.SellerID != (await _userManagerClient.GetUserAsync(User)).Id)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price")] Product product)
+        {
+            if (id != product.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _userManagerClient.GetUserAsync(User);
+                    var existingProduct = await _dbContext.Products.FindAsync(id);
+
+                    if (existingProduct == null || existingProduct.SellerID != user.Id)
+                    {
+                        return NotFound();
+                    }
+
+                    existingProduct.Name = product.Name;
+                    existingProduct.Description = product.Description;
+                    existingProduct.Price = product.Price;
+
+                    _dbContext.Update(existingProduct);
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(product.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ProductList));
+            }
+            return View(product);
+        }
+
+        private bool ProductExists(int id)
+        {
+            return _dbContext.Products.Any(e => e.Id == id);
         }
         #endregion
 
@@ -177,7 +247,7 @@ namespace Demo.PL.Controllers.Users
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteProduct(int id)
+        public IActionResult Delete(int id)
         {
             var product = _productRepo.GetProductById(id);
             if (product == null)
@@ -186,7 +256,7 @@ namespace Demo.PL.Controllers.Users
             try
             {
                 _productRepo.Delete(product);
-                return RedirectToAction("AllCategory", "Category");
+                return RedirectToAction(nameof(ProductList));
             }
             catch (System.Exception ex)
             {
@@ -197,11 +267,13 @@ namespace Demo.PL.Controllers.Users
         #endregion
 
 
-        #region ProductList
-        public IActionResult ProductList()
+        #region ProductList 
+        public async Task<IActionResult> ProductList()
         {
-            var products = _productRepo.Getproducts();
-            return View(products);
+            var user = await _userManagerClient.GetUserAsync(User);
+            var products = _dbContext.Products.Where(p=>p.SellerID== user.Id);
+           
+            return View(products.ToList());
         }
         #endregion
 

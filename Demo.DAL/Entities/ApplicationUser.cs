@@ -37,5 +37,7 @@ namespace Demo.DAL.Entities
 
         public ICollection<Course> Courses { get; set; }
 
+        public ICollection<Product> Products { get; set; }
+
     }
 }

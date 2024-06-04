@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Category>
+<link href="~/css/seller.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "AllCategory";
+}
+<a asp-action="Create" class="btn btn-success">Create New Category</a>
+<br />
+@if (Model.Count() > 0)
+{
+    <section class="container product-list">
+        <h3>Category list</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(C => C.Name) </th>
+                    <th>@Html.DisplayNameFor(C => C.Description)</th>
+                    <th>update</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var categor in Model)
+                {
+                    <tr>
+                        <td>@categor.Name</td>
+                        <td>@categor.Description</td>
+                        <td><a asp-action="EditCategory" asp-route-id="@categor.Id">Edit</a></td>
+                        <td><a asp-action="DeleteCategory" asp-route-id="@categor.Id">Delete</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+
+}
+else
+{
+    <div class="mt=5 alert alert=marning">
+        <h3>There is no Departments</h3>
+    </div>
+}

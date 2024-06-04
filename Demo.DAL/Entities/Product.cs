@@ -31,5 +31,13 @@ namespace Demo.DAL.Entities
         public IFormFile Image { get; set; }
         public string ImageName { get; set; }
 
+        //////////////////////////////////////////////////
+        public ApplicationUser Seller { get; set; }
+        public string SellerID { get; set; }
+      
+        //////////////////////////////////////////////////
+        //public ApplicationUser Client { get; set; }
+        //public string ClientID { get; set; }
+
     }
 }

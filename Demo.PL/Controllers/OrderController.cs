@@ -17,8 +17,8 @@ public class OrderController : Controller
     {
         var order = _context.Orders
             .Include(o => o.OrderItems)
-            .Include(o => o.ApplicationUser)
-            
+            .Include(o => o.User)
+
             .FirstOrDefault(o => o.OrderNumber == orderId);
 
         if (order == null)
@@ -65,7 +65,7 @@ public class OrderController : Controller
     {
         var order = _context.Orders
             .Include(o => o.OrderItems)
-            .Include(o => o.ApplicationUser)
+            .Include(o => o.User)
             .FirstOrDefault(o => o.OrderNumber == orderId);
 
         if (order == null)

@@ -1,5 +1,5 @@
 ﻿@using Demo.PL.Models.UserLogins
-@model ClientLoginViewModel 
+@model ClientLoginViewModel
 @{
     Layout = "_AuthLayout";
 }
@@ -24,7 +24,8 @@
         <h2 id="h2">Log in</h2>
 
         <div asp-validation-summary="All"></div>
-        <form asp-controller="Client" asp-action="ClientLogin">
+
+        <form asp-controller="Admin" asp-action="AdminLogin">
             <div class="textbox">
 
                 <!-- email -->
@@ -40,7 +41,7 @@
 
             <!-- button  -->
             <input type="submit" class="btn" value="Login"><br>
-            <p id="par1"> Don't have an account ? <a href="Register"></a><span> Sign up</span> </p>
+            <p id="par1"> Don't have an account ? <a href="AdminRegister"></a><span> Sign up</span> </p>
         </form>
     </div>
 

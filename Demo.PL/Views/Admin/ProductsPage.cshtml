@@ -36,10 +36,11 @@
                         <td>@Product.Quantity</td>
                         <td>@Product.Price</td>
                         <td>@Html.DisplayFor(P => Product.Category.Name)</td>
-
                         <td>@Product.Status</td>
-                        <td><a asp-action="ApproveProduct" asp-controller="Product" asp-route-id="@Product.Id"><i class="fa-echeck fa-solid" style="color:green"></i></a></td>
-                        <partial name="_buttonPartialView" model="@Product.Id"></partial>
+                        <td><a asp-action="ApproveProduct" asp-controller="Admin" asp-route-id="@Product.Id"><i class="fa-check fa-solid" style="color:green"></i></a></td>
+
+                        <td><a asp-action="EditProduct" asp-route-id="@Product.Id"><i class="fas fa-edit"></i></a></td>
+                        <td><a asp-action="DeleteProduct" asp-route-id="@Product.Id"><i class="fa-sharp fa-solid fa-trash" style="color: #e60f24;"></i></a></td>
 
                     </tr>
                 }

@@ -32,5 +32,6 @@ namespace Demo.DAL.Entities
         public IFormFile Image { get; set; }
         public string ImageName { get; set; }
         public string Requirements {  get; set; } 
+        public CartItem CartItem { get; set; }
     }
 }

@@ -23,8 +23,8 @@ namespace Demo.DAL.Contexts
             // Configure the one-to-many relationship User Make Orders
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Orders)
-                .WithOne(o => o.ApplicationUser)
-                .HasForeignKey(o => o.ApplicationUserID);
+                .WithOne(o => o.User)
+                .HasForeignKey(o => o.UserID);
 
             // Configure the one-to-many relationship Instructor Add Courses
             modelBuilder.Entity<Course>()
@@ -32,6 +32,12 @@ namespace Demo.DAL.Contexts
                 .WithMany(u => u.Courses)
                 .HasForeignKey(c => c.InstructorId);
 
+            //Configure the one to many relationship between seller and products 
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Seller)
+                .WithMany(U => U.Products)
+                .HasForeignKey(p => p.SellerID);
+                
         }
 
         public DbSet<Category> Categories { get; set; }

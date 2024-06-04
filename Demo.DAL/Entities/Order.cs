@@ -23,14 +23,15 @@ namespace Demo.DAL.Entities
         public string Status { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
         public int CustomerID { get; set; }
-        public string ApplicationUserID { get; set; }
+        
 
         // Address fields
         public string ShippingAddress { get; set; }
-        
 
+        public string UserID { get; set; }
         // Navigation property
-        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser User { get; set; }
+
 
 
     }

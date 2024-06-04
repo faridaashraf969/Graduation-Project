@@ -1,21 +1,20 @@
-﻿using Bulky.DataAcess.Repository.IRepository;
-using Bulky.Models;
-using BulkyAcess.DataAcess.Data;
+﻿using Demo.BLL.Interfaces;
 using Demo.DAL.Contexts;
+using Demo.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.DataAcess.Repository
+namespace Demo.BLL.Resitories
 {
 
     public class OrderDetailRepository : IOrderDetailRepository
     {
         private readonly MvcProjectDbContext _dbContext;
 
-        public OrderDetailRepository(MvcProjectDbContext dbContext) : base( dbContext)
+        public OrderDetailRepository(MvcProjectDbContext dbContext) 
         {
             _dbContext = dbContext;
         }
@@ -24,7 +23,11 @@ namespace Bulky.DataAcess.Repository
 
         public void Update(OrderDetail orderDetail)
         {
-            _dbContext.OrderDetails.Update(orderDetail);
+            _dbContext.OrderDetail.Update(orderDetail);
         }
+    }
+
+    public interface IOrderDetailRepository
+    {
     }
 }

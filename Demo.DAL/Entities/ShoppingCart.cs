@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.Models
+namespace Demo.DAL.Entities
 {
     public class ShoppingCart
     {

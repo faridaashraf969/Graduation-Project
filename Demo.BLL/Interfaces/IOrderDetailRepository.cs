@@ -1,4 +1,4 @@
-﻿
+﻿using Demo.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace Bulky.DataAcess.Repository.IRepository
 {
     public interface IOrderDetailRepository
     {
-        void Update(Models.OrderDetail orderDetail);
+        void Update(OrderDetail orderDetail);
     }
 }

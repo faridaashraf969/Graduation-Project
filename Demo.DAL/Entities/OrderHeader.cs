@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Demo.DAL.Entities;
 
-namespace Bulky.Models
+namespace Demo.DAL.Entities
 {
     public class OrderHeader
     {

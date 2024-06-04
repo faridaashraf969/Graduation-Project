@@ -1,49 +1,113 @@
-﻿using Demo.DAL.Entities;
+﻿using Demo.DAL.Contexts;
+using Demo.DAL.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
-public class CartService
+namespace Demo.PL.Services
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public CartService(IHttpContextAccessor httpContextAccessor)
+    public class CartService
     {
-        _httpContextAccessor = httpContextAccessor;
-    }
+        private readonly MvcProjectDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-    private ISession Session => _httpContextAccessor.HttpContext.Session;
-
-    public void AddToCart(Product product, int quantity)
-    {
-        var cartItems = Session.GetObjectFromJson<List<CartItem>>("CartItems") ?? new List<CartItem>();
-
-        var cartItem = cartItems.FirstOrDefault(c => c.ProductID == product.Id);
-        if (cartItem != null)
+        public CartService(MvcProjectDbContext context, IHttpContextAccessor httpContextAccessor)
         {
-            cartItem.Quantity += quantity;
+            _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
-        else
+
+        private async Task<Cart> GetCartAsync()
         {
-            cartItems.Add(new CartItem
+            var userId = _httpContextAccessor.HttpContext.User?.Identity?.Name;
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.ApplicationUserId == userId);
+
+            if (cart == null)
             {
-                ProductID = product.Id,
-                ProductName = product.Name,
+                cart = new Cart { ApplicationUserId = userId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            return cart;
+        }
+
+        public async Task AddToCartAsync(int productId, int quantity)
+        {
+            // Check if the cart service is properly initialized
+            if (_context == null)
+            {
+                throw new InvalidOperationException("Cart service is not properly initialized.");
+            }
+
+            // Retrieve the cart
+            var cart = await GetCartAsync();
+
+            // Check if the cart is null
+            if (cart == null)
+            {
+                throw new InvalidOperationException("Cart is null.");
+            }
+
+            // Retrieve the product from the database
+            var product = await _context.Products.FindAsync(productId);
+
+            // Check if the product is null
+            if (product == null)
+            {
+                throw new ArgumentException($"Product with ID {productId} does not exist.");
+            }
+
+            // Add the product to the cart
+            var cartItem = new CartItem
+            {
+                ProductId = productId,
+                Product = product,
                 Quantity = quantity,
                 Price = product.Price
-            });
+            };
+            cart.CartItems.Add(cartItem);
+            await _context.SaveChangesAsync();
         }
 
-        Session.SetObjectAsJson("CartItems", cartItems);
-    }
 
-    public List<CartItem> GetCartItems()
-    {
-        return Session.GetObjectFromJson<List<CartItem>>("CartItems") ?? new List<CartItem>();
-    }
+        public async Task<Cart> GetCartDetailsAsync()
+        {
+            return await GetCartAsync();
+        }
 
-    public void ClearCart()
-    {
-        Session.Remove("CartItems");
+        public async Task ClearCartAsync()
+        {
+            var cart = await GetCartAsync();
+            cart.CartItems.Clear();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddCourseToCartAsync(int courseId, int quantity)
+        {
+            var cart = await GetCartAsync();
+            var course = await _context.Courses.FindAsync(courseId);
+
+            if (course != null)
+            {
+                var cartItem = new CartItem
+                {
+                    CourseId = courseId,
+                    Course = course,
+                    Quantity = quantity,
+                    Price = course.Price
+                };
+                cart.CartItems.Add(cartItem);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+
     }
 }

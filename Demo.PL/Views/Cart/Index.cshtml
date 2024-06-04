@@ -1,7 +1,8 @@
-﻿@model IEnumerable<CartItem>
+﻿@model Cart
 
-<h2>Your Cart</h2>
-@if (!Model.Any())
+<h2>Your Shopping Cart</h2>
+
+@if (Model.CartItems.Count == 0)
 {
     <p>Your cart is empty.</p>
 }
@@ -17,18 +18,24 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.CartItems)
             {
                 <tr>
-                    <td>@item.ProductName</td>
+                    <td>@item.Product.Name</td>
                     <td>@item.Quantity</td>
-                    <td>@item.Price.ToString("C")</td>
-                    <td>@(item.Quantity * item.Price).ToString("C")</td>
+                    <td>@item.Price</td>
+                    <td>@(item.Quantity * item.Price)</td>
                 </tr>
             }
         </tbody>
     </table>
-    <p>Total: @Model.Sum(item => item.Quantity * item.Price).ToString("C")</p>
-    <a href="@Url.Action("Checkout", "Cart")">Proceed to Checkout</a>
-}
 
+    <p>Total Amount: @Model.CartItems.Sum(ci => ci.Quantity * ci.Price)</p>
+
+    <form asp-action="ClearCart" method="post">
+        <button type="submit">Clear Cart</button>
+    </form>
+    <form asp-controller="order" asp-action="Checkout" method="post">
+        <button type="submit">Checkout</button>
+    </form>
+}

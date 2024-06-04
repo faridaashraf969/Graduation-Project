@@ -1,79 +1,161 @@
-﻿using Demo.DAL.Contexts;
+﻿using Demo.DAL.Entities;
+using Demo.PL.Helpers;
+using Demo.PL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Stripe;
+using Stripe.Checkout;
+using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Demo.DAL.Contexts;
 
-public class OrderController : Controller
+namespace Demo.PL.Controllers
 {
-    private readonly MvcProjectDbContext _context;
-
-    public OrderController(MvcProjectDbContext context)
+    public class OrderController : Controller
     {
-        _context = context;
-    }
+        private readonly MvcProjectDbContext _context;
+        private readonly CartService _cartService;
+        private readonly StripeSettings _stripeSettings;
 
-    public IActionResult OrderSummary(int orderId)
-    {
-        var order = _context.Orders
-            .Include(o => o.OrderItems)
-            .Include(o => o.User)
-
-            .FirstOrDefault(o => o.OrderNumber == orderId);
-
-        if (order == null)
+        public OrderController(MvcProjectDbContext context, CartService cartService, IOptions<StripeSettings> stripeSettings)
         {
-            return NotFound();
+            _context = context;
+            _cartService = cartService;
+            _stripeSettings = stripeSettings.Value;
         }
 
-        return View(order);
-    }
-    [HttpPost]
-    public IActionResult ProcessPayment(int orderId, string cardNumber, string expiryDate, string cvv)
-    {
-        // Simulate payment processing
-        bool paymentSuccessful = ProcessPayment(cardNumber, expiryDate, cvv);
-
-        if (paymentSuccessful)
+        public IActionResult OrderSummary(int orderId)
         {
-            // Update order status to paid
-            var order = _context.Orders.FirstOrDefault(o => o.OrderNumber == orderId);
-            if (order != null)
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Include(o => o.User)
+                .FirstOrDefault(o => o.OrderNumber == orderId);
+
+            if (order == null)
             {
-                order.Status = "Paid";
-                _context.SaveChanges();
+                return NotFound();
             }
 
-            // Redirect to confirmation page
-            return RedirectToAction(nameof(PaymentConfirmation), new { orderId = orderId });
+            return View(order);
         }
-        else
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout()
         {
-            // Handle payment failure
-            ModelState.AddModelError(string.Empty, "Payment processing failed. Please try again.");
-            return RedirectToAction("OrderSummary", new { orderId = orderId });
-        }
-    }
-    private bool ProcessPayment(string cardNumber, string expiryDate, string cvv)
-    {
-        // Placeholder for actual payment processing logic
-        // Integrate with a payment gateway here
-        return true; // Simulate successful payment
-    }
-    
-    public IActionResult PaymentConfirmation(int orderId)
-    {
-        var order = _context.Orders
-            .Include(o => o.OrderItems)
-            .Include(o => o.User)
-            .FirstOrDefault(o => o.OrderNumber == orderId);
+            var cart = await _cartService.GetCartDetailsAsync();
 
-        if (order == null)
+            if (cart.CartItems.Count == 0)
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+
+            var order = new Order
+            {
+                UserId = cart.ApplicationUserId,
+                OrderDate = DateTime.Now,
+                Status = "Pending",
+                TotalAmount = cart.CartItems.Sum(ci => ci.Quantity * ci.Price),
+                OrderItems = new List<OrderItem>() // Initialize the OrderItems list
+            };
+
+            foreach (var cartItem in cart.CartItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    ProductId = cartItem.ProductId,
+                    Quantity = cartItem.Quantity,
+                    Price = cartItem.Price
+                };
+                order.OrderItems.Add(orderItem);
+            }
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            await _cartService.ClearCartAsync();
+
+            return RedirectToAction("OrderSummary", new { orderId = order.OrderNumber });
+        }
+
+
+        public IActionResult PaymentConfirmation(int orderId)
         {
-            return NotFound();
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Include(o => o.User)
+                .FirstOrDefault(o => o.OrderNumber == orderId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
 
-        return View("PaymentConfirmation", order);
-    }
+        [HttpPost]
+        public async Task<IActionResult> ProcessPayment(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.OrderNumber == orderId);
 
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            if (_stripeSettings.UseSimulatedPayment)
+            {
+                // Simulate payment process
+                order.Status = "Paid";
+                await _context.SaveChangesAsync();
+                return RedirectToAction("PaymentConfirmation", new { orderId = order.OrderNumber });
+            }
+            else
+            {
+                // Process payment using Stripe
+                var domain = "https://yourdomain.com";
+                var options = new SessionCreateOptions
+                {
+                    PaymentMethodTypes = new List<string> { "card" },
+                    LineItems = new List<SessionLineItemOptions>(),
+                    Mode = "payment",
+                    SuccessUrl = $"{domain}/Order/PaymentConfirmation?orderId={orderId}",
+                    CancelUrl = $"{domain}/Order/OrderSummary?orderId={orderId}",
+                };
+
+                foreach (var item in order.OrderItems)
+                {
+                    options.LineItems.Add(new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            UnitAmount = (long)(item.Price * 100),
+                            Currency = "usd",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = item.Product.Name,
+                            },
+                        },
+                        Quantity = item.Quantity,
+                    });
+                }
+
+                var service = new SessionService();
+                Session session = service.Create(options);
+
+                order.Status = "Processing";
+                await _context.SaveChangesAsync();
+
+                return Redirect(session.Url);
+            }
+        }
+    }
 }

@@ -25,7 +25,7 @@ namespace Demo.DAL.Contexts
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Orders)
                 .WithOne(o => o.User)
-                .HasForeignKey(o => o.UserID);
+                .HasForeignKey(o => o.UserId);
 
             // Configure the one-to-many relationship Instructor Add Courses
             modelBuilder.Entity<Course>()
@@ -48,15 +48,12 @@ namespace Demo.DAL.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         
         public DbSet<Course> Courses { get; set; }
-        public DbSet<OrderDetail> OrderDetail { get; set; }
-        public DbSet<OrderHeader> OrderHeader { get; set; }
-        public DbSet<ShoppingCart> ShoppingCart { get; set; }
-        //public DbSet<Instructor> Instructors { get; set; }
-        //public DbSet<Seller> Sellers { get; set; }
-
-        public DbSet<OrderHeader> OrderHeader { get; set; }
-
-        public DbSet<ShoppingCart> ShoppingCart { get; set;}
+        //public DbSet<OrderDetail> OrderDetail { get; set; }
+        //public DbSet<OrderHeader> OrderHeader { get; set; }
+        //public DbSet<ShoppingCart> ShoppingCart { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+      }
 
     }
-}
+

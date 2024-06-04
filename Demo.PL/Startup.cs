@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,13 @@ namespace Demo.PL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddControllersWithViews();
             services.AddDbContext<MvcProjectDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             },ServiceLifetime.Scoped);
-            services.AddScoped<ProductService>();
-            services.AddScoped<CartService>();
+
+            services.AddScoped<Services.ProductService>();
             services.AddScoped<OrderService>();
             services.AddScoped<PaymentService>();
 
@@ -50,6 +52,12 @@ namespace Demo.PL
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            services.AddScoped<CartService>();
+
+            //services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            //StripeConfiguration.ApiKey = Configuration["Stripe:SecretKey"];
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             //////
             //services.AddAuthentication();
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -92,6 +100,7 @@ namespace Demo.PL
 
             app.UseSession();
 
+
             app.UseAuthentication();
 
             app.UseAuthorization();
@@ -102,6 +111,9 @@ namespace Demo.PL
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var stripeSettings = Configuration.GetSection("Stripe").Get<StripeSettings>();
+            StripeConfiguration.ApiKey = stripeSettings.ApiKey;
         }
     }
 }

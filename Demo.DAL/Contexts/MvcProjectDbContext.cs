@@ -1,4 +1,5 @@
-﻿using Demo.DAL.Entities;
+﻿using Bulky.Models;
+using Demo.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace Demo.DAL.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         
         public DbSet<Course> Courses { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         //public DbSet<Instructor> Instructors { get; set; }
         //public DbSet<Seller> Sellers { get; set; }
 

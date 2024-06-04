@@ -57,29 +57,29 @@ namespace Demo.PL.Controllers
             return View(courses);
         }
 
-        //public IActionResult AddToCart(int CourseId)
-        //{
-        //    if (Session["cart"] == null)
-        //    {
-        //        var cart = new List<CartItem>();
-        //        var course = _dbContext.Courses.Find(CourseId);
-        //        cart.Add(new CartItem()
-        //        {
-        //            Course = course,
-        //            Quantity = 1
-        //        });
-        //        //Session["cart"] = cart;
-        //    }else
-        //    {
-        //        List<CartItem> cart = ( List<CartItem>) Session["cart"]
-        //        var course = _dbContext.Courses.Find(CourseId);
-        //        cart.Add(new CartItem()
-        //        {
-        //            Course = course,
-        //            Quantity = 1
-        //        });
-        //        //Session["cart"] = cart;
-        //    }
+        public IActionResult AddToCart(int CourseId)
+        {
+            //if (Session["cart"] == null)
+            //{
+            //    var cart = new List<CartItem>();
+            //    var course = _dbContext.Courses.Find(CourseId);
+            //    cart.Add(new CartItem()
+            //    {
+            //        Course = course,
+            //        Quantity = 1
+            //    });
+            //    //Session["cart"] = cart;
+            //}else
+            //{
+            //    List<CartItem> cart = ( List<CartItem>) Session["cart"]
+            //    var course = _dbContext.Courses.Find(CourseId);
+            //    cart.Add(new CartItem()
+            //    {
+            //        Course = course,
+            //        Quantity = 1
+            //    });
+            //    //Session["cart"] = cart;
+            //}
 
         //    return Redirect("Index");  
         //}

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,11 @@ namespace Demo.DAL.Entities
         public ICollection<Course> Courses { get; set; }
 
         public ICollection<Product> Products { get; set; }
+        // Navigational properties
+        public ICollection<SessionRequest> CreatedSessionRequests { get; set; }
+        public ICollection<Proposal> Proposals { get; set; }
+        public ICollection<Message> SentMessages { get; set; }
+        public ICollection<Message> ReceivedMessages { get; set; }
 
     }
 }

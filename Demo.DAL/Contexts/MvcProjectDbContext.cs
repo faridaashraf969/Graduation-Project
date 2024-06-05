@@ -38,7 +38,48 @@ namespace Demo.DAL.Contexts
                 .HasOne(p => p.Seller)
                 .WithMany(U => U.Products)
                 .HasForeignKey(p => p.SellerID);
-                
+            ///////
+            modelBuilder.Entity<SessionRequest>()
+             .HasOne(sr => sr.Photographer)
+             .WithMany(p => p.CreatedSessionRequests)
+             .HasForeignKey(sr => sr.PhotographerId)
+             .OnDelete(DeleteBehavior.Restrict);
+            //////
+            modelBuilder.Entity<SessionRequest>()
+               .HasOne(sr => sr.Client)
+               .WithMany(c => c.CreatedSessionRequests)
+               .HasForeignKey(sr => sr.ClientId)
+               .OnDelete(DeleteBehavior.Restrict);
+            /////////////
+            modelBuilder.Entity<Proposal>()
+              .HasOne(p => p.Photographer)
+              .WithMany(p => p.Proposals)
+              .HasForeignKey(p => p.PhotographerId)
+              .OnDelete(DeleteBehavior.Restrict);
+            /////////////////
+            modelBuilder.Entity<Proposal>()
+                 .HasOne(p => p.Client)
+                 .WithMany(c => c.Proposals)
+                 .HasForeignKey(p => p.ClientId)
+                 .OnDelete(DeleteBehavior.Restrict);
+            //////////////
+            modelBuilder.Entity<Proposal>()
+                .HasOne(p => p.SessionRequest)
+                .WithMany(sr => sr.Proposals)
+                .HasForeignKey(p => p.SessionRequestId)
+                .OnDelete(DeleteBehavior.Cascade);
+            //////////////
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany(u => u.SentMessages)
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //////////////
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Receiver)
+                .WithMany(u => u.ReceivedMessages)
+                .HasForeignKey(m => m.ReceiverId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -53,6 +94,8 @@ namespace Demo.DAL.Contexts
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         //public DbSet<Instructor> Instructors { get; set; }
         //public DbSet<Seller> Sellers { get; set; }
-
+        public DbSet<SessionRequest> SessionRequests { get; set; }
+        public DbSet<Proposal> Proposals { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

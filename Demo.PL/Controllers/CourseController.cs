@@ -6,31 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Stripe.BillingPortal;
 using System.Collections.Generic;
 using System.Linq;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers
@@ -55,6 +30,15 @@ namespace Demo.PL.Controllers
         {
             var courses = _dbContext.Courses.Include(c => c.Instructor).Where(c => c.Status == "Approved").ToList();
             return View(courses);
+        }
+        public IActionResult Details(int id)
+        {
+            var course = _courseRepo.GetById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
         }
 
         //public IActionResult AddToCart(int CourseId)

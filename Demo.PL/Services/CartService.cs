@@ -37,6 +37,23 @@ namespace Demo.PL.Services
 
             return cart;
         }
+        private async Task<Cart> GetCourseCartAsync()
+        {
+            var userId = _httpContextAccessor.HttpContext.User?.Identity?.Name;
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Course)
+                .FirstOrDefaultAsync(c => c.ApplicationUserId == userId);
+
+            if (cart == null)
+            {
+                cart = new Cart { ApplicationUserId = userId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            return cart;
+        }
 
         public async Task AddToCartAsync(int productId, int quantity)
         {
@@ -81,7 +98,10 @@ namespace Demo.PL.Services
         {
             return await GetCartAsync();
         }
-
+        public async Task<Cart> GetCourseCartDetailsAsync()
+        {
+            return await GetCourseCartAsync();
+        }
         public async Task ClearCartAsync()
         {
             var cart = await GetCartAsync();

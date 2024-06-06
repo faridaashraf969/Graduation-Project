@@ -38,7 +38,7 @@ namespace Demo.DAL.Contexts
                 .HasOne(p => p.Seller)
                 .WithMany(U => U.Products)
                 .HasForeignKey(p => p.SellerID);
-            ///////
+            /////////////////////////////////////////////////////////////
             modelBuilder.Entity<SessionRequest>()
              .HasOne(sr => sr.Photographer)
              .WithMany(p => p.CreatedSessionRequests)
@@ -94,7 +94,11 @@ namespace Demo.DAL.Contexts
         //public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-      }
+        public DbSet<SessionRequest> SessionRequests { get; set; }
+        public DbSet<Proposal> Proposals { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
     }
+
+}
 

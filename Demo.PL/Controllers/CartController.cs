@@ -38,6 +38,11 @@ namespace Demo.PL.Controllers
             var cart = await _cartService.GetCartDetailsAsync();
             return View(cart);
         }
+        public async Task<IActionResult> CourseIndex()
+        {
+            var cart = await _cartService.GetCourseCartDetailsAsync();
+            return View(cart);
+        }
 
         public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
         {
@@ -54,7 +59,7 @@ namespace Demo.PL.Controllers
         public async Task<IActionResult> AddCourseToCart(int courseId, int quantity = 1)
         {
             await _cartService.AddCourseToCartAsync(courseId, quantity);
-            return RedirectToAction("Index");
+            return RedirectToAction("CourseIndex");
         }
 
         public async Task<IActionResult> CheckoutAsync()

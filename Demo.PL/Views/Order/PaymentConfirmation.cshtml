@@ -6,24 +6,53 @@
 <p>Thank you for your order!</p>
 <p>Order Number: @Model.OrderNumber</p>
 <p>Total Amount: @Model.TotalAmount</p>
+<p>Customer Name: @Model.User.FirstName+""+@Model.User.LastName</p>
 
 <h3>Order Items</h3>
 <table>
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderItems)
-        {
+    {
+    @if(Model.Courses.Count()>0)
+    {
+        <thead>
             <tr>
-                <td>@item.Product.Name</td>
-                <td>@item.Quantity</td>
-                <td>@item.Price</td>
+                <th>Course</th>
+                <th>Quantity</th>
+                <th>Price</th>
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Course.Topic</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+
+                </tr>
+            }
+        </tbody>
+    }
+    }
 </table>
+

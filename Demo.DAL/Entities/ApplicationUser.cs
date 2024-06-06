@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace Demo.DAL.Entities
 
         public ICollection<Product> Products { get; set; }
         // Navigational properties
+
         public ICollection<SessionRequest> CreatedSessionRequests { get; set; }
         public ICollection<Proposal> Proposals { get; set; }
         public ICollection<Message> SentMessages { get; set; }

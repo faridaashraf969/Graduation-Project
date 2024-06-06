@@ -1,0 +1,24 @@
+﻿@model List<Message>
+@{
+    ViewData["Title"] = "Chat";
+}
+
+
+@foreach (var message in Model)
+{
+    <div>
+        <p>@message.Content</p>
+        <small>Sent by: @message.SenderId on @message.SentAt</small>
+    </div>
+}
+
+<h2>Send Message</h2>
+
+<form asp-action="Send" asp-controller="Messages">
+    <input type="hidden" name="ReceiverId" value="@ViewData["ChatWith"]" />
+    <div class="form-group">
+        <label for="content">Message:</label>
+        <textarea name="Content" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

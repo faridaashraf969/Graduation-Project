@@ -1,0 +1,13 @@
+﻿@model int // SessionRequestId
+
+@{
+    ViewData["Title"] = "SubmitProposal";
+}
+
+<form asp-action="SubmitProposal" asp-controller="Proposals">
+    <input type="hidden" name="sessionRequestId" value="@Model" />
+    <input type="hidden" name="photographerId" value="[Photographer's ID]" />
+    <input type="hidden" name="clientId" value="[Client's ID]" />
+    <textarea name="proposalText" class="form-control"></textarea>
+    <button type="submit" class="btn btn-primary">Submit Proposal</button>
+</form>

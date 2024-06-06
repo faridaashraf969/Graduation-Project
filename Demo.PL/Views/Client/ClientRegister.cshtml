@@ -22,33 +22,37 @@
         <h2 id="h2">Sign Up</h2>
         <div asp-validation-summary="All" class="validation"></div>
         <form asp-controller="Client" asp-action="ClientRegister">
-            <!--  First Name-->
-            <div class="textbox">
-                <label for="fname">First Name</label><br>
-                <input asp-for="FName" type="text" id="fname" required><br>
-                <span asp-validation-for="FName" class="text-danger"></span>
-            </div>
-            <!-- Last Name -->
-            <div class="textbox">
+         <div class="fandl">
+                <!--  First Name-->
+                <div class="textbox">
+                    <label for="fname">First Name</label><br>
+                    <input asp-for="FName" type="text" id="fname" required><br>
+                    <span asp-validation-for="FName" class="text-danger"></span>
+                </div>
+                <!-- Last Name -->
+                <div class="textbox">
 
-                <label for="lname">Last Name</label><br>
-                <input asp-for="LName" type="text" id="lname" required>
-                <span asp-validation-for="LName" class="text-danger"></span>
-            </div>
+                    <label for="lname">Last Name</label><br>
+                    <input asp-for="LName" type="text" id="lname" required>
+                    <span asp-validation-for="LName" class="text-danger"></span>
+                </div>
+         </div>
 
-            <!-- Email -->
-            <div class="textbox">
-                <label for="email">Email</label><br>
-                <input asp-for="Email" type="email" id="email" required>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+           <div class="fandl">
+                <!-- Email -->
+                <div class="textbox">
+                    <label for="email">Email</label><br>
+                    <input asp-for="Email" type="email" id="email" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <!-- Phone number -->
-            <div class="textbox">
-                <label for="phone">Phone Number</label><br>
-                <input asp-for="Phone" type="tel" id="phone" required>
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
+                <!-- Phone number -->
+                <div class="textbox">
+                    <label for="phone">Phone Number</label><br>
+                    <input asp-for="Phone" type="tel" id="phone" required>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+           </div>
 
             <!-- Address -->
             <div class="textbox">
@@ -57,18 +61,20 @@
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
 
-            <!-- password -->
-            <div class="textbox">
-                <label for="pass">Password</label><br>
-                <input asp-for="Password" type="password" id="pass" required>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+            <div class="fandl">
+                <!-- password -->
+                <div class="textbox">
+                    <label for="pass">Password</label><br>
+                    <input asp-for="Password" type="password" id="pass" required>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-              <!--Comfirm password -->
-            <div class="textbox">
-            <label for="pass">Comfirm Password</label><br>
-            <input asp-for="ComfirmPassword" type="password" id="pass" required>
-            <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
+                <!--Comfirm password -->
+                <div class="textbox">
+                    <label for="pass">Comfirm Password</label><br>
+                    <input asp-for="ComfirmPassword" type="password" id="pass" required>
+                    <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
+                </div>
             </div>
 
             <!-- button sign up-->
@@ -77,7 +83,7 @@
             </div>
 
             <!--last paragraph-->
-            <p class="paragraph">Already have an Account?<a href="Login" class="link"><span>Log In</span></a></p>
+            <p class="paragraph">Already have an Account?<a href="ClientLogin" class="link"><span>Log In</span></a></p>
 
 
 

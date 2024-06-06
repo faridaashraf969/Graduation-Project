@@ -11,7 +11,8 @@ else
     <table>
         <thead>
             <tr>
-                <th>Product</th>
+                <th>Course</th>
+                <th>Instructor UserName</th>
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Total</th>
@@ -21,7 +22,8 @@ else
             @foreach (var item in Model.CartItems)
             {
                 <tr>
-                    <td>@item.Product.Name</td>
+                    <td>@item.Course.Topic</td>
+                    <td>@item.Course.Instructor.UserName</td>
                     <td>@item.Quantity</td>
                     <td>@item.Price</td>
                     <td>@(item.Quantity * item.Price)</td>
@@ -35,7 +37,8 @@ else
     <form asp-action="ClearCart" method="post">
         <button type="submit">Clear Cart</button>
     </form>
-    <form asp-controller="order" asp-action="Checkout" method="post">
+    <form asp-controller="order" asp-action="CourseCheckout" method="post">
         <button type="submit">Checkout</button>
     </form>
 }
+

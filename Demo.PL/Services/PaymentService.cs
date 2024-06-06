@@ -14,7 +14,7 @@ namespace Demo.PL.Services
         public PaymentService(IOptions<StripeSettings> stripeSettings)
         {
             _stripeSettings = stripeSettings.Value;
-            StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
+            StripeConfiguration.ApiKey = _stripeSettings.ApiKey;
         }
 
         public async Task<bool> ProcessPayment(string token, decimal amount)

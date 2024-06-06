@@ -6,31 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Stripe.BillingPortal;
 using System.Collections.Generic;
 using System.Linq;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers
@@ -56,37 +31,46 @@ namespace Demo.PL.Controllers
             var courses = _dbContext.Courses.Include(c => c.Instructor).Where(c => c.Status == "Approved").ToList();
             return View(courses);
         }
-
-        public IActionResult AddToCart(int CourseId)
+        public IActionResult Details(int id)
         {
-            //if (Session["cart"] == null)
-            //{
-            //    var cart = new List<CartItem>();
-            //    var course = _dbContext.Courses.Find(CourseId);
-            //    cart.Add(new CartItem()
-            //    {
-            //        Course = course,
-            //        Quantity = 1
-            //    });
-            //    //Session["cart"] = cart;
-            //}else
-            //{
-            //    List<CartItem> cart = ( List<CartItem>) Session["cart"]
-            //    var course = _dbContext.Courses.Find(CourseId);
-            //    cart.Add(new CartItem()
-            //    {
-            //        Course = course,
-            //        Quantity = 1
-            //    });
-            //    //Session["cart"] = cart;
-            //}
-
-            return Redirect("Index");  
+            var course = _courseRepo.GetById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
         }
 
-        public IActionResult Delete()
-        {
-            return View();
-        }
+        //public IActionResult AddToCart(int CourseId)
+        //{
+        //    //if (Session["cart"] == null)
+        //    //{
+        //    //    var cart = new List<CartItem>();
+        //    //    var course = _dbContext.Courses.Find(CourseId);
+        //    //    cart.Add(new CartItem()
+        //    //    {
+        //    //        Course = course,
+        //    //        Quantity = 1
+        //    //    });
+        //    //    //Session["cart"] = cart;
+        //    //}else
+        //    //{
+        //    //    List<CartItem> cart = ( List<CartItem>) Session["cart"]
+        //    //    var course = _dbContext.Courses.Find(CourseId);
+        //    //    cart.Add(new CartItem()
+        //    //    {
+        //    //        Course = course,
+        //    //        Quantity = 1
+        //    //    });
+        //    //    //Session["cart"] = cart;
+        //    //}
+
+        ////    return Redirect("Index");  
+        ////}
+
+        //public IActionResult Delete()
+        //{
+        //    return View();
+        //}
     }
 }

@@ -1,26 +1,58 @@
-﻿ @model Order
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Confirmation</title>
-    <link rel="stylesheet" href="~/css/Payment-confirmation-page.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</head>
-<body>
- 
+﻿@model Order
+<link href="~/css/payment-confirmation-page.css" rel="stylesheet" />
+<link href="~/css/order-summary-page.css" rel="stylesheet" />
+<h2>Payment Confirmation</h2>
 
-    <h2>Payment Confirmation</h2>
-    <p class="p1">Thank you for your order!</p>
-    <p>Order ID: @Model.OrderNumber</p>
-    <p>Order Date: @Model.OrderDate</p>
-    <p>Total Amount: @Model.TotalAmount</p>
-    
-    <p class="p2">Your payment has been successfully processed.</p>
-</body>
-</html>
+<p>Thank you for your order!</p>
+<p>Order Number: @Model.OrderNumber</p>
+<p>Total Amount: @Model.TotalAmount</p>
+<p>Customer Name: @Model.User.FirstName+""+@Model.User.LastName</p>
 
+<h3>Order Items</h3>
+<table>
+    {
+    @if(Model.Courses.Count()>0)
+    {
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Course.Topic</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+
+                </tr>
+            }
+        </tbody>
+    }
+    }
+</table>
 

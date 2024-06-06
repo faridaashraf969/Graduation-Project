@@ -14,9 +14,9 @@ namespace Demo.DAL.Entities
         public string Location { get; set; }
         public string Details { get; set; }
         public string SessionType { get; set; }
-        public string PhotographerId { get; set; }
+        public string? PhotographerId { get; set; }
         public ApplicationUser Photographer { get; set; } // Navigational property
-        public string ClientId { get; set; }
+        public string? ClientId { get; set; }
         public ApplicationUser Client { get; set; } // Navigational property
         public List<Proposal> Proposals { get; set; } // Navigational property
     }

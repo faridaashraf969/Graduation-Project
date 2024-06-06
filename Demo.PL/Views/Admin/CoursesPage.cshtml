@@ -1,4 +1,6 @@
-﻿<table class="table table-striped table-hover mt-3">
+﻿@model IEnumerable<Course>
+
+<table class="table table-striped table-hover mt-3">
   
     <thead>
         @* <tr>
@@ -16,9 +18,10 @@
             <th>Approve</th>
         </tr> *@
     </thead>
-    <tbody>
+ 
         @foreach (var course in Model)
         {
+        <tbody>
             <tr>
                 <td><img src="~/Files/Images/@course.ImageName" class="rounded" height="40" width="40" alt="course Image" /></td>
                 <td>@course.Topic</td>
@@ -28,11 +31,13 @@
                 <td>@course.Status</td>
                 <td>@course.Requirements</td>
                 <td>@(course.Instructor.FirstName + " " + course.Instructor.LastName)</td>
-                @*  <td><a asp-action="Edit" asp-route-id="@Model"><i class="fas fa-edit"></i></a></td>
-            <td><a asp-action="Delete" asp-route-id="@Model"><i class="fa-sharp fa-solid fa-trash" style="color: #e60f24;"></i></a></td> *@
+                @*<td><a asp-action="Edit" asp-route-id="@Model"><i class="fas fa-edit"></i></a></td>
+            <td><a asp-action="Delete" asp-route-id="@Model"><i class="fa-sharp fa-solid fa-trash" style="color: #e60f24;"></i></a></td>*@
                 <partial name="_buttonPartialView" model="@course.Id"></partial>
                  <td><a asp-action="ApproveCourse" asp-route-id="@course.Id"><i class="fa-check fa-solid" style="color:green"></i></a></td>
             </tr>
+        </tbody>
         }
-    </tbody>
+  
 </table>
+ 

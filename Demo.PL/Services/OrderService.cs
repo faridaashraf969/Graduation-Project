@@ -17,14 +17,14 @@ public class OrderService
     {
         var order = new Order
         {
-            UserID = applicationUserId,
+            UserId = applicationUserId,
             OrderDate = DateTime.UtcNow,
             TotalAmount = cartItems.Sum(item => item.Quantity * item.Price),
             ShippingAddress = shippingAddress,
             
             OrderItems = cartItems.Select(item => new OrderItem
             {
-                ProductID = item.ProductID,
+                ProductId = item.ProductId,
                 Quantity = item.Quantity,
                 Price = item.Price
             }).ToList()

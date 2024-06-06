@@ -1,57 +1,82 @@
-﻿using Demo.DAL.Entities;
+﻿using Bulky.Models;
+using Bulky.Models.ViewModel;
+using Demo.BLL.Interfaces;
+using Demo.DAL.Contexts;
+using Demo.DAL.Entities;
+using Demo.PL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Stripe.Checkout;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
-public class CartController : Controller
+namespace Demo.PL.Controllers
 {
-    private readonly CartService _cartService;
-    private readonly OrderService _orderService;
-    private readonly UserManager<ApplicationUser> _userManager;
-
-    public CartController(CartService cartService, OrderService orderService, UserManager<ApplicationUser> userManager)
+    public class CartController : Controller
     {
-        _cartService = cartService;
-        _orderService = orderService;
-        _userManager = userManager;
-    }
+        private readonly CartService _cartService;
+        //private readonly OrderService _orderService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly MvcProjectDbContext _dbContext;
 
-    public IActionResult Index()
-    {
-        var cartItems = _cartService.GetCartItems();
-        return View(cartItems);
-    }
 
-    public IActionResult Checkout()
-    {
-        var cartItems = _cartService.GetCartItems();
-        return View(cartItems);
-    }
-
-    [HttpPost]
-    [Authorize]
-    public async Task<IActionResult> CheckoutConfirm(string shippingAddress, string billingAddress)
-    {
-        var user = await _userManager.GetUserAsync(User);
-        if (user == null)
+        public CartController(CartService cartService,/* OrderService orderService*/ UserManager<ApplicationUser> userManager, MvcProjectDbContext dbContext)
         {
-            return Challenge();
+            _cartService = cartService;
+            //_orderService = orderService;
+            _userManager = userManager;
+            _dbContext = dbContext;
         }
 
-        var cartItems = _cartService.GetCartItems();
-        if (!cartItems.Any())
+        public async Task<IActionResult> Index()
         {
+            var cart = await _cartService.GetCartDetailsAsync();
+            return View(cart);
+        }
+        public async Task<IActionResult> CourseIndex()
+        {
+            var cart = await _cartService.GetCourseCartDetailsAsync();
+            return View(cart);
+        }
+
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
+        {
+            await _cartService.AddToCartAsync(productId, quantity);
             return RedirectToAction("Index");
         }
 
-        var order = _orderService.CreateOrder(user.Id, cartItems, shippingAddress, billingAddress);
+        public async Task<IActionResult> ClearCart()
+        {
+            await _cartService.ClearCartAsync();
+            return RedirectToAction("Index");
+        }
 
-        // Clear the cart after creating the order
-        _cartService.ClearCart();
+        public async Task<IActionResult> AddCourseToCart(int courseId, int quantity = 1)
+        {
+            await _cartService.AddCourseToCartAsync(courseId, quantity);
+            return RedirectToAction("CourseIndex");
+        }
 
-        // Redirect to Order Summary for review
-        return RedirectToAction("OrderSummary", "Order", new { orderId = order.OrderNumber });
+        public async Task<IActionResult> CheckoutAsync()
+        {
+            // Retrieve the cart items from the database or wherever they're stored
+            var cartItems = await _dbContext.CartItems
+           .Include(ci => ci.Product) // Include the Product entity
+           .ToListAsync();// Modify this as needed
+
+            if (cartItems == null || !cartItems.Any())
+            {
+                return NotFound(); // Handle the case where cart items are not found
+            }
+
+            return View(cartItems); // Pass the cart items to the view
+        }
+
+
     }
 }

@@ -81,9 +81,9 @@ namespace Demo.PL.Controllers
             return RedirectToAction("OrderSummary", new { orderId = order.OrderNumber });
         }
         [HttpPost]
-        public async Task<IActionResult> CourseCheckout()
+        public async Task<IActionResult> CourseCheckout(string userId)
         {
-            var cart = await _cartService.GetCourseCartDetailsAsync();
+            var cart = await _cartService.GetCourseCartDetailsAsync(userId);
 
             if (cart.CartItems.Count == 0)
             {

@@ -1,5 +1,6 @@
 ﻿using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +22,9 @@ namespace Demo.PL.Services
 
         public Product GetProductById(int id)
         {
-            return _context.Products.FirstOrDefault(p => p.Id == id);
+            return _context.Products
+                .Include(p=>p.Seller)
+                .FirstOrDefault(p => p.Id == id);
         }
     }
 

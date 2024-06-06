@@ -82,6 +82,7 @@ namespace Demo.DAL.Contexts
                 .WithMany(u => u.ReceivedMessages)
                 .HasForeignKey(m => m.ReceiverId)
                 .OnDelete(DeleteBehavior.Restrict);
+            /////
         }
 
         public DbSet<Category> Categories { get; set; }

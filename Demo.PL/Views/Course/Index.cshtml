@@ -60,7 +60,7 @@
                     <h3>@course.Topic</h3>
                     <p>@course.Description</p>
                     <p>@course.Price.ToString("C")</p>
-                    <p><img src="~/Files/Images/@course.ImageName" alt="@course.ImageName" class="course-image"></p>
+                    <p><img src="~/Files/Images/@course.ImageName" alt="@course.ImageName" style="width: 300px; height: auto;"></p>
                     <a href="@Url.Action("Details", new { id = course.Id })">View Details</a>
                 </div>
             }

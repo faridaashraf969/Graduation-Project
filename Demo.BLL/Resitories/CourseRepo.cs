@@ -1,12 +1,14 @@
 ﻿using Demo.BLL.Interfaces;
 using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
+using Demo.DAL.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Course = Demo.DAL.Entities.Course;
 
 namespace Demo.BLL.Resitories
 {
@@ -36,7 +38,9 @@ namespace Demo.BLL.Resitories
 
         public Course GetById(int CourseId)
         {
-            return _dbContext.Courses.FirstOrDefault(c => c.Id == CourseId);
+            return _dbContext.Courses
+                             .Include(c => c.Instructor)
+                             .FirstOrDefault(c => c.Id == CourseId);
         }
 
         public void Update(Course course)

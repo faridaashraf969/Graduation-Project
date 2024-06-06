@@ -2,12 +2,7 @@
 
 <h2>Your Shopping Cart</h2>
 
-@if (Model.CartItems.Count == 0)
-{
-    <p>Your cart is empty.</p>
-}
-else
-{
+
     <table>
         <thead>
             <tr>
@@ -40,5 +35,5 @@ else
     <form asp-controller="order" asp-action="CourseCheckout" method="post">
         <button type="submit">Checkout</button>
     </form>
-}
+
 

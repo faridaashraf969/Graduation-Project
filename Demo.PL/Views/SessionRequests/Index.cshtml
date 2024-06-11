@@ -1,0 +1,13 @@
+﻿@model List<SessionRequest>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var sessionRequest in Model)
+{
+    <div>
+        <h4>@sessionRequest.Description</h4>
+        <!-- Display other session request details -->
+        <a asp-action="Details" asp-controller="SessionRequests" asp-route-id="@sessionRequest.Id">View Details</a>
+    </div>
+}

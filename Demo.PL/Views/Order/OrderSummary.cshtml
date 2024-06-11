@@ -40,7 +40,8 @@
         </tbody>
     </table>
 
-    <form asp-action="ProcessPayment" method="post">
+    <form asp-controller="order" asp-action="ProcessPayment" method="post" enctype="multipart/form-data">
+        <input asp-for="OrderNumber" type="hidden" name="orderId"/>
         <button type="submit">Pay Now</button>
     </form>
 

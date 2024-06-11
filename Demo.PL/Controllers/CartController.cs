@@ -38,9 +38,9 @@ namespace Demo.PL.Controllers
             var cart = await _cartService.GetCartDetailsAsync();
             return View(cart);
         }
-        public async Task<IActionResult> CourseIndex(string userId)
+        public async Task<IActionResult> CourseIndex()
         {
-            var cart = await _cartService.GetCourseCartDetailsAsync(userId);
+            var cart = await _cartService.GetCourseCartDetailsAsync( );
             return View(cart);
         }
 
@@ -55,15 +55,6 @@ namespace Demo.PL.Controllers
             await _cartService.ClearCartAsync();
             return RedirectToAction("Index");
         }
-
-        public async Task<IActionResult> AddCourseToCart(int courseId, int quantity = 1)
-        {
-            var userId = _userManager.GetUserId(User);
-
-            await _cartService.AddCourseToCartAsync(courseId, quantity ,userId);
-            return RedirectToAction("CourseIndex");
-        }
-
         public async Task<IActionResult> CheckoutAsync()
         {
             // Retrieve the cart items from the database or wherever they're stored
@@ -78,7 +69,27 @@ namespace Demo.PL.Controllers
 
             return View(cartItems); // Pass the cart items to the view
         }
+        /////////////////////////////////////////////////////////////////////////////////////
+        public async Task<IActionResult> AddCourseToCart(int courseId, int quantity = 1)
+        {
+            var userid = _userManager.GetUserId(User);
 
+            // Ensure the user is not null
+            if (userid == null)
+            {
+                // Handle the case where the user is not authenticated or not found
+                return RedirectToAction("Register", "Account");
+            }
+
+            // Get the user ID
+
+
+            // Add the course to the cart
+            await _cartService.AddCourseToCartAsync(courseId, quantity, userid);
+
+            // Redirect to the cart page
+            return RedirectToAction("Index", "Cart");
+        }
 
     }
 }

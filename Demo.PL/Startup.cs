@@ -36,7 +36,8 @@ namespace Demo.PL
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddControllersWithViews();
             services.AddDbContext<MvcProjectDbContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("default"));
+                options.UseSqlServer(Configuration.GetConnectionString("default")
+                    );
             },ServiceLifetime.Scoped);
 
             services.AddScoped<Services.ProductService>();

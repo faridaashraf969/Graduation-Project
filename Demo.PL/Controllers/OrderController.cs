@@ -26,22 +26,7 @@ namespace Demo.PL.Controllers
             _cartService = cartService;
             _stripeSettings = stripeSettings.Value;
         }
-
-        public IActionResult OrderSummary(int orderId)
-        {
-            var order = _context.Orders
-                .Include(o => o.OrderItems)
-                    .ThenInclude(oi => oi.Product)
-                .Include(o => o.User)
-                .FirstOrDefault(o => o.OrderNumber == orderId);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
+       
 
         [HttpPost]
         public async Task<IActionResult> Checkout()
@@ -80,10 +65,26 @@ namespace Demo.PL.Controllers
 
             return RedirectToAction("OrderSummary", new { orderId = order.OrderNumber });
         }
+        [HttpGet]
+        public IActionResult OrderSummary(int orderId)
+        {
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .Include(o => o.User)
+                .FirstOrDefault(o => o.OrderNumber == orderId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
         [HttpPost]
         public async Task<IActionResult> CourseCheckout(string userId)
         {
-            var cart = await _cartService.GetCourseCartDetailsAsync(userId);
+            var cart = await _cartService.GetCourseCartDetailsAsync();
 
             if (cart.CartItems.Count == 0)
             {
@@ -134,36 +135,20 @@ namespace Demo.PL.Controllers
         }
 
 
-        public IActionResult PaymentConfirmation(int orderId)
-        {
-            var order = _context.Orders
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Course)
-                .Include(o => o.User)
-                .FirstOrDefault(o => o.OrderNumber == orderId);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
-
         [HttpPost]
         public async Task<IActionResult> ProcessPayment(int orderId)
         {
-            //var order = await _context.Orders
-            //    .Include(o => o.OrderItems)
-            //    .ThenInclude(oi => oi.Product)
-            //    .Include(o => o.User)
-            //    .FirstOrDefaultAsync(o => o.OrderNumber == orderId);
-
-            var order = _context.Orders
+            var order = await _context.Orders
                 .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Course)
+                .ThenInclude(oi => oi.Product)
                 .Include(o => o.User)
-                .FirstOrDefault(o => o.OrderNumber == orderId);
+                .FirstOrDefaultAsync(o => o.OrderNumber == orderId);
+
+            //var order = _context.Orders
+            //    .Include(o => o.OrderItems)
+            //    .ThenInclude(oi => oi.Course)
+            //    .Include(o => o.User)
+            //    .FirstOrDefault(o => o.OrderNumber == orderId);
 
             if (order == null)
             {
@@ -215,6 +200,23 @@ namespace Demo.PL.Controllers
 
                 return Redirect(session.Url);
             }
+        }
+
+        [HttpGet]
+        public IActionResult PaymentConfirmation(int orderId)
+        {
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .Include(o => o.User)
+                .FirstOrDefault(o => o.OrderNumber == orderId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
     }
 }

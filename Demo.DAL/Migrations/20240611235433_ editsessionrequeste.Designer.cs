@@ -4,14 +4,16 @@ using Demo.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Demo.DAL.Migrations
 {
     [DbContext(typeof(MvcProjectDbContext))]
-    partial class MvcProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240611235433_ editsessionrequeste")]
+    partial class editsessionrequeste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

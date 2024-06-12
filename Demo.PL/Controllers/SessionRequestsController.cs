@@ -20,16 +20,26 @@ namespace Demo.PL.Controllers
             _context = context;
         }
         // GET: SessionRequests
-        public IActionResult Index()
-        {
-            var sessionRequests = _context.SessionRequests.ToList();
-            return View(sessionRequests);
-        }
+        public IActionResult Index(int? clientId)
+{
+    if (clientId == null)
+    {
+        return BadRequest("Client ID is required");
+    }
+
+    string clientIdString = clientId.ToString();
+    var sessionRequests = _context.SessionRequests
+        .Where(sr => sr.ClientId == clientIdString)
+        .ToList();
+
+    return View(sessionRequests);
+}
+
 
         // GET: SessionRequests/Details/5
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id, string clientId)
         {
-            if (id == null)
+            if (id == null || string.IsNullOrEmpty(clientId))
             {
                 return NotFound();
             }
@@ -38,7 +48,7 @@ namespace Demo.PL.Controllers
                 .Include(sr => sr.Proposals)
                 .Include(sr => sr.Photographer)
                 .Include(sr => sr.Client)
-                .FirstOrDefault(sr => sr.Id == id);
+                .FirstOrDefault(sr => sr.Id == id && sr.ClientId == clientId);
 
             if (sessionRequest == null)
             {
@@ -47,6 +57,7 @@ namespace Demo.PL.Controllers
 
             return View(sessionRequest);
         }
+
 
         // GET: SessionRequests/Create
         public IActionResult Create()

@@ -3,35 +3,34 @@
     ViewData["Title"] = "Details";
 }
 
+<h2>Session Request Details</h2>
 
-<h1>Session Request Details</h1>
-<p><strong>Description:</strong> @Model.Description</p>
-<!-- Display other session request details -->
-
-<h2>Proposals</h2>
-@if (Model.Proposals.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Photographer</th>
-                <th>Proposal Text</th>
-                <!-- Add other proposal details -->
-            </tr>
-        </thead>
-        <tbody>
+<div>
+    <h4>@Model.Description</h4>
+    <p><strong>Date:</strong> @Model.SessionDate.ToString("f")</p>
+    <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Details:</strong> @Model.Details</p>
+    <p><strong>Type:</strong> @Model.SessionType</p>
+    <p><strong>Photographer:</strong> @Model.Photographer?.UserName</p>
+    <p><strong>Client:</strong> @Model.Client?.UserName</p>
+    <h4>Proposals</h4>
+    @if (Model.Proposals != null && Model.Proposals.Any())
+    {
+        <ul>
             @foreach (var proposal in Model.Proposals)
             {
-                <tr>
-                    <td>@proposal.PhotographerId</td>
-                    <td>@proposal.ProposalText</td>
-                    <!-- Display other proposal details -->
-                </tr>
+                <li>
+                    <strong>Proposal:</strong> @proposal.ProposalText<br>
+                    <strong>Additional Details:</strong> @proposal.AddtionalDetails<br>
+                    <strong>Accepted:</strong> @(proposal.IsAccepted ? "Yes" : "No")
+                </li>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No proposals submitted yet.</p>
-}
+        </ul>
+    }
+    else
+    {
+        <p>No proposals available.</p>
+    }
+</div>
+

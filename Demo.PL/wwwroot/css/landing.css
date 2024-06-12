@@ -52,6 +52,7 @@ nav ul li a:hover {
 }
 
   /* Styling the clickable divs */
+
   .content-sec {
     display: flex;
     flex-direction: column;
@@ -194,4 +195,39 @@ right: 15px;
   font-style: normal;
   font-weight: 500;
 }
+button {
+    display: inline;
+    border: none;
+    width: 200px;
+    border-radius: 32px;
+    background-color: #F0A400;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 9px;
+    height: 33px;
+    
+}
+
+    button:hover {
+        background-color: #555;
+    }
+.nav-button {
+    display: inline;
+    border: none;
+    width: 150px;
+    border-radius: 32px;
+    background-color: #F0A400;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 9px;
+    height: 33px;
+    margin-top: 27px;
+    border-radius: 15px;
+}
+
+    .nav-button:hover {
+        background-color: #555;
+    }
 /* ///////////////////end footer section////////////////////////// */

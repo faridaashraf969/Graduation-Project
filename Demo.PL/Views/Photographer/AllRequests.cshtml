@@ -1,0 +1,15 @@
+﻿@model List<SessionRequest>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var sessionRequest in Model)
+{
+    <div>
+        <h4>@sessionRequest.Description</h4>
+        <p>@sessionRequest.Client.FirstName+""+@sessionRequest.Client.LastName</p>
+        <p>@sessionRequest.Location</p>
+        <p>@sessionRequest.SessionDate</p>
+        <p>@sessionRequest.SessionType</p>
+    </div>
+}

@@ -30,7 +30,13 @@ namespace Demo.PL.Services
 
         private async Task<Cart> GetCartAsync()
         {
-            var userId = _httpContextAccessor.HttpContext.User?.Identity?.Name;
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            if (user == null)
+            {
+                throw new InvalidOperationException("User is not authenticated.");
+            }
+
+            var userId = user.Id;
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -46,34 +52,6 @@ namespace Demo.PL.Services
 
             return cart;
         }
-        //private async Task<Cart> GetCourseCartAsync(string userId)
-        //{
-        //    var user = await GetUserByIdAsync(userId);
-        //    if (user == null)
-        //    {
-        //        // Handle user not found case
-        //        return null;
-        //    }
-
-        //    var cart = await _context.Carts
-        //                             .Include(c => c.CartItems)
-        //                             .ThenInclude(ci=>ci.Course)
-        //                             .FirstOrDefaultAsync(c => c.ApplicationUserId == user.Id);
-
-        //    if (cart == null)
-        //    {
-        //        cart = new Cart
-        //        { 
-        //            ApplicationUserId = userId 
-
-        //        };
-        //        _context.Carts.Add(cart);
-        //        await _context.SaveChangesAsync();
-        //    }
-
-        //    return cart;
-        //}
-
         public async Task AddToCartAsync(int productId, int quantity)
         {
             var cart = await GetCartAsync();
@@ -100,40 +78,7 @@ namespace Demo.PL.Services
             cart.CartItems.Add(cartItem);
             await _context.SaveChangesAsync();
         }
-
-
-        public async Task AddCourseToCartAsync(int courseId, int quantity ,string userId)
-        {
-            var cart = await GetCartAsync();
-
-            var cartItem = await _context.CartItems
-                                         .FirstOrDefaultAsync(ci => ci.CartId == cart.CartId && ci.CourseId == courseId);
-            var course =await _context.Courses.FindAsync(courseId);
-            if (cartItem == null)
-            {
-                cartItem = new CartItem
-                {
-                    CartId = cart.CartId,
-                    CourseId = courseId,
-                    Quantity = quantity,
-                    Price=course.Price
-                };
-                _context.CartItems.Add(cartItem);
-            }
-            else
-            {
-                cartItem.Quantity += quantity;
-                _context.CartItems.Update(cartItem);
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<Cart> GetCartDetailsAsync()
-        {
-            return await GetCartAsync();
-        }
-        public async Task<Cart> GetCourseCartDetailsAsync()
         {
             return await GetCartAsync();
         }

@@ -41,9 +41,9 @@
 
 
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                <form asp-action="List" class="d-flex" role="search" >
+                    <input class="form-control me-2" name="category" type="text" placeholder="Search By Category" aria-label="Search">
+                    <button class="btn btn-outline-warning" type="submit"> Search </button>
                 </form>
             </div>
         </div>

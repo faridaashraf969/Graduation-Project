@@ -39,6 +39,8 @@ namespace Demo.PL.Controllers
                 .Include(sr => sr.Photographer)
                 .Include(sr => sr.Client)
                 .FirstOrDefault(sr => sr.Id == id);
+                
+                
 
             if (sessionRequest == null)
             {

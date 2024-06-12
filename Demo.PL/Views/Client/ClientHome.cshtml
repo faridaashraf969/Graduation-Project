@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 </head>
 <body style="font-family: Montserrat">
  <!-- ///////////////////start nav section/////////////////////////////// -->
@@ -17,7 +18,9 @@
   <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">Find a photographer</a></li>
-      <li><a href="#">Store</a></li>
+
+      <li><a asp-controller="Product" asp-action="List">Store</a></li>
+
       <li><a href="#">Courses</a></li>
   </ul>
         <a href="#" class="u-icon"> <img src="~/files/clientimages/user-icon.svg" alt="user-icon"></a>

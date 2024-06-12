@@ -55,3 +55,21 @@ table, th, td {
   .btn2:hover{
     transform: scale(1.1);
   }
+.button-container button[type="submit"] {
+    background-color: orange;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    .button-container button[type="submit"]:hover {
+        background-color: #584f4b;
+    }
+
+.button-container form {
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 5px;
+}

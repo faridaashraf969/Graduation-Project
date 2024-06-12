@@ -21,6 +21,12 @@ public class ProductController : Controller
         var products = _dbContext.Products.Where(p => p.Status == "Approved");
         return View(products);
     }
+    [HttpPost]
+    public IActionResult List(string category)
+    {
+        var products = _dbContext.Products.Where(p => p.Category.Name.ToUpper().Contains(category.ToUpper()));
+        return View(products);
+    }
 
     public IActionResult Details(int id)
     {

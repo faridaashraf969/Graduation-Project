@@ -34,7 +34,7 @@ namespace Demo.DAL.Entities
         //////////////////////////////////////////////////
         public ApplicationUser Seller { get; set; }
         public string SellerID { get; set; }
-      
+
         //////////////////////////////////////////////////
         //public ApplicationUser Client { get; set; }
         //public string ClientID { get; set; }

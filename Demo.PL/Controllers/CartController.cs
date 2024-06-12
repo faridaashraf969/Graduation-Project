@@ -25,12 +25,21 @@ namespace Demo.PL.Controllers
         private readonly MvcProjectDbContext _dbContext;
 
 
-        public CartController(CartService cartService,/* OrderService orderService*/ UserManager<ApplicationUser> userManager, MvcProjectDbContext dbContext)
+        public CartController(CartService cartService,UserManager<ApplicationUser> userManager, MvcProjectDbContext dbContext)
         {
             _cartService = cartService;
-            //_orderService = orderService;
             _userManager = userManager;
             _dbContext = dbContext;
+        }
+
+        private async Task<string> GetUserIdAsync()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new InvalidOperationException("User is not authenticated.");
+            }
+            return user.Id;
         }
 
         public async Task<IActionResult> Index()
@@ -38,13 +47,8 @@ namespace Demo.PL.Controllers
             var cart = await _cartService.GetCartDetailsAsync();
             return View(cart);
         }
-        public async Task<IActionResult> CourseIndex()
-        {
-            var cart = await _cartService.GetCourseCartDetailsAsync( );
-            return View(cart);
-        }
 
-        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1 )
         {
             await _cartService.AddToCartAsync(productId, quantity);
             return RedirectToAction("Index");
@@ -57,38 +61,14 @@ namespace Demo.PL.Controllers
         }
         public async Task<IActionResult> CheckoutAsync()
         {
-            // Retrieve the cart items from the database or wherever they're stored
             var cartItems = await _dbContext.CartItems
-           .Include(ci => ci.Product) // Include the Product entity
-           .ToListAsync();// Modify this as needed
-
+           .Include(ci => ci.Product) 
+           .ToListAsync();
             if (cartItems == null || !cartItems.Any())
             {
-                return NotFound(); // Handle the case where cart items are not found
+                return NotFound();
             }
-
-            return View(cartItems); // Pass the cart items to the view
-        }
-        /////////////////////////////////////////////////////////////////////////////////////
-        public async Task<IActionResult> AddCourseToCart(int courseId, int quantity = 1)
-        {
-            var userid = _userManager.GetUserId(User);
-
-            // Ensure the user is not null
-            if (userid == null)
-            {
-                // Handle the case where the user is not authenticated or not found
-                return RedirectToAction("Register", "Account");
-            }
-
-            // Get the user ID
-
-
-            // Add the course to the cart
-            await _cartService.AddCourseToCartAsync(courseId, quantity, userid);
-
-            // Redirect to the cart page
-            return RedirectToAction("Index", "Cart");
+            return View(cartItems);
         }
 
     }

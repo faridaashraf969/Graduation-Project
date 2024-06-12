@@ -26,7 +26,8 @@ namespace Demo.PL.Controllers.Users
             ,IProductRepo productRepo
             ,ICourseRepo courseRepo
             ,MvcProjectDbContext dbContext
-            ,ICategoryRepo categoryRepo) 
+            ,ICategoryRepo categoryRepo
+            ) 
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -350,7 +351,7 @@ namespace Demo.PL.Controllers.Users
 
             _courseRepo.Delete(course);
 
-            return RedirectToAction(nameof(AllCategory));
+            return RedirectToAction(nameof(CoursesPage));
 
 
         }

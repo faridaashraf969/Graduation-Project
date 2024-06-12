@@ -26,7 +26,7 @@ namespace Demo.PL.Controllers
             _cartService = cartService;
             _stripeSettings = stripeSettings.Value;
         }
-       
+
 
         [HttpPost]
         public async Task<IActionResult> Checkout()
@@ -81,58 +81,58 @@ namespace Demo.PL.Controllers
 
             return View(order);
         }
-        [HttpPost]
-        public async Task<IActionResult> CourseCheckout(string userId)
-        {
-            var cart = await _cartService.GetCourseCartDetailsAsync();
+        //[HttpPost]
+        //public async Task<IActionResult> CourseCheckout(string userId)
+        //{
+        //    var cart = await _cartService.GetCourseCartDetailsAsync();
 
-            if (cart.CartItems.Count == 0)
-            {
-                return RedirectToAction("CourseIndex", "Cart");
-            }
+        //    if (cart.CartItems.Count == 0)
+        //    {
+        //        return RedirectToAction("CourseIndex", "Cart");
+        //    }
 
-            var order = new Order
-            {
-                UserId = cart.ApplicationUserId,
-                OrderDate = DateTime.Now,
-                Status = "Pending",
-                TotalAmount = cart.CartItems.Sum(ci => ci.Quantity * ci.Price),
-                OrderItems = new List<OrderItem>() // Initialize the OrderItems list
-            };
+        //    var order = new Order
+        //    {
+        //        UserId = cart.ApplicationUserId,
+        //        OrderDate = DateTime.Now,
+        //        Status = "Pending",
+        //        TotalAmount = cart.CartItems.Sum(ci => ci.Quantity * ci.Price),
+        //        OrderItems = new List<OrderItem>() // Initialize the OrderItems list
+        //    };
 
-            foreach (var cartItem in cart.CartItems)
-            {
-                var orderItem = new OrderItem
-                {
-                    ProductId = cartItem.CourseId,
-                    Quantity = cartItem.Quantity,
-                    Price = cartItem.Price
-                };
-                order.OrderItems.Add(orderItem);
-            }
+        //    foreach (var cartItem in cart.CartItems)
+        //    {
+        //        var orderItem = new OrderItem
+        //        {
+        //            ProductId = cartItem.CourseId,
+        //            Quantity = cartItem.Quantity,
+        //            Price = cartItem.Price
+        //        };
+        //        order.OrderItems.Add(orderItem);
+        //    }
 
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+        //    _context.Orders.Add(order);
+        //    await _context.SaveChangesAsync();
 
-            await _cartService.ClearCartAsync();
+        //    await _cartService.ClearCartAsync();
 
-            return RedirectToAction("CourseOrderSummary", new { orderId = order.OrderNumber });
-        }
-        public IActionResult CourseOrderSummary(int orderId)
-        {
-            var order = _context.Orders
-                .Include(o => o.OrderItems)
-                    .ThenInclude(oi => oi.Course)
-                .Include(o => o.User)
-                .FirstOrDefault(o => o.OrderNumber == orderId);
+        //    return RedirectToAction("CourseOrderSummary", new { orderId = order.OrderNumber });
+        //}
+        //public IActionResult CourseOrderSummary(int orderId)
+        //{
+        //    var order = _context.Orders
+        //        .Include(o => o.OrderItems)
+        //            .ThenInclude(oi => oi.Course)
+        //        .Include(o => o.User)
+        //        .FirstOrDefault(o => o.OrderNumber == orderId);
 
-            if (order == null)
-            {
-                return NotFound();
-            }
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(order);
-        }
+        //    return View(order);
+        //}
 
 
         [HttpPost]

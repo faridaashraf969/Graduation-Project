@@ -1,8 +1,11 @@
-﻿using Demo.DAL.Entities;
+﻿using Demo.DAL.Contexts;
+using Demo.DAL.Entities;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers.Users
@@ -11,13 +14,16 @@ namespace Demo.PL.Controllers.Users
     {
         private readonly UserManager<ApplicationUser> _userManagerClient;
         private readonly SignInManager<ApplicationUser> _signInManagerClient;
+        private readonly MvcProjectDbContext _dbContext;
 
         public PhotographerController(UserManager<ApplicationUser> userManager
             , SignInManager<ApplicationUser> signInManager
+            ,MvcProjectDbContext dbContext
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
+            this._dbContext = dbContext;
         }
             #region Register
         public IActionResult PhotographerRegister()
@@ -106,6 +112,15 @@ namespace Demo.PL.Controllers.Users
         public IActionResult PhotographerHome()
         {
             return View();
+        }
+
+        #endregion
+
+        #region AllRequests
+        public IActionResult AllRequests()
+        {
+            var sessionRequests = _dbContext.SessionRequests.ToList();
+            return View(sessionRequests);
         }
 
         #endregion

@@ -1,16 +1,16 @@
 ﻿@model Order
-<link href="~/css/payment-confirmation-page.css" rel="stylesheet" />
+@* <link href="~/css/payment-confirmation-page.css" rel="stylesheet" /> *@
 <link href="~/css/order-summary-page.css" rel="stylesheet" />
 <h2>Payment Confirmation</h2>
 
 <p>Thank you for your order!</p>
 <p>Order Number: @Model.OrderNumber</p>
-<p>Total Amount: @Model.TotalAmount</p>
-@* <p>Customer Name: @Model.User.FirstName+""+@Model.User.LastName</p>
- *@
+<p>Customer Name: @Model.User.FirstName @Model.User.LastName</p>
+<h2>Total Amount: @Model.TotalAmount</h2>
+
 <h3>Order Items</h3>
 <table>
-    {
+    
     @if(Model.Courses.Count()>0)
     {
         <thead>
@@ -53,6 +53,6 @@
             }
         </tbody>
     }
-    }
+    
 </table>
 

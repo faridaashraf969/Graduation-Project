@@ -91,7 +91,7 @@
 
                         <!--  -->
 
-                        <p><strong>Duration: </strong>@Model.Duration</p>
+                        @* <p><strong>Duration: </strong>@Model.Duration</p> *@
 
                         <p><strong>Price: </strong>@Model.Price.ToString("C")</p>
 
@@ -151,11 +151,11 @@
                 </div>
 
                 <!-- add to cart button  -->
-                @*Add to cart button*@
-                @using (Html.BeginForm("AddCourseToCart", "Cart", FormMethod.Post))
+                @* @*Add to cart button*@
+               @*@using (Html.BeginForm("AddCourseToCart", "Cart", FormMethod.Post))
                 {
-                    @*@Html.HiddenFor(model => model.Id) <!-- Assuming your product ID property is named "Id" -->*@
-                    <div class="form-group">
+                    @* @Html.HiddenFor(model => model.Id) <!-- Assuming your product ID property is named "Id" -->
+                   @*  <div class="form-group">
 
                         <label for="quantity">Quantity:</label>
                         @Html.HiddenFor(model => model.Id) <!-- Assuming your product ID property is named "Id" -->
@@ -163,8 +163,11 @@
                         <input type="hidden" name="courseId" value="@Model.Id">
 
                     </div>
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                }
+                    <a asp-action="Enroll" asp-route-id="@Model.Id" class="btn btn-primary">Enroll</a>
+                }*@
+
+        <a asp-action="Enroll" asp-route-id="@Model.Id" class="btn-enroll"> Enroll Now </a>
+
             </section>
         
     

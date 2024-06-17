@@ -1,0 +1,36 @@
+﻿@model Course
+
+@{
+    ViewBag.Title = "Enter Payment Details";
+}
+
+<h2>Enter Payment Details for @Model.Topic</h2>
+
+<div>
+    <form asp-action="ProcessPayment" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required />
+        </div>
+
+        <div class="form-group">
+            <label for="cardHolderName">Card Holder Name</label>
+            <input type="text" class="form-control" id="cardHolderName" name="cardHolderName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="expirationDate">Expiration Date</label>
+            <input type="text" class="form-control" id="expirationDate" name="expirationDate" placeholder="MM/YY" required />
+        </div>
+
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" class="form-control" id="cvv" name="cvv" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+</div>
+

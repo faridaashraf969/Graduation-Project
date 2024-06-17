@@ -2,12 +2,27 @@
 @{
     ViewData["Title"] = "Index";
 }
+@{
+    ViewData["Title"] = "Index";
+}
 
-@foreach (var sessionRequest in Model)
+@if (Model == null || !Model.Any())
 {
-    <div>
-        <h4>@sessionRequest.Description</h4>
-        <!-- Display other session request details -->
-        <a asp-action="Details" asp-controller="SessionRequests" asp-route-id="@sessionRequest.Id">View Details</a>
-    </div>
+    <p>No session requests found for the specified client.</p>
+}
+else
+{
+    @foreach (var sessionRequest in Model)
+    {
+        <div>
+            <h4>@sessionRequest.Description</h4>
+            <p>@sessionRequest.Details</p>
+            <p>@sessionRequest.Location</p>
+            <p>@sessionRequest.SessionDate.ToString("f")</p>
+            <p>Price: @sessionRequest.Price.ToString("C")</p> <!-- Display Price -->
+            <p>Type: @sessionRequest.SessionType</p>
+            <!-- Display other session request details -->
+            <a asp-action="Details" asp-controller="SessionRequests" asp-route-id="@sessionRequest.Id">View Details</a>
+        </div>
+    }
 }

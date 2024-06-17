@@ -19,6 +19,21 @@ namespace Demo.DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ApplicationUserCourse", b =>
+                {
+                    b.Property<int>("PurchasedCoursesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PurchasersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PurchasedCoursesId", "PurchasersId");
+
+                    b.HasIndex("PurchasersId");
+
+                    b.ToTable("ApplicationUserCourse");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.Cart", b =>
                 {
                     b.Property<int>("CartId")
@@ -65,9 +80,7 @@ namespace Demo.DAL.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("CourseId")
-                        .IsUnique()
-                        .HasFilter("[CourseId] IS NOT NULL");
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("ProductId");
 
@@ -100,16 +113,18 @@ namespace Demo.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Feedback")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("EnrollmentStartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
@@ -123,9 +138,6 @@ namespace Demo.DAL.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Rate")
-                        .HasColumnType("int");
-
                     b.Property<string>("Requirements")
                         .HasColumnType("nvarchar(max)");
 
@@ -136,6 +148,12 @@ namespace Demo.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TotalHours")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VideoContentUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("InstructorId");
@@ -143,6 +161,34 @@ namespace Demo.DAL.Migrations
                     b.HasIndex("OrderNumber");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Demo.DAL.Entities.Enrollment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EnrollmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Enrollments");
                 });
 
             modelBuilder.Entity("Demo.DAL.Entities.Message", b =>
@@ -344,6 +390,9 @@ namespace Demo.DAL.Migrations
                     b.Property<string>("PhotographerId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("SessionDate")
                         .HasColumnType("datetime2");
 
@@ -356,7 +405,7 @@ namespace Demo.DAL.Migrations
 
                     b.HasIndex("PhotographerId");
 
-                    b.ToTable("SessionRequests");
+                    b.ToTable("SessionRequest");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -616,6 +665,21 @@ namespace Demo.DAL.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("ApplicationUserCourse", b =>
+                {
+                    b.HasOne("Demo.DAL.Entities.Course", null)
+                        .WithMany()
+                        .HasForeignKey("PurchasedCoursesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("PurchasersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.Cart", b =>
                 {
                     b.HasOne("Demo.DAL.Entities.ApplicationUser", "ApplicationUser")
@@ -634,8 +698,8 @@ namespace Demo.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Demo.DAL.Entities.Course", "Course")
-                        .WithOne("CartItem")
-                        .HasForeignKey("Demo.DAL.Entities.CartItem", "CourseId");
+                        .WithMany()
+                        .HasForeignKey("CourseId");
 
                     b.HasOne("Demo.DAL.Entities.Product", "Product")
                         .WithMany()
@@ -659,6 +723,23 @@ namespace Demo.DAL.Migrations
                         .HasForeignKey("OrderNumber");
 
                     b.Navigation("Instructor");
+                });
+
+            modelBuilder.Entity("Demo.DAL.Entities.Enrollment", b =>
+                {
+                    b.HasOne("Demo.DAL.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Demo.DAL.Entities.Message", b =>
@@ -753,14 +834,12 @@ namespace Demo.DAL.Migrations
             modelBuilder.Entity("Demo.DAL.Entities.SessionRequest", b =>
                 {
                     b.HasOne("Demo.DAL.Entities.ApplicationUser", "Client")
-                        .WithMany("CreatedSessionRequests")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany()
+                        .HasForeignKey("ClientId");
 
                     b.HasOne("Demo.DAL.Entities.ApplicationUser", "Photographer")
                         .WithMany()
-                        .HasForeignKey("PhotographerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("PhotographerId");
 
                     b.Navigation("Client");
 
@@ -828,11 +907,6 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Demo.DAL.Entities.Course", b =>
-                {
-                    b.Navigation("CartItem");
-                });
-
             modelBuilder.Entity("Demo.DAL.Entities.Order", b =>
                 {
                     b.Navigation("Courses");
@@ -848,8 +922,6 @@ namespace Demo.DAL.Migrations
             modelBuilder.Entity("Demo.DAL.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Courses");
-
-                    b.Navigation("CreatedSessionRequests");
 
                     b.Navigation("Orders");
 

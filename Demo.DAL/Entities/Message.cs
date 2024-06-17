@@ -15,5 +15,7 @@ namespace Demo.DAL.Entities
         public ApplicationUser Receiver { get; set; } // Navigational property
         public string Content { get; set; }
         public DateTime SentAt { get; set; }
+        
+            
     }
 }

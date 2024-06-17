@@ -16,10 +16,10 @@
     <nav class="container">
         <p class="logo">Photocamp</p>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a asp-controller="Home" asp-action="Index" >Home</a></li>
             <li><a href="#">Bids</a></li>
-            <li><a href="#">Courses</a></li>
-            <li><a href="#">Store </a></li>
+            <li><a asp-controller="Course" asp-action="Index">Courses</a></li>
+            <li><a asp-controller="Product" asp-action=" List">Store </a></li>
             <li><a href="#">Work List </a></li>
         </ul>
         <a href="#" class="u-icon"> <img src="~/files/photographer imges/user-icon.svg" alt="user-icon"></a>
@@ -75,10 +75,10 @@
         <p class="footer-logo">Photocamp</p>
         <div class="footer-section container">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a asp-controller ="Home" asp-action="Index">Home</a></li>
                 <li><a href="#">Bids</a></li>
-                <li><a href="#">Courses</a></li>
-                <li><a href="#">Stores</a></li>
+                <li><a asp-controller="Course" asp-action="Index" >Courses</a></li>
+                <li><a asp-controller="Product" asp-action=" List">Stores</a></li>
                 <li><a href="#">Work list</a></li>
             </ul>
             <p class="footer-p">COPYRIGHT © 2024 . ALL RIGHT RESERVED</p>

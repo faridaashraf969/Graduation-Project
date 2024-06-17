@@ -1,0 +1,27 @@
+﻿@model List<Enrollment>
+
+@{
+    ViewBag.Title = "My Courses";
+}
+
+<h2>My Courses</h2>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var enrollment in Model)
+        {
+            <li>
+                <a asp-controller="Course" asp-action="Watch" asp-route-id="@enrollment.Course.Id">@enrollment.Course.Topic</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>You haven't purchased any courses yet.</p>
+    <div>
+        <a class="btn btn-primary" asp-action="Index" asp-controller="Course"> Browse Courses </a>
+    </div>
+}
+

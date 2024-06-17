@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer Filtering Page</title>
+    <link href="~/css/photographer-filtering.css" rel="stylesheet" />
+    <script src="~/js/photographer-filtering.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Find Your Photographer</h1>
+        </header>
+        <div class="content">
+            <!-- ////////////////////filter section ////////////////////////////// -->
+            <aside class="filters">
+                <h2>Filters</h2>
+                <div class="filter-section">
+                    <h3>Specialty</h3>
+                    <label><input type="checkbox" class="filter" name="specialty" value="wedding"> Wedding</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="portrait"> Portrait</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="event"> Event</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="product"> Product</label>
+                </div>
+                <div class="filter-section">
+                    <h3>Location</h3>
+                    <label><input type="checkbox" class="filter" name="location" value="new-york"> Cairo</label>
+                    <label><input type="checkbox" class="filter" name="location" value="los-angeles"> Giza</label>
+                    <label><input type="checkbox" class="filter" name="location" value="chicago"> Alex</label>
+                    <label><input type="checkbox" class="filter" name="location" value="san-francisco"> Fayom</label>
+                </div>
+                <div class="filter-section">
+                    <h3>Price Budget</h3>
+                    <label><input type="checkbox" class="filter" name="price" value="0-50">0 L.E - 500 L.E</label>
+                    <label><input type="checkbox" class="filter" name="price" value="50-100">500 L.E - 2000 L.E</label>
+                    <label><input type="checkbox" class="filter" name="price" value="100-200">2000 L.E - 5000 L.E</label>
+                    <label><input type="checkbox" class="filter" name="price" value="200+">5000+ L.E</label>
+                </div>
+                <div class="filter-section">
+                    <h3>Availability</h3>
+                    <label><input type="checkbox" class="filter" name="availability" value="weekdays"> Weekdays</label>
+                    <label><input type="checkbox" class="filter" name="availability" value="weekends"> Weekends</label>
+                    <label><input type="checkbox" class="filter" name="availability" value="anytime"> Anytime</label>
+                </div>
+            </aside>
+            <!-- ////////////////////filter section ////////////////////////////// -->
+            <main class="results">
+                <!-- ////////////////////photographer section ////////////////////////////// -->
+                <div id="photographerList">
+                    <div class="photographer-card" data-specialty="wedding" data-location="new-york" data-price="100-200" data-availability="weekends">
+                        <img src="~/files/fillterimages/p1.jpg" alt="Photographer">
+                        
+                        <div class="details">
+                            <h3>Salma Naser</h3>
+                            <p>Specialty: Wedding</p>
+                            <p>Location: Cairo</p>
+                            <p>Price: 2000 L.E - 5000 L.E</p>
+                            <p>Availability: Weekends</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="portrait" data-location="los-angeles" data-price="50-100" data-availability="weekdays">
+                        <img src="~/files/fillterimages/p2.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Amr Tamer</h3>
+                            <p>Specialty: Portrait</p>
+                            <p>Location: Giza</p>
+                            <p>Price: 500 L.E - 2000 L.E</p>
+                            <p>Availability: Weekdays</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="event" data-location="chicago" data-price="200+" data-availability="anytime">
+                        <img src="~/files/fillterimages/p3.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Mariem Ramez</h3>
+                            <p>Specialty: Event</p>
+                            <p>Location: Alex</p>
+                            <p>Price: 5000+ L.E</p>
+                            <p>Availability: Anytime</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="product" data-location="san-francisco" data-price="100-200" data-availability="weekends">
+                        <img src="~/files/fillterimages/p4.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Mostafa Ayman</h3>
+                            <p>Specialty: Product</p>
+                            <p>Location: Fayom</p>
+                            <p>Price: 2000 L.E - 5000 L.E/p>
+                            <p>Availability: Weekends</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="wedding" data-location="new-york" data-price="0-50" data-availability="weekdays">
+                        <img src="~/files/fillterimages/p5.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Huda Adel</h3>
+                            <p>Specialty: Wedding</p>
+                            <p>Location: Cairo</p>
+                            <p>Price: 0 L.E - 500 L.E</p>
+                            <p>Availability: Weekdays</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="portrait" data-location="los-angeles" data-price="50-100" data-availability="anytime">
+                        <img src="~/files/fillterimages/p6.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Sarah Ali</h3>
+                            <p>Specialty: Portrait</p>
+                            <p>Location: Giza</p>
+                            <p>Price: 500 L.E - 2000 L.E</p>
+                            <p>Availability: Anytime</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="event" data-location="chicago" data-price="100-200" data-availability="weekdays">
+                        <img src="~/files/fillterimages/p7.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Heba Sameh</h3>
+                            <p>Specialty: Event</p>
+                            <p>Location: Alex</p>
+                            <p>Price: 2000 L.E - 5000 L.E</p>
+                            <p>Availability: Weekdays</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="product" data-location="san-francisco" data-price="200+" data-availability="weekends">
+                        <img src="~/files/fillterimages/p8.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Mazen Ali</h3>
+                            <p>Specialty: Product</p>
+                            <p>Location: Fayom</p>
+                            <p>Price: 5000+ L.E</p>
+                            <p>Availability: Weekends</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="wedding" data-location="new-york" data-price="200+" data-availability="anytime">
+                        <img src="~/files/fillterimages/p9.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Ahmed Fayez</h3>
+                            <p>Specialty: Wedding</p>
+                            <p>Location: Cairo</p>
+                            <p>Price: 5000+ L.E</p>
+                            <p>Availability: Anytime</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                    <div class="photographer-card" data-specialty="portrait" data-location="los-angeles" data-price="0-50" data-availability="weekdays">
+                        <img src="~/files/fillterimages/p10.jpg" alt="Photographer">
+                        <div class="details">
+                            <h3>Hany Galal</h3>
+                            <p>Specialty: Portrait</p>
+                            <p>Location: Giza</p>
+                            <p>Price: 0 L.E - 500 L.E</p>
+                            <p>Availability: Weekdays</p>
+                        </div>
+                        <button>See Portofolio</button>
+                    </div>
+                </div>
+                <!-- ////////////////////filter section ////////////////////////////// -->
+            </main>
+        </div>
+    </div>
+    
+    <script src="~/js/photographer-filtering.js"></script>
+</body>
+</html>
+

@@ -1,6 +1,8 @@
-﻿using Demo.DAL.Contexts;
+﻿using Demo.BLL.Interfaces;
+using Demo.DAL.Contexts;
 using Demo.PL.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 public class ProductController : Controller
@@ -9,7 +11,7 @@ public class ProductController : Controller
     private readonly CartService _cartService;
     private readonly MvcProjectDbContext _dbContext;
 
-    public ProductController(ProductService productService, CartService cartService ,MvcProjectDbContext dbContext)
+    public ProductController(ProductService productService, CartService cartService ,MvcProjectDbContext dbContext )
     {
         _productService = productService;
         _cartService = cartService;
@@ -18,13 +20,15 @@ public class ProductController : Controller
 
     public IActionResult List()
     {
-        var products = _dbContext.Products.Where(p => p.Status == "Approved");
+        var products = _dbContext.Products.Include(p=>p.Category).Where(p => p.Status == "Approved");
+
         return View(products);
     }
     [HttpPost]
     public IActionResult List(string category)
     {
-        var products = _dbContext.Products.Where(p => p.Category.Name.ToUpper().Contains(category.ToUpper()));
+        var Products = _dbContext.Products.Include(p => p.Category);
+        var products =Products.Where(p => p.Category.Name.ToUpper().Contains(category.ToUpper()));
         return View(products);
     }
 

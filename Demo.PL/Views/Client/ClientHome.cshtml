@@ -16,12 +16,11 @@
  <nav class="container">
   <p class="logo">Photocamp</p>
   <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Find a photographer</a></li>
-
+      <li><a asp-controller="Client" asp-action="ClientHome">Home</a></li>
+      <li><a asp-controller="Home" asp-action="Fillter">Find a photographer</a></li>
       <li><a asp-controller="Product" asp-action="List">Store</a></li>
-
-      <li><a href="#">Courses</a></li>
+      <li><a asp-controller="Course" asp-action="Index">Courses</a></li>
+      <li><a asp-controller="Client" asp-action="MyCourses">My Courses</a></li>
   </ul>
         <a href="#" class="u-icon"> <img src="~/files/clientimages/user-icon.svg" alt="user-icon"></a>
         <button class="nav-button" onclick="location.href='@Url.Action("SignOut","Account")'">Sign Out</button>
@@ -34,16 +33,22 @@
 
   
   <div class="container content-sec">
-   <div class="box1"> <a href="#"> <h2>Find Photographers</h2><br><p>Easily discover talented photographers from various specialties and locations. Use our search and filter tool to refine your search based on your specific requirements.</p>
+        <div class="box1">
+            <a asp-controller="Home" asp-action="Fillter">
+                <h2>Find Photographers</h2><br><p>Easily discover talented photographers from various specialties and locations. Use our search and filter tool to refine your search based on your specific requirements.</p>
       <img src="~/files/clientimages/user-icon.svg">
             </a>
         </div>
-   
-   <div class="box2"> <a href="#"> <h2>Buy Equipment</h2><br><p>Our search and filter tool makes it easy to discover talented photographers who specialize in the style you desire. Whether you need a wedding photographer, portrait photographer, or someone to capture your special event, we’ve got you covered.</p>
+
+        <div class="box2">
+            <a asp-controller="Product" asp-action="List">
+                <h2>Buy Equipment</h2><br><p>Our search and filter tool makes it easy to discover talented photographers who specialize in the style you desire. Whether you need a wedding photographer, portrait photographer, or someone to capture your special event, we’ve got you covered.</p>
                 <img src="~/files/clientimages/arrow.svg">
             </a>
         </div>
-   <div class="box3"> <a href="#"> <h2>Enhance Your Skills</h2><br><p>Take advantage of our extensive library of photography courses and tutorials designed to help you improve your skills and unleash your creative potential.</p>
+        <div class="box3">
+            <a asp-controller="Course" asp-action="Index">
+                <h2>Enhance Your Skills</h2><br><p>Take advantage of our extensive library of photography courses and tutorials designed to help you improve your skills and unleash your creative potential.</p>
                 <img src="~/files/clientimages/arrow.svg">
             </a>
         </div>

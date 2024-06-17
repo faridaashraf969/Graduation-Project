@@ -20,35 +20,44 @@ namespace Demo.PL.Controllers
             _context = context;
         }
         // GET: SessionRequests
-        public IActionResult Index()
-        {
-            var sessionRequests = _context.SessionRequests.ToList();
-            return View(sessionRequests);
-        }
+//        public IActionResult Index(int? clientId)
+//{
+//    if (clientId == null)
+//    {
+//        return BadRequest("Client ID is required");
+//    }
+
+//    string clientIdString = clientId.ToString();
+//    var sessionRequests = _context.SessionRequests
+//        .Where(sr => sr.ClientId == clientIdString)
+//        .ToList();
+
+//    return View(sessionRequests);
+//}
+
 
         // GET: SessionRequests/Details/5
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public IActionResult Details(int? id, string clientId)
+        //{
+        //    if (id == null || string.IsNullOrEmpty(clientId))
+        //    {
+        //        return NotFound();
+        //    }
 
-            var sessionRequest = _context.SessionRequests
-                .Include(sr => sr.Proposals)
-                .Include(sr => sr.Photographer)
-                .Include(sr => sr.Client)
-                .FirstOrDefault(sr => sr.Id == id);
-                
-                
+        //    var sessionRequest = _context.SessionRequests
+        //        .Include(sr => sr.Proposals)
+        //        .Include(sr => sr.Photographer)
+        //        .Include(sr => sr.Client)
+        //        .FirstOrDefault(sr => sr.Id == id && sr.ClientId == clientId);
 
-            if (sessionRequest == null)
-            {
-                return NotFound();
-            }
+        //    if (sessionRequest == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(sessionRequest);
-        }
+        //    return View(sessionRequest);
+        //}
+
 
         // GET: SessionRequests/Create
         public IActionResult Create()
@@ -71,26 +80,26 @@ namespace Demo.PL.Controllers
         }
 
         // POST: SessionRequests/AcceptProposal/{proposalId}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AcceptProposal(int proposalId)
-        {
-            var proposal = await _context.Proposals.FindAsync(proposalId);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AcceptProposal(int proposalId)
+        //{
+        //    var proposal = await _context.Proposals.FindAsync(proposalId);
 
-            if (proposal == null)
-            {
-                return NotFound();
-            }
+        //    if (proposal == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            // Mark the proposal as accepted
-            proposal.IsAccepted = true;
+        //    // Mark the proposal as accepted
+        //    proposal.IsAccepted = true;
 
-            // Save changes to the database
-            await _context.SaveChangesAsync();
+        //    // Save changes to the database
+        //    await _context.SaveChangesAsync();
 
-            // Redirect to the details page of the session request associated with the proposal
-            return RedirectToAction("Details", "SessionRequests", new { id = proposal.SessionRequestId });
-        }
+        //    // Redirect to the details page of the session request associated with the proposal
+        //    return RedirectToAction("Details", "SessionRequests", new { id = proposal.SessionRequestId });
+        //}
     }
 
     

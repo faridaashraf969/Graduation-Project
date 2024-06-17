@@ -85,7 +85,7 @@ namespace Demo.PL.Controllers.Users
             if (ModelState.IsValid)
             {
                 var User = await _userManagerClient.FindByEmailAsync(model.Email);
-                if (User is not null)
+                if (User is not null && User.Role == "Photographer")
                 {
                     var Result = await _userManagerClient.CheckPasswordAsync(User, model.Password);
                     if (Result)
@@ -117,11 +117,11 @@ namespace Demo.PL.Controllers.Users
         #endregion
 
         #region AllRequests
-        public IActionResult AllRequests()
-        {
-            var sessionRequests = _dbContext.SessionRequests.ToList();
-            return View(sessionRequests);
-        }
+        //public IActionResult AllRequests()
+        //{
+        //    var sessionRequests = _dbContext.SessionRequests.ToList();
+        //    return View(sessionRequests);
+        //}
 
         #endregion
     }

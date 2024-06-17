@@ -88,7 +88,7 @@ namespace Demo.PL.Controllers.Users
             if (ModelState.IsValid)
             {
                 var User = await _userManager.FindByEmailAsync(model.Email);
-                if (User is not null)
+                if (User is not null && User.Role == "Admin")
                 {
                     var Result = await _userManager.CheckPasswordAsync(User, model.Password);
                     if (Result)

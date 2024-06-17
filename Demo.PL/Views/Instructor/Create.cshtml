@@ -1,43 +1,66 @@
-﻿
-@model Course
+﻿@model Course
 
-<h1>Add New Course</h1>
-<br />
-<form asp-action="Create" enctype="multipart/form-data">
+@{
+    ViewBag.Title = "Create Course";
+}
 
-    <div class="form-group  ">
-        <label class="col-form-label" asp-for="Topic"></label>
-        <input class="form-control" asp-for="Topic" />
-        <span asp-validation-for="Topic" class="text-danger"></span>
-    </div>
-    <div class="form-group ">
-        <label class="col-form-label" asp-for="Description"></label>
-        <input class="form-control" asp-for="Description" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group ">
-        <label class="col-form-label" asp-for="Price"></label>
-        <input class="form-control" asp-for="Price" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-    <div class="form-group ">
-        <label class="col-form-label" asp-for="Duration"></label>
-        <input class="form-control" asp-for="Duration" />
-        <span asp-validation-for="Duration" class="text-danger"></span>
-    </div>
-    <div class="form-group ">
-        <label class="col-form-label" asp-for="Image"></label>
-        <input class="form-control" asp-for="Image" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div>
-    <div class="form-group ">
-        <label class="col-form-label" asp-for="Requirements"></label>
-        <input class="form-control" asp-for="Requirements" />
-        <span asp-validation-for="Requirements" class="text-danger"></span>
-    </div>
+<h2>Add New Course</h2>
 
-    <input type="submit" value="Submit" class="btn btn-primary" />
-    <a asp-action="CourseList" class="btn btn-light">Back to List</a>
-</form>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label"></label>
+                <input asp-for="Topic" class="form-control" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<CourseCategory>()"></select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalHours" class="control-label"></label>
+                <input asp-for="TotalHours" class="form-control" />
+                <span asp-validation-for="TotalHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Requirements" class="control-label"></label>
+                <input asp-for="Requirements" class="form-control" />
+                <span asp-validation-for="Requirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VideoContentUrl" class="control-label"></label>
+                <input type="file" name="VideoFile" class="form-control" />
+                <span asp-validation-for="VideoContentUrl" class="text-danger"></span>
+            </div>
+            <!-- Add other form fields as necessary -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="@Url.Action("CourseList")" class="btn btn-primary">Back to My Courses List</a>
+</div>
 
 

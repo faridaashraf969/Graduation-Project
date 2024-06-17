@@ -5,10 +5,14 @@ using Demo.DAL.Migrations;
 using Demo.PL.Helpers;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,17 +25,20 @@ namespace Demo.PL.Controllers.Users
         private readonly SignInManager<DAL.Entities.ApplicationUser> _signInManagerClient;
         private readonly ICourseRepo _courseRepo;
         private readonly MvcProjectDbContext _dbContext;
+        private readonly IWebHostEnvironment _environment;
 
         public InstructorController(UserManager<DAL.Entities.ApplicationUser> userManager
             , SignInManager<DAL.Entities.ApplicationUser> signInManager
             , ICourseRepo courseRepo
             ,MvcProjectDbContext dbContext
+            , IWebHostEnvironment environment
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
             this._courseRepo = courseRepo;
             this._dbContext = dbContext;
+            this._environment = environment;
         }
         #region Register
         public IActionResult InstructorRegister()
@@ -90,7 +97,7 @@ namespace Demo.PL.Controllers.Users
             if (ModelState.IsValid)
             {
                 var User = await _userManagerClient.FindByEmailAsync(model.Email);
-                if (User is not null)
+                if (User is not null && User.Role == "Instructor")
                 {
                     var Result = await _userManagerClient.CheckPasswordAsync(User, model.Password);
                     if (Result)
@@ -128,22 +135,161 @@ namespace Demo.PL.Controllers.Users
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(DAL.Entities.Course model)
+        public async Task<IActionResult> Create(DAL.Entities.Course model, IFormFile VideoFile)
         {
             model.Status = "Pending";
             if (ModelState.IsValid)
             {
                 model.ImageName = DocumentSettings.UploadFille(model.Image, "Images");
 
+                if (VideoFile != null)
+                {
+                    var videosPath = Path.Combine(_environment.WebRootPath, "videos");
+                    if (!Directory.Exists(videosPath))
+                    {
+                        Directory.CreateDirectory(videosPath);
+                    }
+
+                    var filePath = Path.Combine(videosPath, VideoFile.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await VideoFile.CopyToAsync(stream);
+                    }
+                    model.VideoContentUrl = "/videos/" + VideoFile.FileName;
+                }
+
                 var user =await _userManagerClient.GetUserAsync(User);
                 model.InstructorId = user.Id;
                 model.Instructor = user;
+                
 
-                _courseRepo.Add(model);
+                _dbContext.Add(model);
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(CourseList));
               
             }
             return View(model);
+        }
+
+        #endregion
+
+        #region Edit Course 
+
+        // GET: Instructor/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _dbContext.Courses.FindAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
+        // POST: Instructor/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, DAL.Entities.Course course, IFormFile VideoFile)
+        {
+            if (id != course.Id)
+            {
+                return NotFound();
+            }
+
+            var courseToUpdate = await _dbContext.Courses.FindAsync(id);
+            if (courseToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Update course properties
+                    courseToUpdate.Image = course.Image;
+                    courseToUpdate.Topic = course.Topic;
+                    courseToUpdate.Description = course.Description;
+                    courseToUpdate.Price = course.Price;
+                    courseToUpdate.Category = course.Category;
+                  
+
+                    if (VideoFile != null)
+                    {
+                        var videosPath = Path.Combine(_environment.WebRootPath, "videos");
+                        if (!Directory.Exists(videosPath))
+                        {
+                            Directory.CreateDirectory(videosPath);
+                        }
+
+                        var filePath = Path.Combine(videosPath, VideoFile.FileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await VideoFile.CopyToAsync(stream);
+                        }
+                        courseToUpdate.VideoContentUrl = "/videos/" + VideoFile.FileName;
+                    }
+
+                    _dbContext.Update(courseToUpdate);
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CourseExists(course.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(CourseList));
+            }
+            return View(course);
+        }
+
+
+        private bool CourseExists(int id)
+        {
+            return _dbContext.Courses.Any(e => e.Id == id);
+        }
+
+
+        #endregion
+
+        #region Delete Course 
+        // GET: Instructor/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _dbContext.Courses
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+        // POST: Instructor/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var course = await _dbContext.Courses.FindAsync(id);
+            _dbContext.Courses.Remove(course);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(CourseList));
         }
 
         #endregion

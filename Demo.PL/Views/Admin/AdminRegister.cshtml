@@ -58,30 +58,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-<!-- Email -->
-<div class="textbox">
-    <label for="email">Email</label><br>
-    <input asp-for="Email" type="email" id="email" required>
-    <span asp-validation-for="Email" class="text-danger"></span>
-</div>
-
-<!-- password -->
-<div class="textbox">
-    <label for="pass">Password</label><br>
-    <input asp-for="Password" type="password" id="pass" required>
-    <span asp-validation-for="Password" class="text-danger"></span>
-</div>
-
-<div>
-    <input class="btn" type="submit" value="Sign Up">
-</div>
-
-<!--last paragraph-->
-<p class="paragraph">Already have an Account?<a href="Login" class="link"><span>Log In</span></a></p>

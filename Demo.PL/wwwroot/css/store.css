@@ -63,8 +63,66 @@ body {
     color: #FFFFFF;
     border: none;
 }
+.camera-sections {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
+    .camera-sections div {
+        width: 30%;
+        height: 415px;
+    }
 
+        .camera-sections div h3 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 27px;
+            color: #0B3362;
+            margin-top: 20px;
+        }
+
+        .camera-sections div p {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            color: rgba(23, 26, 31, 0.6);
+        }
+
+        .camera-sections div a {
+            width: 200px;
+            height: 50px;
+            background: #F0A400;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 18px;
+            text-align: center;
+            color: #FFFFFF;
+            border: none;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+
+        }
+img {
+    width: 280px;
+    height: 200px;
+}
+/*.btn-details {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+}*/
 
 
 

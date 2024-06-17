@@ -1,9 +1,12 @@
-﻿using Demo.DAL.Entities;
+﻿using Demo.DAL.Contexts;
+using Demo.DAL.Entities;
 using Demo.PL.Models;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Demo.PL.Controllers.Users
@@ -12,13 +15,16 @@ namespace Demo.PL.Controllers.Users
     {
         private readonly UserManager<ApplicationUser> _userManagerClient;
         private readonly SignInManager<ApplicationUser> _signInManagerClient;
+        private readonly MvcProjectDbContext _dbContext;
 
         public ClientController(UserManager<ApplicationUser> userManager
             , SignInManager<ApplicationUser> signInManager
+             ,MvcProjectDbContext dbContext
             )
         {
             this._userManagerClient = userManager;
             this._signInManagerClient = signInManager;
+            this._dbContext = dbContext;
         }
 
         #region Register
@@ -78,7 +84,7 @@ namespace Demo.PL.Controllers.Users
             if (ModelState.IsValid)
             {
                 var User = await _userManagerClient.FindByEmailAsync(model.Email);
-                if (User is not null)
+                if (User is not null && User.Role=="Client")
                 {
                     var Result = await _userManagerClient.CheckPasswordAsync(User, model.Password);
                     if (Result)
@@ -106,7 +112,24 @@ namespace Demo.PL.Controllers.Users
         public IActionResult ClientHome()
         {
             return View();
-        } 
+        }
+
+        #endregion
+
+        #region MyCourses 
+
+        // GET: Client/MyCourses
+        public async Task<IActionResult> MyCourses()
+        {
+            var userId = _userManagerClient.GetUserId(User);
+            var enrollments = await _dbContext.Enrollments
+                .Include(e => e.Course)
+                .Where(e => e.UserId == userId && e.IsPaid)
+                .ToListAsync();
+
+            return View(enrollments);
+        }
+
 
         #endregion
     }

@@ -41,13 +41,15 @@ namespace Demo.DAL.Entities
 
         public ICollection<Order> Orders { get; set; }
 
-        public ICollection<Course> Courses { get; set; }
+        public ICollection<Course> Courses { get; set; }//for instructor
+        public ICollection<Course> PurchasedCourses { get; set; }//for client
 
         public ICollection<Product> Products { get; set; }
         // Navigational properties
 
-        public ICollection<SessionRequest> CreatedSessionRequests { get; set; }
-        public ICollection<Proposal> Proposals { get; set; }
+        //public ICollection<SessionRequest> CreatedSessionRequests { get; set; }
+        //public ICollection<Proposal> Proposals { get; set; }
+
         public ICollection<Message> SentMessages { get; set; }
         public ICollection<Message> ReceivedMessages { get; set; }
 

@@ -62,13 +62,7 @@
             <h2 class="name">@Model.Name</h2><br>
             <p class="pt1">@Model.Description</p><br>
             <!-- product price -->
-            <h2 class="price">Price : @Model.Price.ToString("C")</h2><br>
-            <!-- product more details -->
-            <p class="pt2">
-                <b>. </b>Dx format 20.9mp cmos sensor is paired with the expeed 6 image processor to provide a versatile mixture of high sensitivity, nuanced image quality, and fast overall performance. At native values, a sensitivity range from iso 100 51200 permits working in a broad array of lighting conditions.<br>
-                <b>. </b>Z fc supports uhd 4k video recording at up to 30 fps and full hd recording at up to 120 fps, for slow motion effects, along with the ability to save movie files to the in camera memory card. In camera time lapse shooting is also possible.<br>
-                <b>. </b>Built in snapbridge connectivity to enable seamless transfer of low resolution imagery as well as remote shooting capabilities.
-            </p><br><br>
+            <h2 class="price">Price : @Model.Price EGP</h2><br>
             <!-- buttons   -->
             <div>
                 @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
@@ -80,8 +74,10 @@
                         <input type="hidden" name="productId" value="@Model.Id">
                     </div>
                     <button type="submit" class="add-cart"><img class="cart-img" src="~/Files/Images/Add shopping cartadd to card.svg">  Add to cart </button>
+                    
                 }
-                <button asp-action="List" asp-controller="Product" class="all-item">See All Items</button>
+                @* <button asp-action="List" asp-controller="Product" class="all-item">See All Items</button> *@
+                <button type="submit" class="all-item" onclick="location.href='@Url.Action("List", "Product")'">See All Items</button>
             </div>
         </div>
     </section>

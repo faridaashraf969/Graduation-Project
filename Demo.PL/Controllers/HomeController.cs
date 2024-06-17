@@ -44,6 +44,9 @@ namespace Demo.PL.Controllers
             return RedirectToAction("List", "Product");
         }
 
-        
+        public IActionResult Fillter()
+        {
+            return View();
+        }
     }
 }

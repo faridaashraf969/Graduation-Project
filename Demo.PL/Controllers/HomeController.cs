@@ -1,4 +1,6 @@
-﻿using Demo.PL.Models;
+﻿using Demo.DAL.Entities;
+using Demo.PL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,10 +14,13 @@ namespace Demo.PL.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger
+            ,UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
+            this._userManager = userManager;
         }
 
         public IActionResult Index()
@@ -46,7 +51,8 @@ namespace Demo.PL.Controllers
 
         public IActionResult Fillter()
         {
-            return View();
+            var photographers = _userManager.Users.Where(u => u.Role == "Photographer").ToList();
+            return View(photographers);
         }
-    }
+    }   
 }

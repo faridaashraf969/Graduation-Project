@@ -1,0 +1,27 @@
+body{
+    margin: 0;
+    padding: 0;
+    color: #0B3362;
+    background-color: #E6EDF5;
+
+}
+hr{
+height: 4px;
+background-color: #F0A400;
+width: 100%;
+}
+h2{
+    text-align: center;
+}
+button{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #F0A400;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+h3{
+    font-size: larger;
+}

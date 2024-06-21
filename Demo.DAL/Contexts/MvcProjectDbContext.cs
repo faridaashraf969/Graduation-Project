@@ -83,6 +83,10 @@ namespace Demo.DAL.Contexts
                 .HasForeignKey(m => m.ReceiverId)
                 .OnDelete(DeleteBehavior.Restrict);
             ///
+         modelBuilder.Entity<ApplicationUser>()
+            .HasMany(u => u.PhotographerImages)
+            .WithOne(p => p.Photographer)
+            .HasForeignKey(p => p.PhotographerId);
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -100,6 +104,8 @@ namespace Demo.DAL.Contexts
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<Enrollment> Enrollments { get; set; }
+
+        public DbSet<PhotographerImages> PhotographerImages { get; set; }
 
     }
 

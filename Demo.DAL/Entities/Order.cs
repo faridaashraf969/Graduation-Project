@@ -9,8 +9,6 @@ namespace Demo.DAL.Entities
 {
     public class Order
     {
-         
-
         [Key]
         public int OrderNumber { get; set; }
         [DataType(DataType.Currency)]

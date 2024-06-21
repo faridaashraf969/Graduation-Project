@@ -2,65 +2,81 @@
 
 @{
     ViewBag.Title = "Create Course";
-}
+ }
 
-<h2>Add New Course</h2>
-
-
+<body>
+<link href="~/css/register.css" rel="stylesheet" />
 <hr />
-<div class="row">
+<div class="signup-box">
+    <h2 id="h2">Add New Course</h2>
     <div class="col-md-12">
+       <div asp-validation-summary="All" class="validation"></div>
         <form asp-action="Create" enctype="multipart/form-data">
-            <div class="form-group">
+
+            <div class="fandl">
+            <div class="textbox">
                 <label asp-for="Topic" class="control-label"></label>
                 <input asp-for="Topic" class="form-control" />
                 <span asp-validation-for="Topic" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="textbox">
                 <label asp-for="Image" class="control-label"></label>
                 <input asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            </div>
+
+            <div class="fandl">
+            <div class="textbox">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="textbox">
                 <label asp-for="Category" class="control-label"></label>
                 <select asp-for="Category" class="form-control" asp-items="Html.GetEnumSelectList<CourseCategory>()"></select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            </div>
+            
+            <div class="fandl">
+            <div class="textbox">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="textbox">
                 <label asp-for="TotalHours" class="control-label"></label>
                 <input asp-for="TotalHours" class="form-control" />
                 <span asp-validation-for="TotalHours" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            </div>
+
+            <div class="fandl">
+            <div class="textbox">
                 <label asp-for="Requirements" class="control-label"></label>
                 <input asp-for="Requirements" class="form-control" />
                 <span asp-validation-for="Requirements" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="textbox">
                 <label asp-for="VideoContentUrl" class="control-label"></label>
                 <input type="file" name="VideoFile" class="form-control" />
                 <span asp-validation-for="VideoContentUrl" class="text-danger"></span>
             </div>
-            <!-- Add other form fields as necessary -->
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+                <!-- Add other form fields as necessary -->
+            
+                <input class="btn" type="submit" value="Create" />
+                 <br />
+                 <hr />
+            <div>
+                <a href="@Url.Action("CourseList")" class="btn btn-primary">Back to My Courses List</a>
+            </div>
+            
         </form>
     </div>
 </div>
-
-<div>
-    <a href="@Url.Action("CourseList")" class="btn btn-primary">Back to My Courses List</a>
-</div>
+</body>
 
 

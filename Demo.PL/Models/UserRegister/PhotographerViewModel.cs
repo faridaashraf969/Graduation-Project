@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Demo.DAL.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Demo.PL.Models.UserRegister
 {
@@ -24,13 +28,20 @@ namespace Demo.PL.Models.UserRegister
         [Required(ErrorMessage = "SSN Is Required(National Id Number)")]
         public string SSN { get; set; }
         [Required]
-        public string Specialty { get; set; }
+        public Specialty Specialty { get; set; }
+        [Required]
+        public Location Location { get; set; }
+        [Required]
+        public Availiability Availiability { get; set; }
         [Url]
         public string PortofiloUrl { get; set; }
         
         public string BankAccountNumber { get; set; }
         public bool IsActive { get; set; }
-        
+        public IEnumerable<SelectListItem> Specialties { get; set; }
+        public IEnumerable<SelectListItem> Locations { get; set; }
+        public IEnumerable<SelectListItem> Avaliabilities { get; set; }
+        public IFormFile ImageFile { get; set; }
 
     }
 }

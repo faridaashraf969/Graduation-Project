@@ -1,0 +1,73 @@
+﻿@* @model List<Order>
+
+<h1>My Orders</h1>
+
+
+    <tbody>
+        @foreach (var order in Model)
+        {
+            foreach (var orderItem in order.OrderItems)
+            {
+                
+                    <p>Order Number : @order.OrderNumber</p>
+                    <p>Product Name : @orderItem.Product.Name</p>
+                    <p>Quantity :@orderItem.Quantity</p>
+                    <p>Order Total Amount : @order.TotalAmount</p>
+                    <p>Order Status : @order.Status</p>
+                    <p>Order Date : @order.OrderDate</p>
+                    <p>Cllient Address : @order.ShippingAddress </p>
+                   
+
+                
+            }
+        }
+    </tbody> *@
+    @model List<Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<h1 class="text-center mt-4">My Orders</h1>
+
+<div class="container mt-5">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Order Number</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Order Total Amount</th>
+                    <th>Order Status</th>
+                    <th>Order Date</th>
+                    <th>Client Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    foreach (var orderItem in order.OrderItems)
+                    {
+                        <tr>
+                            <td>@order.OrderNumber</td>
+                            <td>@orderItem.Product.Name</td>
+                            <td>@orderItem.Quantity</td>
+                            <td>@order.TotalAmount.ToString("C")</td>
+                            <td>@order.Status</td>
+                            <td>@order.OrderDate.ToString("MM/dd/yyyy")</td>
+                            <td>@order.ShippingAddress</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Add Bootstrap CSS -->
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+

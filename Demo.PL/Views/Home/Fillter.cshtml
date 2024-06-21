@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<ApplicationUser>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,36 +23,68 @@
                 <h2>Filters</h2>
                 <div class="filter-section">
                     <h3>Specialty</h3>
-                    <label><input type="checkbox" class="filter" name="specialty" value="wedding"> Wedding</label>
-                    <label><input type="checkbox" class="filter" name="specialty" value="portrait"> Portrait</label>
-                    <label><input type="checkbox" class="filter" name="specialty" value="event"> Event</label>
-                    <label><input type="checkbox" class="filter" name="specialty" value="product"> Product</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="Wedding"> Wedding</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="Portrait"> Portrait</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="Event"> Event</label>
+                    <label><input type="checkbox" class="filter" name="specialty" value="Product"> Product</label>
                 </div>
                 <div class="filter-section">
                     <h3>Location</h3>
-                    <label><input type="checkbox" class="filter" name="location" value="new-york"> Cairo</label>
-                    <label><input type="checkbox" class="filter" name="location" value="los-angeles"> Giza</label>
-                    <label><input type="checkbox" class="filter" name="location" value="chicago"> Alex</label>
-                    <label><input type="checkbox" class="filter" name="location" value="san-francisco"> Fayom</label>
+                    <label><input type="checkbox" class="filter" name="location" value="Cairo"> Cairo</label>
+                    <label><input type="checkbox" class="filter" name="location" value="Giza"> Giza</label>
+                    <label><input type="checkbox" class="filter" name="location" value="Alex"> Alex</label>
+                    <label><input type="checkbox" class="filter" name="location" value="Fayoum"> Fayom</label>
                 </div>
-                <div class="filter-section">
+               @*  <div class="filter-section">
                     <h3>Price Budget</h3>
                     <label><input type="checkbox" class="filter" name="price" value="0-50">0 L.E - 500 L.E</label>
                     <label><input type="checkbox" class="filter" name="price" value="50-100">500 L.E - 2000 L.E</label>
                     <label><input type="checkbox" class="filter" name="price" value="100-200">2000 L.E - 5000 L.E</label>
                     <label><input type="checkbox" class="filter" name="price" value="200+">5000+ L.E</label>
-                </div>
+                </div> *@
                 <div class="filter-section">
                     <h3>Availability</h3>
-                    <label><input type="checkbox" class="filter" name="availability" value="weekdays"> Weekdays</label>
-                    <label><input type="checkbox" class="filter" name="availability" value="weekends"> Weekends</label>
-                    <label><input type="checkbox" class="filter" name="availability" value="anytime"> Anytime</label>
+                    <label><input type="checkbox" class="filter" name="availability" value="Weekdays"> Weekdays</label>
+                    <label><input type="checkbox" class="filter" name="availability" value="Weekends"> Weekends</label>
+                    <label><input type="checkbox" class="filter" name="availability" value="Anytime"> Anytime</label>
                 </div>
             </aside>
             <!-- ////////////////////filter section ////////////////////////////// -->
             <main class="results">
                 <!-- ////////////////////photographer section ////////////////////////////// -->
                 <div id="photographerList">
+
+                    @foreach(var user in Model)
+                    {
+                        <div class="photographer-card"
+                             data-specialty="@user.Specialty"
+                             data-location="@user.Location"
+                             data-availability="@user.Availiability">
+
+                            <img src="@user.ImagePath" alt="@user.ImagePath">
+
+                            <div class="details">
+                                <h3> @user.FirstName @user.LastName</h3>
+                                <p>Specialty: @user.Specialty</p>
+                                <p>Location: @user.Location</p>
+                               @*  <p>Price: 2000 L.E - 5000 L.E</p> *@
+                                <p>Availability: @user.Availiability</p>
+                            </div>
+
+                            <form asp-controller="Photographer" asp-action="MyProfile" method="get">
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <button type="submit">See Portfolio</button>
+                            </form>
+
+                        </div>
+
+                        
+                    }
+
+
+
+
+@* 
                     <div class="photographer-card" data-specialty="wedding" data-location="new-york" data-price="100-200" data-availability="weekends">
                         <img src="~/files/fillterimages/p1.jpg" alt="Photographer">
                         
@@ -106,7 +139,7 @@
                             <p>Price: 0 L.E - 500 L.E</p>
                             <p>Availability: Weekdays</p>
                         </div>
-                        <button>See Portofolio</button>
+                        <button>See Portofolio</button> 
                     </div>
                     <div class="photographer-card" data-specialty="portrait" data-location="los-angeles" data-price="50-100" data-availability="anytime">
                         <img src="~/files/fillterimages/p6.jpg" alt="Photographer">
@@ -162,7 +195,7 @@
                             <p>Availability: Weekdays</p>
                         </div>
                         <button>See Portofolio</button>
-                    </div>
+                    </div> *@
                 </div>
                 <!-- ////////////////////filter section ////////////////////////////// -->
             </main>

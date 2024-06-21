@@ -2,26 +2,48 @@
 
 @{
     ViewBag.Title = "My Courses";
-}
+} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My courses</title>
+    <link rel="stylesheet" href="~/css/mycourse.css">
+</head>
+<body>
 
-<h2>My Courses</h2>
+    <h1>My Courses</h1>
 
-@if (Model.Any())
-{
-    <ul>
-        @foreach (var enrollment in Model)
-        {
-            <li>
-                <a asp-controller="Course" asp-action="Watch" asp-route-id="@enrollment.Course.Id">@enrollment.Course.Topic</a>
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>You haven't purchased any courses yet.</p>
-    <div>
-        <a class="btn btn-primary" asp-action="Index" asp-controller="Course"> Browse Courses </a>
-    </div>
-}
+    @if (Model.Any())
+    {
+        <table>
+            <tr>
+                <th>Course</th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        @foreach (var enrollment in Model)
+                        {
 
+                            <li>
+                                <a asp-controller="Course" asp-action="Watch" asp-route-id="@enrollment.Course.Id">@enrollment.Course.Topic</a>
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+       
+        </table>
+    }
+    else
+    {
+        <p>You haven't purchased any courses yet.</p>
+        <div>
+            <a class="btn btn-primary" asp-action="Index" asp-controller="Course"> Browse Courses </a>
+        </div>
+    }
+   
+</body>
+</html>

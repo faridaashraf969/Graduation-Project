@@ -138,6 +138,8 @@ else
             <form asp-controller="order" asp-action="Checkout" method="post">
                 <button type="submit">Checkout</button>
             </form>
+            <hr />
+            <button type="submit" class="all-item" onclick="location.href='@Url.Action("List", "Product")'">Add New Product</button>
   </div>
 </div>
   <!-- Bootstrap JS (optional) -->

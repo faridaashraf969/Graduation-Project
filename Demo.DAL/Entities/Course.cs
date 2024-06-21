@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -53,6 +54,12 @@ namespace Demo.DAL.Entities
         [Display(Name = "Video Content")]
         public string VideoContentUrl { get; set; }
 
+        //public decimal PriceWithCommission
+        //{
+        //    get { return Price * 1.13M; }
+        //}
+        //public decimal AmountPaid { get; set; }
+
     }
     public enum CourseCategory
     {
@@ -68,4 +75,7 @@ namespace Demo.DAL.Entities
         Published,
         Archived
     }
+
+    // Computed property to calculate price with commission
+   
 }

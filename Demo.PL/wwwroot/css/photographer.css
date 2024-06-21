@@ -242,6 +242,29 @@ div h1 {
     font-weight: 500;
 }
 /* ///////////////////end footer section////////////////////////// */
+a{
+    margin-left:100px
+}
+.sign-out{
+    display: inline-block
+
+
+
+}
+.sign-out a{
+    display: inline-block;
+    padding: 10px 20px;
+    color: #FFFFFF;
+    background-color: #F0A400;
+    text-decoration:none;
+    border-radius:8px;
+    transition:background-color 0.3s ease;
+}
+.sign-out a:hover
+{
+    background-color:#c48d15;
+}
+
 
 
 

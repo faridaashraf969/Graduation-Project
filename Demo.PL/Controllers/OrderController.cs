@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Demo.DAL.Contexts;
+using Microsoft.AspNetCore.Identity;
 
 namespace Demo.PL.Controllers
 {
@@ -18,12 +19,14 @@ namespace Demo.PL.Controllers
     {
         private readonly MvcProjectDbContext _context;
         private readonly CartService _cartService;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly StripeSettings _stripeSettings;
 
-        public OrderController(MvcProjectDbContext context, CartService cartService, IOptions<StripeSettings> stripeSettings)
+        public OrderController(MvcProjectDbContext context, CartService cartService, IOptions<StripeSettings> stripeSettings , UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _cartService = cartService;
+            this._userManager = userManager;
             _stripeSettings = stripeSettings.Value;
         }
 
@@ -32,7 +35,7 @@ namespace Demo.PL.Controllers
         public async Task<IActionResult> Checkout()
         {
             var cart = await _cartService.GetCartDetailsAsync();
-
+            
             if (cart.CartItems.Count == 0)
             {
                 return RedirectToAction("Index", "Cart");
@@ -44,7 +47,8 @@ namespace Demo.PL.Controllers
                 OrderDate = DateTime.Now,
                 Status = "Pending",
                 TotalAmount = cart.CartItems.Sum(ci => ci.Quantity * ci.Price),
-                OrderItems = new List<OrderItem>() // Initialize the OrderItems list
+                OrderItems = new List<OrderItem>(),
+                ShippingAddress = cart.ApplicationUser.Address
             };
 
             foreach (var cartItem in cart.CartItems)
@@ -81,59 +85,6 @@ namespace Demo.PL.Controllers
 
             return View(order);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> CourseCheckout(string userId)
-        //{
-        //    var cart = await _cartService.GetCourseCartDetailsAsync();
-
-        //    if (cart.CartItems.Count == 0)
-        //    {
-        //        return RedirectToAction("CourseIndex", "Cart");
-        //    }
-
-        //    var order = new Order
-        //    {
-        //        UserId = cart.ApplicationUserId,
-        //        OrderDate = DateTime.Now,
-        //        Status = "Pending",
-        //        TotalAmount = cart.CartItems.Sum(ci => ci.Quantity * ci.Price),
-        //        OrderItems = new List<OrderItem>() // Initialize the OrderItems list
-        //    };
-
-        //    foreach (var cartItem in cart.CartItems)
-        //    {
-        //        var orderItem = new OrderItem
-        //        {
-        //            ProductId = cartItem.CourseId,
-        //            Quantity = cartItem.Quantity,
-        //            Price = cartItem.Price
-        //        };
-        //        order.OrderItems.Add(orderItem);
-        //    }
-
-        //    _context.Orders.Add(order);
-        //    await _context.SaveChangesAsync();
-
-        //    await _cartService.ClearCartAsync();
-
-        //    return RedirectToAction("CourseOrderSummary", new { orderId = order.OrderNumber });
-        //}
-        //public IActionResult CourseOrderSummary(int orderId)
-        //{
-        //    var order = _context.Orders
-        //        .Include(o => o.OrderItems)
-        //            .ThenInclude(oi => oi.Course)
-        //        .Include(o => o.User)
-        //        .FirstOrDefault(o => o.OrderNumber == orderId);
-
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(order);
-        //}
-
 
         [HttpPost]
         public async Task<IActionResult> ProcessPayment(int orderId)

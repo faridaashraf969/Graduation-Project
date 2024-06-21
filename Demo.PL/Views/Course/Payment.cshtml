@@ -4,27 +4,110 @@
     ViewBag.Title = "Payment";
 }
 
-<h2>Payment</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Payment</title>
+    <style>
+        /* Reset default margin and padding */
+        body, h1, p, hr, button {
+            margin: 0;
+            padding: 0;
+        }
 
-<div>
-    <h4>Course</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Topic)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Topic)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="EnterPaymentDetails" asp-route-id="@Model.Id" class="btn btn-primary">Proceed to Payment</a>
-</div>
+        h1{
+            color: #0B3362
+        }
 
+        /* Set body background color and font family */
+        body {
+            background-color: #E6EDF5;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center-align the title */
+        .title {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Style the container for course details */
+        .course-details {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+            /* Style the course name and price */
+            .course-details p {
+                margin-bottom: 10px;
+                color: #0B3362
+            }
+
+                .course-details p b {
+                    font-weight: bold;
+                }
+
+                .course-details p small {
+                    font-size: 0.8em;
+                    color: #666;
+                }
+
+        /* Style the commission and total price */
+        .commission, .total-price {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Style the button container */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style the payment button */
+        .payment-button {
+            padding: 10px 20px;
+            background-color: #F0A400;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+            .payment-button:hover {
+                background-color: #e09000;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <h1 class="title">Course Payment</h1>
+
+    <!-- Container for course details -->
+    <div class="course-details">
+        <p><b>Course Name:</b> @Model.Topic</p>
+        <p><b>Course Price:</b> @Model.Price.ToString("F2")<small> EGP</small></p>
+        <hr />
+        <p class="commission"><b>Commission (13%):</b> @(ViewBag.TotalPrice - Model.Price)<small> EGP</small></p>
+        <hr />
+        <div class="total-price">
+            <p><strong>Total Price: @ViewBag.TotalPrice.ToString("F2")</strong><small> EGP</small></p>
+        </div>
+    </div>
+
+    <!-- Button for proceeding to payment -->
+    <div class="button-container">
+        <button class="payment-button" onclick="location.href='@Url.Action("EnterPaymentDetails", "Course", new { id = Model.Id })'">Proceed to Payment</button>
+    </div>
+
+</body>
+</html>

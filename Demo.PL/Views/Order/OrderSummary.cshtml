@@ -14,12 +14,9 @@
 <body  class="container" >
     @model Order
 
-    <h2>Order Summary</h2>
-
+    <h2>Order Payment</h2>
     <p>Order Date: @Model.OrderDate</p>
     <p>Total Amount: @Model.TotalAmount</p>
-
-    <h3>Order Items</h3>
     <table>
         <thead>
             <tr>
@@ -39,12 +36,34 @@
             }
         </tbody>
     </table>
+   @*////////////////////////////////////////////////////////////////////////////////*@
+   <div>
+        <form asp-controller="order" asp-action="ProcessPayment" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" class="form-control" id="cardNumber" name="cardNumber" required />
+    </div>
 
-    <form asp-controller="order" asp-action="ProcessPayment" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="cardHolderName">Card Holder Name</label>
+        <input type="text" class="form-control" id="cardHolderName" name="cardHolderName" required />
+    </div>
+
+    <div class="form-group">
+        <label for="expirationDate">Expiration Date</label>
+        <input type="text" class="form-control" id="expirationDate" name="expirationDate" placeholder="MM/YY" required />
+    </div>
+
+    <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input type="text" class="form-control" id="cvv" name="cvv" required />
+    </div>
+
+   
         <input asp-for="OrderNumber" type="hidden" name="orderId"/>
         <button type="submit">Pay Now</button>
     </form>
-
+    </div>
 </body>
 </html>
 

@@ -1,0 +1,159 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.details-container {
+    width: 80%;
+    margin: 70px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.details-container .photographer-image {
+    width: 45%;
+    margin-left: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.details-container h2 {
+    color:#0B3362 ;
+    margin-bottom: 10px;
+}
+.details-container h3 {
+    color:#0B3362 ;
+    margin-top: 20px;
+    font-size: large;
+    margin-bottom: 10px;
+}
+.details-container p {
+    margin: 5px 0;
+    color: rgba(23, 26, 31, 0.6);
+
+}
+strong{
+    color: #0b3362;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* js */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+.modal-content, #caption {  
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* js  */
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5rem 0;
+    padding: 0.5rem 1rem;
+    quotes: "“" "”" "‘" "’";
+}
+
+blockquote::before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4rem;
+    line-height: 0.1rem;
+    margin-right: 0.25rem;
+    vertical-align: -0.4rem;
+}
+
+blockquote p {
+    display: inline;
+}
+
+cite {
+    display: block;
+    text-align: right;
+    color: #666;
+    font-style: normal;
+}
+footer {
+    background: #0B3362;
+    color: rgb(255, 255, 255 );
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.contact a {
+    color:  #F0A400;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

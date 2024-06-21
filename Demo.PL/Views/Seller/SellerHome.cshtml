@@ -16,11 +16,11 @@
         <p class="logo">Photocamp</p>
         <ul>
             <li><a asp-controller ="Home" asp-action="Index" >Home</a></li>
-            <li><a href="Store">Store</a></li>
-            <li><a href="Create">Add new product</a></li>
-            <li><a href="ProductList">My product list </a></li>
-            <li><a asp-controller=" Account" asp-action="SignOut"></a>SignOut</li>
-
+            <li><a asp-action="List" asp-controller="Product">Store</a></li>
+            <li><a asp-action="Create" asp-controller="Seller">Add new product</a></li>
+            <li><a asp-action="ProductList" asp-controller="Seller">My product list </a></li>
+            <li><a asp-action="MyOrders" asp-controller="Seller">My Orders</a></li>
+            <li><a asp-controller="Account" asp-action="SignOut">SignOut</a></li>
         </ul>
         <a href="#" class="u-icon"> <img src="~/Files/seller-images/user-icon.svg" alt="user-icon"></a>
     </nav>

@@ -96,11 +96,17 @@ namespace Demo.PL.Controllers
                 return NotFound();
             }
 
+            var commissionRate = 0.13m;
+            var commission = course.Price * commissionRate;
+            var totalPrice = course.Price + commission;
+
+            ViewBag.TotalPrice = totalPrice;
+
             // Simulate payment process
             return View(course);
 
         }
-        // GET: Client/EnterPaymentDetails/5
+        // GET: Course/EnterPaymentDetails/5
         public async Task<IActionResult> EnterPaymentDetails(int? id)
         {
             if (id == null)
@@ -116,7 +122,7 @@ namespace Demo.PL.Controllers
 
             return View(course);
         }
-        // POST: Client/ProcessPayment
+        // POST: Course/ProcessPayment
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProcessPayment(int id, string cardNumber, string cardHolderName, string expirationDate, string cvv)

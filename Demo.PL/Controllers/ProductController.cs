@@ -42,15 +42,4 @@ public class ProductController : Controller
         return View(product);
     }
 
-    //[HttpPost]
-    //public IActionResult AddToCart(int productId, int quantity)
-    //{
-    //    var product = _productService.GetProductById(productId);
-    //    if (product == null)
-    //    {
-    //        return NotFound();
-    //    }
-    //    _cartService.AddToCart(product, quantity);
-    //    return RedirectToAction("Index", "Cart");
-    //}
 }

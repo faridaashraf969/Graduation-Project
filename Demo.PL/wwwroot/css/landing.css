@@ -215,15 +215,15 @@ button {
 .nav-button {
     display: inline;
     border: none;
-    width: 150px;
+    width: 200px;
     border-radius: 32px;
     background-color: #F0A400;
     color: #fff;
     font-size: 18px;
     cursor: pointer;
     margin-left: 9px;
-    height: 33px;
-    margin-top: 27px;
+    height: 52px;
+    margin-top: 18px;
     border-radius: 15px;
 }
 

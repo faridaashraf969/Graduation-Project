@@ -290,6 +290,26 @@ namespace Demo.DAL.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.PhotographerImages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotographerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotographerId");
+
+                    b.ToTable("PhotographerImages");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -330,82 +350,6 @@ namespace Demo.DAL.Migrations
                     b.HasIndex("SellerID");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Demo.DAL.Entities.Proposal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddtionalDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClientId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PhotographerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProposalText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SessionRequestId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("PhotographerId");
-
-                    b.HasIndex("SessionRequestId");
-
-                    b.ToTable("Proposals");
-                });
-
-            modelBuilder.Entity("Demo.DAL.Entities.SessionRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClientId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotographerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("SessionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SessionType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("PhotographerId");
-
-                    b.ToTable("SessionRequest");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -620,19 +564,22 @@ namespace Demo.DAL.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Availiability")
+                        .HasColumnType("int");
+
                     b.Property<string>("BankAccountNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Feedback")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -641,7 +588,13 @@ namespace Demo.DAL.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Location")
+                        .HasColumnType("int");
+
                     b.Property<string>("PortofiloUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PriceRange")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
@@ -650,8 +603,8 @@ namespace Demo.DAL.Migrations
                     b.Property<string>("SSN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Specialty")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Specialty")
+                        .HasColumnType("int");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -791,6 +744,15 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.PhotographerImages", b =>
+                {
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Photographer")
+                        .WithMany("PhotographerImages")
+                        .HasForeignKey("PhotographerId");
+
+                    b.Navigation("Photographer");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.Product", b =>
                 {
                     b.HasOne("Demo.DAL.Entities.Category", "Category")
@@ -804,46 +766,6 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("Demo.DAL.Entities.Proposal", b =>
-                {
-                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Photographer")
-                        .WithMany("Proposals")
-                        .HasForeignKey("PhotographerId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Demo.DAL.Entities.SessionRequest", "SessionRequest")
-                        .WithMany("Proposals")
-                        .HasForeignKey("SessionRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Photographer");
-
-                    b.Navigation("SessionRequest");
-                });
-
-            modelBuilder.Entity("Demo.DAL.Entities.SessionRequest", b =>
-                {
-                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Photographer")
-                        .WithMany()
-                        .HasForeignKey("PhotographerId");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Photographer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -914,20 +836,15 @@ namespace Demo.DAL.Migrations
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Demo.DAL.Entities.SessionRequest", b =>
-                {
-                    b.Navigation("Proposals");
-                });
-
             modelBuilder.Entity("Demo.DAL.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Courses");
 
                     b.Navigation("Orders");
 
-                    b.Navigation("Products");
+                    b.Navigation("PhotographerImages");
 
-                    b.Navigation("Proposals");
+                    b.Navigation("Products");
 
                     b.Navigation("ReceivedMessages");
 

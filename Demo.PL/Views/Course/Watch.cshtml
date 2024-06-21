@@ -3,19 +3,29 @@
 @{
     ViewBag.Title = "Watch Course";
 }
+@* <a asp-action="ClientHome" asp-controller="Client" class="btn btn-primary">Back To Home</a> *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Your Course</title>
+    <link rel="stylesheet" href="~/css/watch_course.css">
 
-<h2>Watch Course: @Model.Topic</h2>
-<hr />
-<h3>Here Is Your Course!!</h3>
-<br />
+</head>
 
-
-<div>
+<body>
+    <h2>Watch course : @Model.Topic </h2>
+    <hr>
+    <h3>Here is your course!</h3>
+    <!-- video -->
     <video width="900" controls>
         <source src="@Url.Content(@Model.VideoContentUrl)" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-</div>
-<a asp-action="ClientHome" asp-controller="Client" class="btn btn-primary">Back To Home</a>
 
+    <button onclick="location.href='@Url.Action("ClientHome","Client")'">Back to home</button>
+</body>
+
+</html>
 

@@ -20,8 +20,14 @@
     <div class="signup-box">
         <h2 id="h2">Sign Up As  Photographer!</h2>
         <div asp-validation-summary="All" class="validation"></div>
-        <form asp-action="PhotographerRegister">
-          <div class="fandl">
+        <form asp-action="PhotographerRegister" enctype="multipart/form-data">
+          
+                <div class="textbox">
+                    <label for="image">Upload Your Image</label><br>
+                    <input asp-for="ImageFile" type="file" name="ImageFile" id="ImageFile" required><br>
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+            <div class="fandl">
                 <!--  First Name-->
                 <div class="textbox">
                     <label for="fname">First Name</label><br>
@@ -62,10 +68,18 @@
                 </div>
 
                 <!--Specialty-->
-                <div class="textbox">
+                @* <div class="textbox">
                     <label for="Specialty">Specialty</label><br>
                     <input asp-for="Specialty" id="Specialty" required>
                     <span asp-validation-for="Specialty" class="text-danger"></span>
+                </div> *@
+                <div class="textbox">
+                    @Html.LabelFor(model => model.Specialty, "Specialty", htmlAttributes: new { @class = "textbox" })
+                    <div class="textbox" style="margin-bottom: 20px;">
+                           @Html.DropDownListFor(model => model.Specialty, Model.Specialties, "Select a specialty", new { @class = "custom-dropdown", style = "width: 350px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; color: #555; font-size: 14px;" })
+                           @Html.ValidationMessageFor(model => model.Specialty, "", new { @class = "text-danger" })
+                    </div>
+
                 </div>
            </div>
 
@@ -84,6 +98,23 @@
                     <span asp-validation-for="PortofiloUrl" class="text-danger"></span>
                 </div>
            </div>
+            <div class="fandl">
+                <div class="textbox">
+                    @Html.LabelFor(model => model.Location, "Location", htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="textbox">
+                        @Html.DropDownListFor(model => model.Location, Model.Locations, "Select a Location", new { @class = "custom-dropdown", style = "width: 350px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; color: #555; font-size: 14px;" })
+                        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="textbox">
+                    @Html.LabelFor(model => model.Availiability, "Availiability", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="textbox">
+                        @Html.DropDownListFor(model => model.Availiability, Model.Avaliabilities, "Select a Availiability", new { @class = "custom-dropdown", style = "width: 350px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; color: #555; font-size: 14px;" })
+                        @Html.ValidationMessageFor(model => model.Availiability, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
 
            <div class="fandl">
                 <!-- password -->

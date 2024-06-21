@@ -29,12 +29,19 @@ namespace Demo.DAL.Entities
         //////
 
         public string SSN { get; set; }
-        public string Specialty { get; set; }
         public string PortofiloUrl { get; set; }
         public string BankAccountNumber { get; set; }
         public string AccountStatus { get; set; }
         public string Feedback { get; set; }
         public bool IsActive { get; set; }
+
+        public string ImagePath { get; set; }
+
+        public string PriceRange { get; set; }
+
+        public Availiability Availiability { get; set; }
+        public Location Location { get; set; }
+        public Specialty Specialty { get; set; }
 
         ////////
         public int YearsOfExperience { get; set; }
@@ -45,15 +52,37 @@ namespace Demo.DAL.Entities
         public ICollection<Course> PurchasedCourses { get; set; }//for client
 
         public ICollection<Product> Products { get; set; }
-        // Navigational properties
-
-        //public ICollection<SessionRequest> CreatedSessionRequests { get; set; }
-        //public ICollection<Proposal> Proposals { get; set; }
 
         public ICollection<Message> SentMessages { get; set; }
         public ICollection<Message> ReceivedMessages { get; set; }
+        
+        public ICollection<PhotographerImages> PhotographerImages { get; set; } = new List<PhotographerImages>();
+    }
 
-        public int CompanyId { get; set; }
+    public enum Specialty
+    {
+        Wedding,
+        Product,
+        Portrait,
+        Event
+    }
+
+    public enum Availiability
+    {
+        Weekdays,
+        Weekends,
+        Anytime
 
     }
+
+    public enum Location
+    {
+        Cairo,
+        Giza,
+        Alex,
+        Fayoum
+
+    }
+    
+
 }

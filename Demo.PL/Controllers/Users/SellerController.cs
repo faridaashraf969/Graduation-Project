@@ -277,5 +277,31 @@ namespace Demo.PL.Controllers.Users
         }
         #endregion
 
+        #region MyOrders
+
+        public async Task<IActionResult> MyOrders()
+        {
+            var user = await _userManagerClient.GetUserAsync(User);
+            if(user == null)
+            {
+                // Handle the case where the user is not authenticated
+                return RedirectToAction("SellerLogin", "Seller");
+    }
+    // Get seller's products
+    var sellerProducts = _dbContext.Products.Where(p => p.SellerID == user.Id).ToList();
+
+            // Get orders containing seller's products
+            var orders = _dbContext.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .Where(o => o.OrderItems.Any(oi => sellerProducts.Contains(oi.Product)))
+                .ToList();
+
+            return View(orders);
+        }
+
+
+        #endregion
+
     }
 }

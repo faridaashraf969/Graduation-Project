@@ -106,6 +106,46 @@ namespace Demo.DAL.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SessionBidId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId1");
+
+                    b.HasIndex("SessionBidId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -191,34 +231,6 @@ namespace Demo.DAL.Migrations
                     b.ToTable("Enrollments");
                 });
 
-            modelBuilder.Entity("Demo.DAL.Entities.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReceiverId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SenderId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("SentAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
-                });
-
             modelBuilder.Entity("Demo.DAL.Entities.Order", b =>
                 {
                     b.Property<int>("OrderNumber")
@@ -290,6 +302,32 @@ namespace Demo.DAL.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SessionBidId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.PhotographerImages", b =>
                 {
                     b.Property<int>("Id")
@@ -350,6 +388,49 @@ namespace Demo.DAL.Migrations
                     b.HasIndex("SellerID");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Demo.DAL.Entities.SessionBid", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotographerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("SessionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SessionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("PhotographerId");
+
+                    b.ToTable("SessionBids");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -665,6 +746,29 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.Comment", b =>
+                {
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId1");
+
+                    b.HasOne("Demo.DAL.Entities.SessionBid", "SessionBid")
+                        .WithMany("Comments")
+                        .HasForeignKey("SessionBidId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("SessionBid");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.Course", b =>
                 {
                     b.HasOne("Demo.DAL.Entities.ApplicationUser", "Instructor")
@@ -693,23 +797,6 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Demo.DAL.Entities.Message", b =>
-                {
-                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Receiver")
-                        .WithMany("ReceivedMessages")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Sender")
-                        .WithMany("SentMessages")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Receiver");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Demo.DAL.Entities.Order", b =>
@@ -744,6 +831,15 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.Payment", b =>
+                {
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.PhotographerImages", b =>
                 {
                     b.HasOne("Demo.DAL.Entities.ApplicationUser", "Photographer")
@@ -766,6 +862,23 @@ namespace Demo.DAL.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Seller");
+                });
+
+            modelBuilder.Entity("Demo.DAL.Entities.SessionBid", b =>
+                {
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Client")
+                        .WithMany("ClientSessions")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Demo.DAL.Entities.ApplicationUser", "Photographer")
+                        .WithMany("PhotographerSessions")
+                        .HasForeignKey("PhotographerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Photographer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -836,19 +949,26 @@ namespace Demo.DAL.Migrations
                     b.Navigation("OrderItems");
                 });
 
+            modelBuilder.Entity("Demo.DAL.Entities.SessionBid", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("Demo.DAL.Entities.ApplicationUser", b =>
                 {
+                    b.Navigation("ClientSessions");
+
+                    b.Navigation("Comments");
+
                     b.Navigation("Courses");
 
                     b.Navigation("Orders");
 
                     b.Navigation("PhotographerImages");
 
+                    b.Navigation("PhotographerSessions");
+
                     b.Navigation("Products");
-
-                    b.Navigation("ReceivedMessages");
-
-                    b.Navigation("SentMessages");
                 });
 #pragma warning restore 612, 618
         }

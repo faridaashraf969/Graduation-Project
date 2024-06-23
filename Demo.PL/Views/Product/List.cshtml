@@ -194,10 +194,12 @@
                 {
                     <div class="camera-p1">
                         <h3>@product.Name</h3>
-                        <img src="~/Files/Images/@product.ImageName" alt="Photography Basics @product.ImageName">
+                        <img src="~/Files/Images/@product.ImageName" alt="Photography Basics @product.ImageName"style="width: 300px; height:200px" />
                         <br />
-                        <div class="cam-ac">
+                        
                             <span>@product.Price </span><small>EGP</small>
+                            <br />
+                        <div class="button-container">
                             <a href="@Url.Action("Details", new { id = product.Id })" class="btn-details">View Details</a>
                        </div>
 

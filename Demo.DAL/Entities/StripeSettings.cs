@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Demo.DAL.Entities
 {
-    internal class StripeSettings
+    public class StripeSettingss
     {
         public string PublishableKey { get; set; }
         public string SecretKey { get; set; }
+
+        public bool IsPaid { get; set; } = true;
     }
 }

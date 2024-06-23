@@ -1,0 +1,109 @@
+﻿@model SessionBid
+
+@{
+    ViewData["Title"] = "Indexcommentphotographer";
+    var currentTime = DateTime.Now;
+}
+<head>
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #E6EDF5;
+        }
+
+        .main {
+            width: 70%;
+            margin: 70px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #0b3362;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            .table thead {
+                background-color: #F0A400;
+                color: #fff;
+            }
+
+            .table th, .table td {
+                padding: 10px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+
+            .table tbody tr:nth-child(odd) {
+                background-color: #f9f9f9;
+            }
+
+            .table tbody tr:hover {
+                background-color: #e0ebf7;
+            }
+
+        a {
+            color: #F0A400;
+            text-decoration: none;
+        }
+
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        p {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<h2>Proposals for Session Bid: @Model.Description</h2>
+
+ <a asp-action="Create" asp-route-sessionBidId="@Model.Id">Add Proposal</a>
+
+@if (Model.Comments.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Proposal</th>
+                <th>Price</th>
+                <th>User</th>
+                <th>Posted On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model.Comments)
+            {
+                <tr>
+                    <td>@comment.Content</td>
+                    <td>@comment.Price</td>
+                    <td>@comment.User?.UserName </td>
+                    <td>@comment.CreatedAt</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@comment.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@comment.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No comments available for this session bid.</p>
+}

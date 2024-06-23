@@ -18,7 +18,7 @@
         <p class="logo">Photocamp</p>
         <ul>
             <li><a asp-controller="Home" asp-action="Index" >Home</a></li>
-            <li><a href="#">Bids</a></li>
+            <li><a asp-controller="FindPhotographer" asp-action="Photographyfreelance">Bids</a></li>
             <li><a asp-controller="Course" asp-action="Index">Courses</a></li>
             <li><a asp-controller="Product" asp-action=" List">Store </a></li>
            
@@ -26,7 +26,7 @@
             <img src="~/files/photographer imges/user-icon.svg" alt="user-icon">
         </a>
             
-            <li class="Sign-Out"><a asp-controller="Account" asp-action="SignOut">SignOut </a></li>
+            <li class="sign-out"><a asp-controller="Account" asp-action="SignOut">SignOut </a></li>
             
        </ul>
 
@@ -39,13 +39,18 @@
             
             <p>Excited to have you on board! Here, you'll find everything you need to thrive in the world of photography. Explore job offers, shop for gear, dive into courses, and manage your work effortlessly. Let's capture some magic together!</p>
 
-            <p>As a photographer, you can add images to your Profile gallery to add Your latest works . Click the button below to upload images:</p>
+            <p>As a photographer, you can add images to your Profile gallery to add Your latest works .</p>
+            <p>And You can also Update Yor Portfolio , editing Your Contact Info or update your profile picture </p>
+            <p>click the buttons below to upload images or edit yor profile: </p>
         </div>
 
-       
+     
         <img src="~/files/photographer imges/pic in welceome sec.png" alt="man with cam">
     </section>
     <a href="@Url.Action("UploadImage", "Photographer")" class="btn" style="background-color: orange; color: white;">Upload Images to your Gallery</a>
+    <a href="@Url.Action("EditProfile", "Photographer")" class="btn" style="background-color: orange; color: white;">Edit Your portfolio </a>
+   <br />
+
     <hr class="container">
     <!-- end welcome section -->
     <!--start  photographer feature -->
@@ -71,12 +76,12 @@
             <a href="Course/Index" class="arrow"> <img src="~/files/photographer imges/arrow.svg" alt="arrow"></a>
         </div>
         <!-- end photography courses -->
-        <!-- start view your work list   -->
+       @*  <!-- start view your work list   -->
         <div class="view-work">
             <h1>View Your Work List</h1>
             <p>Keep track of your ongoing projects and appointments in one convenient place. Review upcoming shoots, manage bookings, and stay organized as you navigate your photography journey.</p>
             <a href="#" class="arrow"> <img src="~/files/photographer imges/arrow.svg" alt="arrow"></a>
-        </div>
+        </div> *@
         <!-- end view your work list -->
     </section>
 

@@ -1,0 +1,68 @@
+﻿@model PaymentViewModel
+<link href="~/css/order-summary-page.css" rel="stylesheet" />
+<h2>Make Payment</h2>
+
+<form id="payment-form" asp-action="MakePayment">
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <span>The Proposal price included 12% commision  </span>
+        <input type="number" id="amount" name="amount" class="form-control" value="@Model.Amount" readonly />
+    </div>
+    <div class="form-group">
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
+    </div>
+    <div class="form-group">
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="text" id="expiry-date" name="expiry-date" class="form-control" placeholder="MM/YY" required>
+    </div>
+    <div class="form-group">
+        <label for="cvc">CVC:</label>
+        <input type="text" id="cvc" name="cvc" class="form-control" placeholder="123" required>
+    </div>
+    <input name="sessionBidId" value="@Model.SessionBidId" hidden />
+    <input name="proposalId" value="@Model.proposalId" hidden />
+    <button id="submit-button" >Submit Payment</button>
+    <a asp-action="Index" asp-route-sessionBidId="@Model.SessionBidId">Back to List</a>
+</form>
+
+
+@* <script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var stripe = Stripe('@Model.PublishableKey');
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        var form = document.getElementById('payment-form');
+        var submitButton = document.getElementById('submit-button');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            stripe.createToken(cardElement).then(function (result) {
+                if (result.error) {
+                    // Show error to your customer (e.g., invalid card details)
+                    console.error(result.error.message);
+                } else {
+                    // Send the token to your server
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        function stripeTokenHandler(token) {
+            // Add the token to the form data
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+    });
+</script> *@
+

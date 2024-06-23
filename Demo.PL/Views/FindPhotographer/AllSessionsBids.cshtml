@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SessionBid>
+<link href="~/css/allsessionsbids.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "AllSessionsBids";
+}
+<head>
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #E6EDF5;
+        }
+
+        .main {
+            width: 70%;
+            margin: 70px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #0b3362;
+            margin-bottom: 40px;
+        }
+
+        .session-bid {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .session-bid h3 {
+                margin-top: 0;
+                color: #0b3362;
+            }
+
+            .session-bid p {
+                margin: 10px 0;
+                color: #555;
+            }
+
+                .session-bid p strong {
+                    color: #0b3362;
+                }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #F0A400;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+            a:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<h1>All Sessions Bids </h1>
+
+@foreach (var sessionBid in Model)
+{
+    <div class="session-bid">
+        <h3>@sessionBid.Description</h3>
+        <p><strong>Date:</strong> @sessionBid.SessionDate.ToString("MM/dd/yyyy")</p>
+        <p><strong>Price:</strong> @sessionBid.Price</p>
+        <p><strong>Location:</strong> @sessionBid.Location</p>
+        <p><strong>Details:</strong> @sessionBid.Details</p>
+        <p><strong>Session Type:</strong> @sessionBid.SessionType</p>
+
+        <p><strong>Client:</strong> @sessionBid.Client?.UserName</p>
+
+        <a href="@Url.Action("Indexcommentphotographer", "Comments", new { sessionBidId = sessionBid.Id })">View Proposals</a>
+        
+
+    </div>
+}

@@ -36,6 +36,12 @@ namespace Demo.PL.Controllers
             var courses = _dbContext.Courses.Include(c => c.Instructor).Where(c => c.Status == "Approved").ToList();
             return View(courses);
         }
+        [HttpPost]
+        public IActionResult Index(string topic)
+        {
+            var courses = _dbContext.Courses.Where(c=>c.Topic.ToUpper().Contains(topic.ToUpper()));
+            return View(courses);
+        }
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -147,26 +153,7 @@ namespace Demo.PL.Controllers
             return RedirectToAction(nameof(Watch), new { id });
         }
 
-        //// POST: Client/ConfirmPayment/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ConfirmPayment(int id)
-        //{
-        //    var userId = _userManager.GetUserId(User);
-
-        //    var enrollment = await _dbContext.Enrollments
-        //        .FirstOrDefaultAsync(e => e.CourseId == id && e.UserId == userId);
-        //    if (enrollment == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    // Mark the enrollment as paid
-        //    enrollment.IsPaid = true;
-        //    _dbContext.Update(enrollment);
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return RedirectToAction(nameof(Watch), new { id });
-        //}
+    
 
         // GET: Client/Watch/5
         public async Task<IActionResult> Watch(int? id)
@@ -192,5 +179,12 @@ namespace Demo.PL.Controllers
 
             return View(course);
         }
+
+        //////////////////////////////////////////////////////////////////////
+        //Enroll(Get ,Id)
+        //Payment(Get , Id)
+        //EnterPaymentDetails(Get , Id , Enter credit Card Details )
+        //ProcessPayment(HttpPost , Id ) Redirect to Confirmation Page 
+        //Watch (Confirmation Page )
     }
 }

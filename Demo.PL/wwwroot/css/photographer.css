@@ -46,8 +46,8 @@ nav ul li a:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 100px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 .welc-sec1 {
     margin-top: 50px;
@@ -259,6 +259,7 @@ a{
     text-decoration:none;
     border-radius:8px;
     transition:background-color 0.3s ease;
+  
 }
 .sign-out a:hover
 {

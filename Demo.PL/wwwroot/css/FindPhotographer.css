@@ -1,0 +1,31 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+    font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+    color: #0B3362;
+    font-size: 37px;
+    margin-bottom: 50px;
+}
+
+a {
+    width: 380px;
+    height: 65px;
+    background-color: orange;
+    color: white;
+    font-size: 28px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 15px;
+}
+
+    a:hover {
+        transform: scale(1.1);
+    }
+ 

@@ -60,24 +60,24 @@ namespace Demo.PL.Controllers
 
 
         // GET: SessionRequests/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: SessionRequests/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(SessionRequest sessionRequest)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(sessionRequest);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(sessionRequest);
-        }
+        //// POST: SessionRequests/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Create(SessionRequest sessionRequest)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(sessionRequest);
+        //        _context.SaveChanges();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(sessionRequest);
+        //}
 
         // POST: SessionRequests/AcceptProposal/{proposalId}
         //[HttpPost]

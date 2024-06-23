@@ -25,7 +25,7 @@ namespace Demo.DAL.Entities
          ErrorMessage = "Address must be Like 123-Street-City-Country")]
         public string ShippingAddress { get; set; }
 
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
         public ICollection<Course> Courses { get; set; } = new List<Course>(); // Add this property

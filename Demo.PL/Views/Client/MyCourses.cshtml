@@ -26,10 +26,12 @@
                     <ul>
                         @foreach (var enrollment in Model)
                         {
-
+                           
                             <li>
                                 <a asp-controller="Course" asp-action="Watch" asp-route-id="@enrollment.Course.Id">@enrollment.Course.Topic</a>
                             </li>
+                            
+                            <hr />
                         }
                     </ul>
                 </td>

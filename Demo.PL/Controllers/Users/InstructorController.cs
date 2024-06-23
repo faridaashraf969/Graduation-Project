@@ -210,8 +210,10 @@ namespace Demo.PL.Controllers.Users
             {
                 try
                 {
-                    // Update course properties
                     courseToUpdate.Image = course.Image;
+                    courseToUpdate.ImageName= DocumentSettings.UploadFille(course.Image, "Images");
+                    // Update course properties
+                   
                     courseToUpdate.Topic = course.Topic;
                     courseToUpdate.Description = course.Description;
                     courseToUpdate.Price = course.Price;

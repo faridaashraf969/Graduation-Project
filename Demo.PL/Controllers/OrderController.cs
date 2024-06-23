@@ -95,12 +95,6 @@ namespace Demo.PL.Controllers
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(o => o.OrderNumber == orderId);
 
-            //var order = _context.Orders
-            //    .Include(o => o.OrderItems)
-            //    .ThenInclude(oi => oi.Course)
-            //    .Include(o => o.User)
-            //    .FirstOrDefault(o => o.OrderNumber == orderId);
-
             if (order == null)
             {
                 return NotFound();

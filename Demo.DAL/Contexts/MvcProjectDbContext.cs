@@ -39,50 +39,31 @@ namespace Demo.DAL.Contexts
                 .WithMany(U => U.Products)
                 .HasForeignKey(p => p.SellerID);
             /////////////////////////////////////////////////////////////
-            //modelBuilder.Entity<SessionRequest>()
-            //   .HasOne(sr => sr.Photographer)
-            //   .WithMany()
-            //   .HasForeignKey(sr => sr.PhotographerId)
-            //   .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<SessionBid>()
+  .HasOne(s => s.Photographer)
+  .WithMany(u => u.PhotographerSessions)
+  .HasForeignKey(s => s.PhotographerId)
+  .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<SessionRequest>()
-            //    .HasOne(sr => sr.Client)
-            //    .WithMany(c => c.CreatedSessionRequests)
-            //    .HasForeignKey(sr => sr.ClientId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-            /////////////////////////////////////////////////////////////////////////
-            
-            //modelBuilder.Entity<Proposal>()
-            //   .HasOne(p => p.Photographer)
-            //   .WithMany(p => p.Proposals)
-            //   .HasForeignKey(p => p.PhotographerId)
-            //   .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<SessionBid>()
+                .HasOne(s => s.Client)
+                .WithMany(u => u.ClientSessions)
+                .HasForeignKey(s => s.ClientId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Proposal>()
-            //    .HasOne(p => p.Client)
-            //    .WithMany()
-            //    .HasForeignKey(p => p.ClientId)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<SessionBid>().ToTable("SessionBids");
 
-            //modelBuilder.Entity<Proposal>()
-            //    .HasOne(p => p.SessionRequest)
-            //    .WithMany(sr => sr.Proposals)
-            //    .HasForeignKey(p => p.SessionRequestId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Comment>()
+           .HasOne(c => c.User)
+           .WithMany(u => u.Comments)
+           .HasForeignKey(c => c.UserId);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.SessionBid)
+                .WithMany(s => s.Comments)
+                .HasForeignKey(c => c.SessionBidId);
             /////////////////////////////////////////////////////////////////////////////////////////
 
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.Sender)
-                .WithMany(u => u.SentMessages)
-                .HasForeignKey(m => m.SenderId)
-                .OnDelete(DeleteBehavior.Restrict);
-            //////////////
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.Receiver)
-                .WithMany(u => u.ReceivedMessages)
-                .HasForeignKey(m => m.ReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);
-            ///
          modelBuilder.Entity<ApplicationUser>()
             .HasMany(u => u.PhotographerImages)
             .WithOne(p => p.Photographer)
@@ -101,11 +82,15 @@ namespace Demo.DAL.Contexts
 
         public DbSet<CartItem> CartItems { get; set; }
 
-        public DbSet<Message> Messages { get; set; }
-
         public DbSet<Enrollment> Enrollments { get; set; }
 
         public DbSet<PhotographerImages> PhotographerImages { get; set; }
+
+        public DbSet<SessionBid> SessionBids { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Payment> Payments { get; set; }
 
     }
 

@@ -8,18 +8,10 @@
 <h2 >My Courses List</h2>
 <br />
 
-<a asp-action="Create" class="btn btn-success">Add New Course</a>
-@* <div class="mt-5">
-    <form asp-action="Index" class="row">
-        <div class="col-8">
-            <input type="text" class="form-control" name="name" placeholder="Enter Course Name" />
-        </div>
-        <div class="col-4">
-            <input type="submit" value="Search" class="btn btn-dark" />
-        </div>
-    </form>
-</div> *@
-
+<a asp-action="Create" class="btn btn-warning btn-lg btn-block">Add New Course</a>
+<a asp-action="InstructorHome" asp-controller="Instructor" class="btn btn-warning btn-lg btn-block">
+    Back to Home
+</a>
 <table class="table table-striped table-hover mt-3">
     <thead>
         <tr>

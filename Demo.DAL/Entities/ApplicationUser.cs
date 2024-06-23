@@ -52,11 +52,13 @@ namespace Demo.DAL.Entities
         public ICollection<Course> PurchasedCourses { get; set; }//for client
 
         public ICollection<Product> Products { get; set; }
-
-        public ICollection<Message> SentMessages { get; set; }
-        public ICollection<Message> ReceivedMessages { get; set; }
         
         public ICollection<PhotographerImages> PhotographerImages { get; set; } = new List<PhotographerImages>();
+
+        // Additional properties for your user
+        public ICollection<SessionBid> PhotographerSessions { get; set; }
+        public ICollection<SessionBid> ClientSessions { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 
     public enum Specialty

@@ -27,22 +27,21 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Home/Index">Home</a>
+                            <a class="nav-link" asp-controller="Client" asp-action="ClientHome">Home</a>
+                             
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Find a Photographer</a>
+                        <a class="nav-link" asp-controller="FindPhotographer" asp-action="FindPhotographer">Find a Photographer</a>    
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Course" asp-action="Index" >Courses</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="AboutUs">About Us</a>
-                    </li>
+                
 
-
+                    
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" name="" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" role="search" asp-action="Index" >
+                    <input class="form-control me-2" name="topic" type="search" placeholder="Search by topic" aria-label="Search">
                     <button class="btn btn-outline-warning" type="submit">Search</button>
                 </form>
             </div>
@@ -60,7 +59,7 @@
                     <h3>@course.Topic</h3>
                     <p>@course.Description</p>
                     <p>@course.Price.ToString("C")</p>
-                    <p><img src="~/Files/Images/@course.ImageName" alt="@course.ImageName" style="width: 300px; height: auto;"></p>
+                    <p><img src="~/Files/Images/@course.ImageName" alt="@course.ImageName" style="width: 300px; height:200px;" /></p>
                     <a href="@Url.Action("Details", new { id = course.Id })">View Details</a>
                 </div>
             }

@@ -64,13 +64,23 @@ button {
     color: white;
     border: none;
     cursor: pointer;
-    width: 150px;
+    width: 250px;
     font-weight: bold;
 }
 
 button:hover {
     background-color: #F0A400;
     opacity: 0.7;
+}
+a {
+    padding: 10px 20px;
+    background-color: #F0A400;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 250px;
+    font-weight: bold;
+
 }
 
 

@@ -11,10 +11,10 @@
     <form asp-action="ProcessPayment" method="post">
         <input type="hidden" asp-for="Id" />
 
-        <div class="form-group">
+       @*  <div class="form-group">
             <label for="cardNumber">Card Number</label>
             <input type="text" class="form-control" id="cardNumber" name="cardNumber" required />
-        </div>
+        </div> *@
 
         <div class="form-group">
             <label for="cardHolderName">Card Holder Name</label>
@@ -22,13 +22,16 @@
         </div>
 
         <div class="form-group">
-            <label for="expirationDate">Expiration Date</label>
-            <input type="text" class="form-control" id="expirationDate" name="expirationDate" placeholder="MM/YY" required />
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" name="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
         </div>
-
         <div class="form-group">
-            <label for="cvv">CVV</label>
-            <input type="text" class="form-control" id="cvv" name="cvv" required />
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" name="expiry-date" class="form-control" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+            <label for="cvc">CVC:</label>
+            <input type="text" id="cvc" name="cvc" class="form-control" placeholder="123" required>
         </div>
 
         <button type="submit" >Pay Now</button>

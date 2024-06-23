@@ -1,6 +1,7 @@
 ﻿using Demo.BLL.Interfaces;
 using Demo.DAL.Contexts;
 using Demo.DAL.Entities;
+using Demo.PL.Helpers;
 using Demo.PL.Models;
 using Demo.PL.Models.UserLogins;
 using Demo.PL.Models.UserRegister;
@@ -252,12 +253,17 @@ namespace Demo.PL.Controllers.Users
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(Product product)
+        public IActionResult EditProduct(Product product ,int Id)
         {
+
+            var productt = _dbContext.Products.Find(Id);
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    productt.Image = product.Image;
+                    productt.ImageName = DocumentSettings.UploadFille(product.Image, "Images");
                     _productRepo.Update(product);
                     return RedirectToAction(nameof(ProductsPage));
                 }

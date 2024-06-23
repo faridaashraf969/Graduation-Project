@@ -45,7 +45,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
 }
-.cam-ac span {
+ span {
     font-style: normal;
     font-weight: 700;
     font-size: 22px;
@@ -123,6 +123,27 @@ img {
     text-decoration: none;
     text-align: center;
 }*/
+
+.orange-btn {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+    .orange-btn:hover {
+        background-color: darkorange;
+    }
+
+
+
 
 
 

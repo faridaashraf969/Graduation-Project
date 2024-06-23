@@ -1,0 +1,88 @@
+﻿@model ConfirmationViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <style>
+        /* Inline styles for simplicity */
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 600px;
+            font-family: Arial, sans-serif;
+           
+
+        }
+
+        body{
+            background-color: #E6EDF5;
+        }
+
+        .header {
+            
+            color: #0B3362;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .content {
+            height: 680px;
+            width: 750px;
+            padding: 40px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .content h2 {
+                color: orange;
+            }
+
+            .content p {
+                line-height: 1.6;
+                color: #0B3362;
+            }
+
+        .button {
+            background-color: orange;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <div class="header">
+                <h1>Payment Confirmation</h1>
+            </div>
+            <h2>Session Bid Details</h2>
+            <p><strong>Description:</strong> @Model.SessionBid.Description</p>
+            <p><strong>Date:</strong> @Model.SessionBid.SessionDate.ToString("yyyy-MM-dd")</p>
+            <p><strong>Location:</strong> @Model.SessionBid.Location</p>
+            <p><strong>SessionType:</strong> @Model.SessionBid.SessionType</p>
+            
+            
+            <h2>Chosen Proposal Details</h2>
+            <p><strong>Photographer:</strong> @Model.Proposal.User.FirstName @Model.Proposal.User.LastName </p>
+            <p> <strong>Photofrapher Phone Number : </strong> @Model.Proposal.User.PhoneNumber</p>
+            <p> <strong>Photofrapher Email : </strong> @Model.Proposal.User.Email</p>
+            <p><strong>Price:</strong> @Model.Proposal.Price<small> EGP</small></p>
+            <p><strong>Description:</strong> @Model.Proposal.Content</p>
+
+            <a class="button" href="@Url.Action("ClientHome" , "Client")">Go to Home</a>
+        </div>
+    </div>
+</body>
+</html>
+

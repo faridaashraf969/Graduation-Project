@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SessionBid>
+@{
+    ViewData["Title"] = "ShowSessionBids";
+}
+
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/session-bids.css" rel="stylesheet" />
+        </head>
+        <body>
+    <h1>ShowSessionBids</h1>
+            <div class="container">
+
+                 @foreach (var sessionBid in Model)
+                { 
+                    <div class="session-bid">
+                        <div class="session-header">
+                            <!-- <h3>@sessionBid.Description</h3> -->
+                        </div>
+                        <div class="session-details">
+                            <p><strong>Date:</strong> @sessionBid.SessionDate.ToString("MM/dd/yyyy")</p>
+                            <p><strong>Price:</strong> @sessionBid.Price</p>
+                            <p><strong>Location:</strong> @sessionBid.Location</p>
+                            <p><strong>Details:</strong> @sessionBid.Details</p>
+                            <p><strong>Session Type:</strong> @sessionBid.SessionType</p>
+             
+                            <p><strong>Client:</strong> @sessionBid.Client?.UserName</p>
+                        </div>
+                        <div class="session-footer">
+                            <a class="comments-link" href="@Url.Action("Index", "Comments", new { sessionBidId = sessionBid.Id })">View Comments</a>
+                        </div>
+                    </div>
+                } 
+            </div>
+        </body>
+        </html>
+        

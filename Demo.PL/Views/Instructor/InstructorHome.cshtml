@@ -17,14 +17,15 @@
  <nav class="container">
   <p class="logo">Photocamp</p>
   <ul>
-            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-      <li><a href="Create">Add new course</a></li>
-            <li><a asp-controller="Course" asp-action="Index">My courses</a></li>
-      <li><a href="CourseList">My course list </a></li>
-            <li><a asp-controller=" Account" asp-action="SignOut"></a>SignOut</li>
+            <li><a asp-controller="Instructor" asp-action="InstructorHome">Home</a></li>
+            <li><a asp-controller="Instructor" asp-action="Create">Add new course</a></li>
+            <li><a asp-controller="Instructor" asp-action="CourseList">My courses List </a></li>
+            <li><a asp-controller="Course" asp-action="Index"> courses Store</a></li>
+            <li>
+                <a asp-controller="Account" asp-action="SignOut" class="btn btn-warning">SignOut</a></li>
 
   </ul>
-  <a href="#" class="u-icon"> <img src="~/Files/InstructorPageImages/user-icon.svg" alt="user-icon"></a>
+ 
 </nav>
 <!-- ///////////////////end nav section/////////////////////////////// -->
 
@@ -39,20 +40,27 @@
 
 
   <div class="container div55">
-   <div class="box1"> <a href="#"> <h2>Add New Course</h2><br><p>Ready to share your expertise with the world? Create and publish your own course here. Craft engaging lessons, upload content, and inspire aspiring photographers to reach new heights.</p> 
-<img src="~/Files/InstructorPageImages/arrow.svg"></a> </div>
-   <div class="box2"> <a href="#"> <h2>Browse Other Courses</h2><br><p>Explore courses offered by fellow instructors in the PhotoCamp community. Discover new teaching styles, gain inspiration, and expand your own knowledge base.</p>
+        <div class="box1">
+            <a asp-controller="Instructor" asp-action="Create">
+                <h2>Add New Course</h2><br><p>Ready to share your expertise with the world? Create and publish your own course here. Craft engaging lessons, upload content, and inspire aspiring photographers to reach new heights.</p>
+                <img src="~/Files/InstructorPageImages/arrow.svg"></a> </div>
+
+
+        <div class="box2">
+            <a asp-controller="Course" asp-action="Index">
+                <h2>Browse Other Courses</h2><br><p>Explore courses offered by fellow instructors in the PhotoCamp community. Discover new teaching styles, gain inspiration, and expand your own knowledge base.</p>
                 <img src="~/Files/InstructorPageImages/arrow.svg">
             </a>
         </div>
-   <div class="box3"> <a href="#"> <h2>View Your Courses List</h2><br><p>Keep track of your courses and monitor their performance. Track enrollment, engagement, and feedback to continuously improve and refine your teaching offerings.</p>
+
+
+        <div class="box3">
+            <a asp-controller="Instructor" asp-action="CourseList">
+                <h2>View Your Courses List</h2><br><p>Keep track of your courses and monitor their performance. Track enrollment, engagement, and feedback to continuously improve and refine your teaching offerings.</p>
                 <img src="~/Files/InstructorPageImages/arrow.svg">
             </a>
         </div>
-    <div class="box4"> <a href="#"> <h2>View Your Courses List</h2><br><p>Keep track of your courses and monitor their performance. Track enrollment, engagement, and feedback to continuously improve and refine your teaching offerings.</p>
-                <img src="~/Files/InstructorPageImages/arrow.svg">
-            </a>
-        </div>
+   
 
 
 
@@ -61,10 +69,9 @@
   <footer>
     <h2>Photocamp</h2>
     <ul>
-      <li> <a href="#">Home</a></li>
-      <li><a href="#">Add new course</a></li>
-      <li><a href="#">My couse list</a></li>
-      <li><a href="#">Courses</a></li>
+            <li> <a asp-controller="Instructor" asp-action="InstructorHome">Home</a></li>
+            <li><a asp-controller="Instructor" asp-action="Create">Add new course</a></li>
+            <li><a asp-controller="Instructor" asp-action="CourseList">My courses</a></li>
     </ul>
     <div class="social-icons">
             <a href="#"><img src="~/Files/InstructorPageImages/fb.svg"></a>

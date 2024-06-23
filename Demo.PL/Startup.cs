@@ -114,6 +114,7 @@ namespace Demo.PL
             });
 
             var stripeSettings = Configuration.GetSection("Stripe").Get<StripeSettings>();
+            //StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             StripeConfiguration.ApiKey = stripeSettings.ApiKey;
         }
     }

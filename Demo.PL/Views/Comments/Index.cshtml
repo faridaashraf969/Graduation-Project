@@ -1,0 +1,46 @@
+﻿@model SessionBid
+<link href="~/css/commentsdx.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "Comments";
+    var currentTime = DateTime.Now;
+}
+
+<h2>Proposals for Session Bid: @Model.Description</h2>
+
+
+
+@if (Model.Comments.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Comment</th>
+                <th>Price</th>
+                <th>User</th>
+                <th>Posted On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model.Comments)
+            {
+                <tr>
+                    <td>@comment.Content</td>
+                    <td>@comment.Price</td>
+                    <td>@comment.User?.UserName </td>
+                    <td>@comment.CreatedAt</td>
+                    <td>
+                       @*  <a asp-action="Edit" asp-route-id="@comment.Id">Edit</a> | *@
+                        <a asp-action="Delete" asp-route-id="@comment.Id">Delete</a> |
+                        <a asp-action="ConfirmProposal" asp-route-id="@comment.Id">Confirm Proposal </a> |
+                        <a asp-controller="Photographer" asp-action="MyProfile" asp-route-id="@comment.User.Id">view protofilo  </a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No comments available for this session bid.</p>
+}
